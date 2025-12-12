@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LEMBA-KONGO ACADEMY</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Inter Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        /* Consistent Dark Mode Aesthetic */
+        .portal-bg { background-color: #0d121c; }
+        .card-bg { background-color: #1F2937; }
+        .accent-color { color: #84cc16; } /* Lime green */
+        .btn-primary {
+            background-color: #84cc16;
+            color: #1F2937;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+        .btn-primary:hover {
+            background-color: #a3e635;
+            box-shadow: 0 4px 15px rgba(132, 204, 22, 0.4);
+        }
+
+        /* Styles for the Dynamic Background (Slideshow) */
+        #background-image-container {
+            position: fixed; 
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0.1; /* Subtly faded background */
+            z-index: -1;
+            transition: background-image 1.5s ease-in-out;
+        }
+        #main-app-container {
+            position: relative;
+            z-index: 10;
+        }
+        
+        /* Table Styling */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+        }
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid #374151; /* Dark gray line */
+        }
+        thead th {
+            background-color: #1F2937;
+            color: #84cc16;
+            font-weight: 600;
+        }
+        tbody tr:nth-child(odd) {
+            background-color: #111827;
+        }
+        tbody tr:hover {
+            background-color: #2a3541;
+            transition: background-color 0.15s;
+        }
+        caption {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: #E5E7EB;
+        }
+        
+        /* Ensure smooth scrolling is auto or handled by JS for internal navigation */
+        html {
+            scroll-behavior: auto; 
+        }
+        
+    </style>
+</head>
+<body class="portal-bg min-h-screen text-gray-100">
+
+    <!-- Dynamic Background Container (The Slideshow Target) -->
+    <div id="background-image-container"></div>
+
+    <!-- Header & Navigation Bar -->
+    <header class="sticky top-0 z-50 bg-gray-900/90 backdrop-blur-sm shadow-xl border-b border-lime-600/30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
+            <div id="lemba-academy-logo-container" class="text-2xl font-extrabold accent-color tracking-wider">
+                LEMBA-KONGO
+            </div>
+            <!-- Navigation Links: ROSTER and SHOP only -->
+            <div id="navigation-bar-container" class="space-x-6 flex items-center">
+                <button id="roster-option-button-container" class="btn-primary py-2 px-4 rounded-lg text-sm">ROSTER</button>
+                <button id="shop-option-button-container" class="btn-primary py-2 px-4 rounded-lg text-sm">SHOP</button>
+            </div>
+        </div>
+    </header>
+
+    <div id="main-app-container">
+        <!-- Hero Section -->
+        <div class="relative overflow-hidden pt-16 pb-20 sm:pt-24 sm:pb-28">
+            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
+                <h1 class="text-5xl font-extrabold tracking-tight text-white sm:text-6xl md:text-7xl">
+                    Forging the <span class="accent-color">Future</span>
+                </h1>
+                <p class="mt-6 max-w-4xl mx-auto text-xl text-gray-400">
+                    The Lemba-Kongo Academy is where elite preparation meets unparalleled potential. We develop athletes with the technical brilliance and psychological resilience demanded by the highest levels of global football.
+                </p>
+            </div>
+        </div>
+        
+        <!-- === CONTENT BLOCKS START HERE === -->
+
+        <!-- ABOUT Section -->
+        <section id="about-info-block-container" class="py-16 content-block border-t border-gray-700/50 bg-gray-900">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 card-bg p-8 rounded-xl shadow-2xl">
+                <h3 class="text-4xl font-extrabold accent-color mb-6">ABOUT</h3>
+                <div class="text-gray-300 space-y-4 text-lg">
+                    <p>The Lemba-Kongo Academy is an institution devoted to researching, preserving, and expanding the academic and cultural traditions of the Diaspora. We recruit and train successive generations of men to provide for their families and communities while embodying our traditions and spirit.</p>
+                    <p>Our holistic approach to developing young men incorporates three career development pathways simultaneously: (1) Divinity Studies, (2) Academics, (3) Athletics.</p>
+                    <p>Our program is boarding only. Academicians are selected via a series of referrals, camps, and tests. Prospects must have begun the onset of puberty and be 15 years of age or older prior to registering for their residency.*</p>
+                    <p>Funding covers up to eight (8) years of room and board per resident.</p>
+                </div>
+            </div>
+        </section>
+        
+        <!-- DORMS Section -->
+        <section id="dorms-info-block-container" class="py-16 portal-bg border-t border-gray-700/50">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 card-bg p-8 rounded-xl shadow-2xl">
+                <h3 class="text-4xl font-extrabold accent-color mb-6">DORMS</h3>
+                <p class="text-gray-300 text-lg">Each Resident lives in a suburban townhome, owned and maintained by the Academy, in the village next to our training ground. First-Year Residents and younger Academicians will be paired with another Resident of their rank along with an Advisor. After their fifth semester, Academicians are eligible for individual housing. Townhomes are alloted based on the Academician's rank and unit availability.</p>
+            </div>
+        </section>
+        
+        <!-- TRAINING Section -->
+        <section id="training-info-block-container" class="py-16 content-block border-t border-gray-700/50 bg-gray-900">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 card-bg p-8 rounded-xl shadow-2xl">
+                <h3 class="text-4xl font-extrabold accent-color mb-6">TRAINING & CURRICULUM</h3>
+                <div class="text-gray-300 space-y-4 text-lg">
+                    <p>The curriculum is taught on a partial block schedule. Classes are generally taken once every other day. Each Academician has a uniquely individualized curriculum based on their Advisor's evaluations. A given week has at most four (4) days dedicated to the curriculum (2 Blocks), two (2) days dedicated to matches, and one (1) day dedicated to recovery.</p>
+                    <p>An example of a First-Year Resident Program:</p>
+                </div>
+                
+                <div class="overflow-x-auto mt-8 rounded-lg shadow-xl">
+                    <table>
+                        <caption>FIRST YEAR SEMESTER A</caption>
+                        <thead>
+                            <tr>
+                                <th scope="col" class="w-1/4">Class</th>
+                                <th scope="col" class="w-2/4">Description</th>
+                                <th scope="col" class="w-1/4">Credits</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">Flexibility</th>
+                                <td>Dynamic exercises to maintain and improve range of motion</td>
+                                <td>2</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Strength</th>
+                                <td>Weighted resistance and plyometric exercises to improve strength and speed</td>
+                                <td>2</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Technique</th>
+                                <td>FDLs, Winger Drills, Shots, and Keep Ups</td>
+                                <td>3</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Reviewing Abrahamic Religions</th>
+                                <td>A study of the major world religions stemming from classical Judaism</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Lemba Literature</th>
+                                <td>Reading and review of the Lemba Historical Series (2025-26 Edition)</td>
+                                <td>2</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">American Cinema Studies</th>
+                                <td>Critical analysis of American cinema and literature, treating the former as a visual extension of the latter</td>
+                                <td>3</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Mathematics and Music</th>
+                                <td>A rigorous approach at developing creative intution</td>
+                                <td>2</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Robotics of Modern Agriculture</th>
+                                <td>Developing modern technologies and methods for growing and distributing foods in contemporary urban environments</td>
+                                <td>3</td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr class="bg-lime-600 text-white font-bold hover:bg-lime-700">
+                                <th scope="row" colspan="2" class="text-right">Total Credits</th>
+                                <td>18</td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+
+                <p class="text-gray-300 text-lg mt-8">Each resident has an Advisor that supports them in their commitment. Advisors are also responsible for disbursing Resident stipends and clearing campus leaves.</p>
+            </div>
+        </section>
+
+        <!-- NEWS Section -->
+        <section id="news-info-block-container" class="py-16 portal-bg border-t border-gray-700/50">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 card-bg p-8 rounded-xl shadow-2xl">
+                <h3 class="text-4xl font-extrabold accent-color mb-6">NEWS & ALUMNI UPDATES</h3>
+                
+                <div class="overflow-x-auto mt-8 rounded-lg shadow-xl">
+                    <table>
+                        <caption>Last updated Sunday, December 7, 2025</caption>
+                        <thead>
+                            <tr>
+                                <th scope="col" class="w-1/4">Media</th>
+                                <th scope="col" class="w-3/4">Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">New Season Begins 12.07.25</th>
+                                <td>A new crop of u16s joins the academy and the 2026 First team selection prepares for January with our annual Winter Pre-Season Series<a href="#" class="text-lime-400 hover:text-lime-200">(continue reading)</a></td>
+                            </tr>
+                            <tr>
+                                <th scope="row">Senior Assignments Complete 08.15.25</th>
+                                <td>Final housing assignments for Senior Residents have been made. All change requests most be completed before September 1. Advisors will deal with trial and roster placements by August 31, 2024...<a href="#" class="text-lime-400 hover:text-lime-200">(continue reading)</a></td>
+                            </tr>
+                            <tr>
+                              <th scope="row">Kante Features in UEFA Conference League Fixture 08.15.24</th>
+                              <td>Midfielder Abdoulaye Kante ('22) came on as a second half substitute for Finnish first division side Tampereen Ilves when they played against Swedish side Djurgårdens in the 3rd round UEFA Conference League Qualifications. Kante described his exhiliration when he was first noticed of his involvement by his manager. "It was surreal, considering I was an amateeur training at the Academy only two years ago...<a href="#" class="text-lime-400 hover:text-lime-200">(continue reading)</a></td>
+                          </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="py-8 text-center text-gray-500">
+            <p>&copy; 2025 LEMBA-KONGO ACADEMY. All rights reserved.</p>
+        </footer>
+    </div>
+    
+    <!-- JavaScript Logic from lemba-academy-lobby.js and Link Handlers -->
+    <script>
+        var imageCache, startSlideShow; 
+
+        let currentImageIndex = -1;
+        let maxImageIndex, bgImageLayerContainer;
+
+        document.addEventListener("DOMContentLoaded", function(){
+            init();
+
+            // Start the slideshow
+            startSlideShow = setInterval(function(){
+                backgroundImageSlideShow()
+            }, 10000);
+        });
+
+        function init(){
+            // Use generic, dynamic placeholders for background slideshow
+            imageCache = [
+                "./media/img/lions-united-0.png",
+                "./media/img/lions-united-1.png",
+                "./media/img/lions-united-2.png",
+                "./media/img/lions-united-3.png",
+                "./media/img/lions-united-4.png",
+                "./media/img/lions-united-5.png"  
+            ];
+          /*[
+                "https://placehold.co/1920x1080/84cc16/0d121c?text=LIONS+UNITED+I",
+                "https://placehold.co/1920x1080/0d121c/84cc16?text=LIONS+UNITED+II",
+                "https://placehold.co/1920x1080/1F2937/84cc16?text=LIONS+UNITED+III",
+                "https://placehold.co/1920x1080/84cc16/1F2937?text=LIONS+UNITED+IV",
+                "https://placehold.co/1920x1080/0d121c/1F2937?text=LIONS+UNITED+V",
+                "https://placehold.co/1920x1080/1F2937/0d121c?text=LIONS+UNITED+VI"
+            ];*/
+            
+            bgImageLayerContainer = document.getElementById("background-image-container");
+            maxImageIndex = imageCache.length;
+            
+            backgroundImageSlideShow();
+            
+            addButtonHandlers();
+        }
+
+        function addButtonHandlers(){
+            // SHOP Button Handler (External Link)
+            document.getElementById("shop-option-button-container").addEventListener("click", function(){
+                window.open("https://lemba-kongo.com/shop", "_blank");
+            });
+            
+            // ROSTER Button Handler (External Link to new Portal)
+            document.getElementById("roster-option-button-container").addEventListener("click", function(){
+                window.open("https://lemba-kongo.com/roster", "_blank");
+            });
+        }
+
+        function backgroundImageSlideShow(){
+            ++currentImageIndex;
+            bgImageLayerContainer.style.backgroundImage = `url(${imageCache[currentImageIndex]})`;
+            
+            if(currentImageIndex + 1 === maxImageIndex){
+                currentImageIndex = -1;
+            }
+        }
+    </script>
+</body>
+</html>

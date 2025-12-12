@@ -1,0 +1,1056 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body, html{
+  width: 100%;
+  height: 100%;
+}
+
+#main-app-container{
+  font-family: Arial, sans-serif;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: block;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+#go-home-button-container{
+  width: 50px;
+  height: 50px;
+  border: 0;
+  border-radius: 50%;
+  background-image: url(../media/img/hov-ig-logo.png);
+  background-size: 110% 110%;
+  background-position: center center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  outline: none;
+  position: absolute;
+  top: 3%;
+  left: 3%;
+  z-index: 5;
+  box-shadow: none;
+  transition: box-shadow 0.25s;
+}
+
+#go-home-button-container:hover{
+  box-shadow: 3px 3px 3px black;
+}
+
+#join-lyoko-button-container{
+  text-align: center;
+  font-size: 20px;
+  font-family: Arial, sans-serif;
+  font-weight: 600;
+  width: 200px;
+  height: 50px;
+  border: 0;
+  border-radius: 25px;
+  background-color: rgba(0, 0, 0, 1.0);
+  color: white;
+  cursor: pointer;
+  outline: none;
+  position: absolute;
+  top: 3%;
+  right: 3%;
+  z-index: 5;
+  letter-spacing: 1px;
+  transition: letter-spacing 0.25s, color 0.25s, background-color 0.25s;
+}
+
+#join-lyoko-button-container:hover{
+  letter-spacing: 3px;
+  color: black;
+  border: 2px solid black;
+  background-color: rgba(255, 255, 255, 1.0);
+}
+
+#examples-container{
+  width: 930px;
+  height: auto;
+  margin: 5% auto;
+}
+
+#nft-0-container{
+
+}
+
+.nft-container{
+  display: inline-block;
+  margin: 2% 3%;
+  width: 250px;
+  height: 410px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+
+.nft-visual-container{
+    display: block;
+    margin: 2px auto;
+  border: 0;
+  border-radius: 25px 25px 0 0;
+  background-size: 100% auto;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-color: rgba(0, 0, 0, 0);
+  transition: background-size 0.5s, width 0.25s, height 0.25s;
+}
+
+.nft-visual-container:hover{
+    background-size: 105% auto;
+    border: 1% white solid;
+}
+
+#nft-0-visual-container{
+    width: 200px;
+    height: 175px;
+}
+
+#nft-0-visual-container:hover{
+    width: 250px;
+    height: 225px;
+}
+
+#nft-1-visual-container{
+    width: 175px;
+    height: 175px;
+}
+
+#nft-1-visual-container:hover{
+    width: 225px;
+    height: 225px;
+}
+
+#nft-2-visual-container{
+    width: 150px;
+    height: 150px;
+}
+
+#nft-2-visual-container:hover{
+    width: 200px;
+    height: 200px;
+}
+
+#nft-3-visual-container{
+    width: 175px;
+    height: 225px;
+}
+
+#nft-3-visual-container:hover{
+    width: 210px;
+    height: 275px;
+}
+
+#nft-4-visual-container{
+    width: 165px;
+    height: 165px;
+}
+
+#nft-4-visual-container:hover{
+    width: 190px;
+    height: 190px;
+}
+
+#nft-5-visual-container{
+    width: 150px;
+    height: 150px;
+}
+
+
+#nft-5-visual-container:hover{
+    width: 180px;
+    height: 180px;
+}
+
+#nft-6-visual-container{
+    width: 160px;
+    height: 160px;
+}
+
+#nft-6-visual-container:hover{
+    width: 205px;
+    height: 205px;
+}
+
+#nft-7-visual-container{
+    width: 160px;
+    height: 160px;
+}
+
+#nft-7-visual-container:hover{
+    width: 205px;
+    height: 205px;
+}
+
+#nft-8-visual-container{
+    width: 150px;
+    height: 115px;
+}
+
+#nft-8-visual-container:hover{
+    width: 180px;
+    height: 145px;
+}
+
+#nft-9-visual-container{
+    width: 185px;
+    height: 185px;
+}
+
+#nft-9-visual-container:hover{
+    width: 215px;
+    height: 215px;
+}
+
+#nft-10-visual-container{
+    width: 160px;
+    height: 160px;
+}
+
+#nft-10-visual-container:hover{
+    width: 205px;
+    height: 205px;
+}
+
+#nft-11-visual-container{
+    width: 150px;
+    height: 185px;
+}
+
+#nft-11-visual-container:hover{
+    width: 180px;
+    height: 205px;
+}
+
+
+#nft-12-visual-container{
+    width: 200px;
+    height: 295px;
+}
+
+#nft-12-visual-container:hover{
+    width: 235px;
+    height: 325px;
+}
+
+#nft-13-visual-container{
+    width: 200px;
+    height: 295px;
+}
+
+#nft-13-visual-container:hover{
+    width: 230px;
+    height: 325px;
+}
+
+
+#nft-14-visual-container{
+    width: 210px;
+    height: 210px;
+}
+
+#nft-14-visual-container:hover{
+    width: 250px;
+    height: 250px;
+}
+
+#nft-15-visual-container{
+    width: 160px;
+    height: 160px;
+}
+
+#nft-15-visual-container:hover{
+    width: 205px;
+    height: 205px;
+}
+
+
+#nft-16-visual-container{
+    width: 185px;
+    height: 185px;
+}
+
+#nft-16-visual-container:hover{
+    width: 225px;
+    height: 225px;
+}
+
+#nft-17-visual-container{
+    width: 185px;
+    height: 185px;
+}
+
+#nft-17-visual-container:hover{
+    width: 205px;
+    height: 205px;
+}
+
+
+#nft-18-visual-container{
+    width: 200px;
+    height: 270px;
+}
+
+#nft-18-visual-container:hover{
+    width: 240px;
+    height: 310px;
+}
+
+#nft-19-visual-container{
+    width: 200px;
+    height: 285px;
+}
+
+#nft-19-visual-container:hover{
+    width: 225px;
+    height: 305px;
+}
+
+
+#nft-20-visual-container{
+    width: 205px;
+    height: 285px;
+}
+
+#nft-20-visual-container:hover{
+    width: 225px;
+    height: 305px;
+}
+
+#nft-21-visual-container{
+    width: 185px;
+    height: 185px;
+}
+
+#nft-21-visual-container:hover{
+    width: 210px;
+    height: 210px;
+}
+
+
+#nft-22-visual-container{
+    width: 250px;
+    height: 190px;
+}
+
+#nft-22-visual-container:hover{
+    width: 290px;
+    height: 225px;
+}
+
+#nft-23-visual-container{
+    width: 250px;
+    height: 185px;
+}
+
+#nft-23-visual-container:hover{
+    width: 280px;
+    height: 205px;
+}
+
+#nft-24-visual-container{
+    width: 195px;
+    height: 195px;
+}
+
+#nft-24-visual-container:hover{
+    width: 235px;
+    height: 235px;
+}
+
+#nft-25-visual-container{
+    width: 190px;
+    height: 250px;
+}
+
+#nft-25-visual-container:hover{
+    width: 240px;
+    height: 305px;
+}
+
+
+#nft-26-visual-container{
+    width: 275px;
+    height: 215px;
+}
+
+#nft-26-visual-container:hover{
+    width: 290px;
+    height: 230px;
+}
+
+#nft-27-visual-container{
+    width: 210px;
+    height: 270px;
+}
+
+#nft-27-visual-container:hover{
+    width: 240px;
+    height: 290px;
+}
+
+#nft-28-visual-container{
+    width: 150px;
+    height: 185px;
+}
+
+#nft-28-visual-container:hover{
+    width: 180px;
+    height: 205px;
+}
+
+#nft-29-visual-container{
+    width: 150px;
+    height: 185px;
+}
+
+#nft-29-visual-container:hover{
+    width: 180px;
+    height: 205px;
+}
+
+
+#nft-30-visual-container{
+    width: 190px;
+    height: 185px;
+}
+
+#nft-30-visual-container:hover{
+    width: 210px;
+    height: 205px;
+}
+
+#nft-31-visual-container{
+    width: 290px;
+    height: 240px;
+}
+
+#nft-31-visual-container:hover{
+    width: 310px;
+    height: 260px;
+}
+
+
+#nft-32-visual-container{
+    width: 270px;
+    height: 185px;
+}
+
+#nft-32-visual-container:hover{
+    width: 300px;
+    height: 205px;
+}
+
+#nft-33-visual-container{
+    width: 270px;
+    height: 185px;
+}
+
+#nft-33-visual-container:hover{
+    width: 300px;
+    height: 205px;
+}
+
+
+#nft-34-visual-container{
+    width: 240px;
+    height: 265px;
+}
+
+#nft-34-visual-container:hover{
+    width: 280px;
+    height: 305px;
+}
+
+#nft-35-visual-container{
+    width: 225px;
+    height: 250px;
+}
+
+#nft-35-visual-container:hover{
+    width: 260px;
+    height: 285px;
+}
+
+
+#nft-36-visual-container{
+    width: 150px;
+    height: 185px;
+}
+
+#nft-36-visual-container:hover{
+    width: 180px;
+    height: 205px;
+}
+
+#nft-37-visual-container{
+    width: 235px;
+    height: 185px;
+}
+
+#nft-37-visual-container:hover{
+    width: 280px;
+    height: 230px;
+}
+
+#nft-38-visual-container{
+    width: 190px;
+    height: 150px;
+}
+
+#nft-38-visual-container:hover{
+    width: 210px;
+    height: 170px;
+}
+
+#nft-39-visual-container{
+    width: 160px;
+    height: 160px;
+}
+
+#nft-39-visual-container:hover{
+    width: 190px;
+    height: 190px;
+}
+
+#nft-40-visual-container{
+    width: 160px;
+    height: 160px;
+}
+
+#nft-40-visual-container:hover{
+    width: 190px;
+    height: 190px;
+}
+
+#nft-41-visual-container{
+    width: 195px;
+    height: 295px;
+}
+
+#nft-41-visual-container:hover{
+    width: 240px;
+    height: 340px;
+}
+
+
+#nft-42-visual-container{
+    width: 220px;
+    height: 240px;
+}
+
+#nft-42-visual-container:hover{
+    width: 260px;
+    height: 280px;
+}
+
+#nft-43-visual-container{
+    width: 160px;
+    height: 160px;
+}
+
+#nft-43-visual-container:hover{
+    width: 190px;
+    height: 190px;
+}
+
+#nft-44-visual-container{
+    width: 150px;
+    height: 150px;
+}
+
+#nft-44-visual-container:hover{
+    width: 180px;
+    height: 180px;
+}
+
+
+
+#nft-0-meta-container{
+
+}
+
+.nft-meta-container{
+
+}
+
+#nft-0-title-container{
+
+}
+
+.nft-title-container{
+  text-align: center;
+  font-size: 22px;
+  font-weight: 400;
+  letter-spacing: 2px;
+  line-height: 33px;
+  height:  100px;
+  overflow-y: scroll;
+}
+
+#nft-0-author-container{
+
+}
+
+.nft-author-container{
+  vertical-align: top;
+  text-align: left;
+  line-height: 50px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  font-size: 18px;
+  width: 50%;
+  overflow-x: scroll;
+  display: inline-block;
+}
+
+#nft-0-value-container{
+
+}
+
+.nft-value-container{
+  vertical-align: top;
+  display: inline-block;
+  width: 45%;
+  text-align: right;
+  color: violet;
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 50px;
+  letter-spacing: 2px;
+  cursor: pointer;
+}
+
+#view-nft-0-button-container{
+
+}
+
+.view-nft-button-container, .buy-nft-button-container{
+  width: 100px;
+  height: 35px;
+  border: 2px black solid;
+  border-radius: 25px;
+  text-align: center;
+  line-height: 35px;
+  font-size: 18px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: black;
+  cursor: pointer;
+  display: inline-block;
+  margin: 5% 10px;
+  outline: none;
+  background-color: rgba(255, 255, 255, 1.0);
+  transition: color 0.25s, background-color 0.25s;
+}
+
+.view-nft-button-container:hover, .buy-nft-button-container:hover{
+  color: white;
+  background-color: rgba(0, 0, 0, 1.0);
+}
+
+#buy-nft-0-button-container{
+
+}
+
+#header-prefix-container{
+  width: 100%;
+  height: max(50px, 5%);
+  line-height: 100px;
+  text-align: center;
+  font-size: 18px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 500;
+}
+
+#header-main-body-container{
+  width: 100%;
+  text-transform: capitalize;
+  text-align: center;
+  line-height: 100px;
+  font-size: 24px;
+  letter-spacing: 2px;
+  font-weight: 500;
+}
+
+#secondary-header-container{
+  width: 100%;
+  text-transform: uppercase;
+  font-weight: 500;
+  letter-spacing: 1px;
+  font-size: 16px;
+  text-align: center;
+  line-height: 35px;
+  height: 35px;
+}
+
+#preview-item-container{
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 800px;
+  height: 600px;
+  border: 0;
+  border-radius: 20px;
+  z-index: 50;
+  cursor: pointer;
+  margin: -300px 0 0 -400px;
+  background-color: rgba(255, 255, 255, 0.95);
+  color: white;
+  font-family: Arial, sans-serif;
+  opacity: 0;
+  transition: opacity 0.5s;
+}
+
+#return-to-store-button-container, #purchase-item-button-container{
+  position: absolute;
+  left: 0;
+  text-align: center;
+  width: 100%;
+  height: 75px;
+  line-height: 75px;
+  border: 0;
+  color: black;
+  font-weight: 700;
+  cursor: pointer;
+  transition: color 0.5s, background-color 0.5s;
+}
+
+#return-to-store-button-container{
+  background-color: rgba(255, 255, 255, 1.0);
+  bottom: 0;
+  border-radius: 0 0 15px 15px;
+}
+
+#purchase-item-button-container{
+  background-color: rgba(255, 255, 0, 1.0);
+  bottom: 75px;
+}
+
+#return-to-store-button-container:hover, #purchase-item-button-container:hover{
+  color: white;
+  background-color: rgba(0, 0, 0, 1.0);
+}
+
+#preview-item-title-container{
+  color: black;
+  height: 75px;
+  line-height: 75px;
+  font-size: 26px;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  cursor: pointer;
+  letter-spacing: 1px;
+  font-weight: 600;
+  transition: font-size 0.25s;
+}
+
+#preview-item-title-container:hover{
+  font-size: 28px;
+}
+
+#preview-item-visual-container{
+  width: 325px;
+  height: 325px;
+  border: 5px;
+  cursor: pointer;
+  display: inline-block;
+  background-color: rgba(255, 0, 0, 0);
+  margin: 0 0 25px 50px;
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+#preview-item-author-container{
+    color: black;
+    font-weight: 600;
+    font-size: 22px;
+    text-align: center;
+    width: 200px;
+    height: 50px;
+    line-height: 50px;
+
+    letter-spacing: 1px;
+    position: absolute;
+    top: 100px;
+    right: 225px;
+}
+
+#preview-item-price-container{
+  color: black;
+  font-weight: 500;
+  font-size: 24px;
+  text-align: center;
+  width: 200px;
+  height: 50px;
+  letter-spacing: 2px;
+  line-height: 50px;
+  position: absolute;
+  top: 100px;
+  right: 25px;
+}
+
+#preview-item-description-container{
+    color: black;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+    position: absolute;
+    top: 150px;
+    right: 50px;
+    width: 325px;
+    letter-spacing: 1px;
+}
+
+#preview-item-in-vr-button-container, #preview-item-in-ar-button-container{
+  border: 2px black solid;
+  width: 75px;
+  height: 40px;
+  border-radius: 25px;
+  cursor: pointer;
+  outline: none;
+  display: inline-block;
+  position: absolute;
+  background-color: rgba(255, 255, 255, 1.0);
+
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+#preview-item-in-vr-button-container{
+  background-image: url(../media/img/eye-icon.png);
+  background-size: 80% auto;
+  bottom: 200px;
+
+  right: 20px;
+}
+
+#preview-item-in-vr-button-container:hover{
+  background-color: rgba(0, 0, 0, 1.0);
+}
+
+#preview-item-in-ar-button-container{
+  background-image: url(../media/img/ar-icon.png);
+  background-size: auto 100%;
+  bottom: 200px;
+  right: 100px;
+}
+
+#preview-item-in-ar-button-container:hover{
+  background-image: url(../media/img/ar-icon-hover.png);
+  background-color: rgba(0, 0, 0, 1.0);
+}
+
+@media only screen and (max-width: 600px){
+  #preview-item-title-container{
+    padding-top: 5%;
+    padding-bottom: 5px;
+    top: 0;
+    background-color: rgba(255, 255, 255, 0.8);
+    position: absolute;
+    height: auto;
+    line-height: 30px;
+    font-size: 20px;/*
+    color: black;
+    height: 75px;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    cursor: pointer;
+    letter-spacing: 1px;
+    font-weight: 600;
+    transition: font-size 0.25s;*/
+  }
+
+  #preview-item-container{
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    margin: 0;
+  }
+
+  #join-lyoko-button-container{
+    background-image: url(../media/img/mobile-menu-icon.png);
+    background-size: 100% 100%;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-color: rgba(255, 255, 255, 1.0);
+    width: 50px;/*200px*/
+    height: 50px;
+    top: 3%;
+    right: 3%;
+    font-size: 0;
+    transition: font-size 0.25s, width 0.25s;
+  }
+
+  #join-lyoko-button-container:hover{
+    background-color: rgba(0, 0, 0, 1.0);
+    color: white;
+    background-image: none;
+    letter-spacing: 2px;
+    width: 200px;
+    font-size: 16px;
+  }
+
+  #examples-container {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+  }
+
+  .nft-container {
+    display: block;
+    margin: 5% auto 30% auto;
+  }
+
+  #secondary-header-container{
+    font-size: 12px;
+  }
+
+  #preview-item-author-container{
+    background-color: rgba(255, 255, 255, 0.8);
+      font-weight: 400;
+      letter-spacing: 2px;
+      z-index: 100;
+      /*font-size: 22px;
+      text-align: center;
+      width: 200px;
+      height: 50px;
+      line-height: 50px;
+      position: absolute;*/
+      top: 45%;/*100px;*/
+      right: auto;/*225px;*/
+      left: 0;
+  }
+
+  #preview-item-price-container{
+    background-color: rgba(255, 255, 255, 0.8);
+    z-index: 99;
+    /*color: black;
+    font-weight: 500;
+    font-size: 24px;
+    text-align: center;
+    width: 200px;
+    height: 50px;
+    letter-spacing: 2px;
+    line-height: 50px;
+    position: absolute;*/
+    top: 45%; /*calc(45% + 65px);/*100px;*/
+    right: 0;
+    left: auto;/*0;*/
+  }
+
+
+  #preview-item-description-container{
+      /*color: black;
+      font-weight: 500;
+      font-size: 20px;
+      line-height: 24px;
+      position: absolute;*/
+      bottom: 165px;/*150px;*/
+      top: auto;
+      height: 75px;
+      overflow-y: scroll;
+      left: 10%;
+      right: auto;/*50px;*/
+      width: 80%;/*325px;*/
+      /*letter-spacing: 1px;*/
+  }
+
+  #preview-item-in-ar-button-container, #preview-item-in-vr-button-container{
+    /*bottom: 180px;*/
+
+    left: auto;
+    bottom: auto;
+  }
+
+  #preview-item-in-ar-button-container{
+    top: calc(45% + 50px);
+    right: 110px;
+  }
+
+  #preview-item-in-vr-button-container{
+    top: calc(45% + 50px);
+    right: 10px;
+  }
+
+
+  #preview-item-visual-container{
+    width: 300px;
+    height: 300px;
+    border: 0;
+    cursor: pointer;
+    display: block;
+    background-color: rgba(255, 0, 0, 0);
+    margin: 25px auto 0 auto;
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    background-position: center center;
+  }
+}
+
+#main-menu-container{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 1.0;
+  display: block;
+  z-index: 2;
+  transition: height 0.5s, opacity 0.5s;
+}
+
+.collapsed{
+  height: 0 !important;
+  opacity: 0 !important;
+}
+
+.option-button-container{
+  width: 100%;
+  height: 100px;
+  line-height: 100px;
+  font-size: 18px;
+  text-align: center;
+  color: white;
+  background-color: black;
+  outline: none;
+  cursor: pointer;
+  transition: color 0.1s, background-color 0.1s;
+}
+
+.option-button-container:hover{
+
+  background-color: white;
+  color: black;
+}
+
+/*#home-option-button-container{
+
+}
+
+#mens-fashion-option-button-container{
+
+}*/
+
+@media only screen and (min-height: 660px) and (max-width: 600px){
+  #preview-item-visual-container{
+    margin-top: 50px;
+  }
+
+  #preview-item-author-container{
+    top: 50%;
+  }
+
+  #preview-item-price-container{
+    top: 50%;
+  }
+}

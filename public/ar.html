@@ -1,0 +1,1061 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>LEMBA | MAISON | 03</title>
+    <link rel="stylesheet" href="./css/browse.css" type="text/css" />
+    <script src="./js/aframe1.3.0.min.js"></script>
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js.map"></script><!---->
+    <script src="./js/Patrice-Morgan.Lyoko.js"></script>
+    <script src="./js/lk-dia-navigation.js"></script><!---->
+    <script>
+      function showTime(){
+          var date = new Date();
+          var h = date.getHours(); // 0 - 23
+          var m = date.getMinutes(); // 0 - 59
+          var s = date.getSeconds(); // 0 - 59
+          var session = "AM";
+
+          if(h == 0){
+              h = 12;
+          }
+
+          if(h > 12){
+              h = h - 12;
+              session = "PM";
+          }
+
+          h = (h < 10) ? "0" + h : h;
+          m = (m < 10) ? "0" + m : m;
+          s = (s < 10) ? "0" + s : s;
+
+          var time = h + ":" + m + ":" + s + " " + session;
+          document.getElementById("MyClockDisplay").innerText = time;
+          document.getElementById("MyClockDisplay").textContent = time;
+
+          setTimeout(showTime, 1000);
+
+      }
+
+      var Fashion = {
+        calendar: {
+          open: false,
+          dayInView: -1
+        },
+        sectionOpen: false,
+        underwearOptionsVisible: false,
+        bottomOptionsVisible: false,
+        nudeSaveForUnderWear: false
+      };
+
+      var FittingRoom = {
+        visible: false,
+        Clothing: {
+          topMostLayers: {
+            head: null,
+            top: null,
+            bottom: null,
+            feet: null,
+            under: null,
+            baseline: true
+          },
+          Array: [
+            [
+              {
+                present: false,
+                topMost: false,
+                option: {
+                  id: "baseline-body-container"
+                }
+              }
+            ],
+            [
+              {
+                present: false,
+                topMost: false,
+                option: {
+                  id: "blue-striped-boxers-container"
+                }
+              },
+              {
+                present: false,
+                topMost: false,
+                option: {
+                  id: "black-and-white-striped-boxers-container"
+                }
+              }
+            ],
+            [
+              {
+                present: false,
+                topMost: false,
+                option: {
+                  id: "gray-champion-sweat-shorts-container"
+                }
+              },
+              {
+                present: false,
+                topMost: false,
+                option: {
+                  id: "indigo-corduroys-container"
+                }
+              },
+              {
+                present: false,
+                topMost: false,
+                option: {
+                  id: "khaki-corduroys-container"
+                }
+              }
+            ],
+            [
+              {
+                present: false,
+                topMost: false,
+                option: {
+                  ids: [
+                      "white-tee-container",
+                      "green-checkered-long-sleeve-with-indigo-corduroys-container",
+                      "green-checkered-long-sleeve-with-khakis-container",
+                  ]
+                }
+              },
+              {
+                present: false,
+                topMost: false,
+                option: {
+                  ids: [
+                      "red-and-white-striped-polo-tee-container",
+                      "blue-oxford-with-indigo-corduroys-container",
+                      "blue-oxford-with-khakis-container",
+                  ]
+                }
+              }
+            ]
+          ]
+        }
+      };
+
+      function showCalendar(){
+        //show the showCalendar and ...
+        document.getElementById("fashion-calendar-container").style.display = "block";
+        setTimeout(function(){
+          document.getElementById("fashion-calendar-container").style.opacity = 1.0;
+          document.getElementById("fashion-calendar-container").style.height = "100%";
+        }, 50);
+
+        //...set the state of the Fashion object-subject to reflect the change
+        Fashion.calendar.open = true;
+
+      }
+
+      function hideCalendar(){
+        //hide the showCalendar and...
+        document.getElementById("fashion-calendar-container").style.opacity = 0;
+        document.getElementById("fashion-calendar-container").style.height = 0;
+
+        setTimeout(function(){
+          document.getElementById("fashion-calendar-container").style.display = "none";
+        }, 500);
+
+        //...reset the state of the Fashion object-subject to reflect the return to baseline
+        Fashion.calendar.open = false;
+
+      }
+
+      function toggleFashionCalendar(){
+        if(Fashion.calendar.open){
+          hideCalendar();
+          return true;
+        }
+        showCalendar();
+      }
+
+      function hideDay(dayToHide){
+        if(dayToHide===-1){
+          document.getElementById(`day-default-container`).setAttribute("visible", false);
+        }
+        else{
+          document.getElementById(`day-${dayToHide}-container`).setAttribute("visible", false);
+        }
+      }
+
+      function showDay(dayToShow){
+        if(dayToShow===-1){
+          //do nothing
+        }
+        else{
+          document.getElementById(`day-${dayToShow}-container`).setAttribute("visible", true);
+          Fashion.calendar.dayInView = dayToShow;
+        }
+      }
+
+      function toggleDayInView(dayNumber){
+        let currentDay = Fashion.calendar.dayInView;
+        console.log(`toggle day ${dayNumber} in view`);
+
+        if(currentDay!=dayNumber){
+          hideDay(currentDay);
+          showDay(dayNumber);
+        }
+      }
+
+      function loadFittingRoom(){
+        document.getElementById("sky-container").setAttribute("src", "");
+        document.getElementById("sky-container").setAttribute("color", "white");
+
+        document.getElementById("baseline-reset-button-container").style.display = "block";
+        document.getElementById("add-tops-button-container").style.display = "block";
+        document.getElementById("add-pants-button-container").style.display = "block";
+        document.getElementById("add-underwear-button-container").style.display = "block";
+
+        document.getElementById("name-container").style.display = "none";
+        document.getElementById("last-public-location-button-container").style.display = "none";
+        document.getElementById("hov-button-container").style.display = "none";
+
+        FittingRoom.visible = true;
+      }
+
+      function hideFittingRoom(){
+        if(Fashion.underwearOptionsVisible){
+          hideUnderWearOptions();
+          Fashion.underwearOptionsVisible = false;
+        }
+
+        if(Fashion.bottomOptionsVisible){
+          hideBottomOptions();
+          Fashion.bottomOptionsVisible = false;
+        }
+
+        Fashion.sectionOpen = false;
+
+        if(FittingRoom.Clothing.topMostLayers.head){
+          document.getElementById(FittingRoom.Clothing.topMostLayers.head).setAttribute("visible", false);
+        }
+        if(FittingRoom.Clothing.topMostLayers.top){
+          document.getElementById(FittingRoom.Clothing.topMostLayers.top).setAttribute("visible", false);
+        }
+        if(FittingRoom.Clothing.topMostLayers.bottom){
+          document.getElementById(FittingRoom.Clothing.topMostLayers.bottom).setAttribute("visible", false);
+        }
+        if(FittingRoom.Clothing.topMostLayers.feet){
+          document.getElementById(FittingRoom.Clothing.topMostLayers.feet).setAttribute("visible", false);
+        }
+        if(FittingRoom.Clothing.topMostLayers.under){
+          document.getElementById(FittingRoom.Clothing.topMostLayers.under).setAttribute("visible", false);
+        }
+        if(FittingRoom.Clothing.topMostLayers.baseline){
+          document.getElementById("baseline-body-container").setAttribute("visible", false);
+        }
+
+        document.getElementById(`day-default-container`).setAttribute("visible", true);
+        Fashion.calendar.dayInView = -1;
+
+        document.getElementById("sky-container").setAttribute("src", "#starry-sky-texture");
+        document.getElementById("sky-container").setAttribute("color", "");
+
+        document.getElementById("baseline-reset-button-container").style.display = "none";
+        document.getElementById("add-tops-button-container").style.display = "none";
+        document.getElementById("add-pants-button-container").style.display = "none";
+        document.getElementById("add-underwear-button-container").style.display = "none";
+
+        document.getElementById("name-container").style.display = "block";
+        document.getElementById("last-public-location-button-container").style.display = "block";
+        document.getElementById("hov-button-container").style.display = "block";
+
+        FittingRoom.visible = false;
+      }
+
+      function toggleFittingRoom(){
+        if(FittingRoom.visible){
+          hideFittingRoom();
+        }
+        else{
+          loadFittingRoom();
+        }
+      }
+
+      //let nudeSaveForUnderWear = false;
+      function showUnderWearOptions(){
+        if(FittingRoom.Clothing.topMostLayers.head===null && FittingRoom.Clothing.topMostLayers.top===null && FittingRoom.Clothing.topMostLayers.bottom===null && FittingRoom.Clothing.topMostLayers.feet===null){
+          Fashion.nudeSaveForUnderWear = true;
+        }
+
+        document.getElementById("underwear-options-container").style.display = "block";
+        setTimeout(function(){
+          document.getElementById("underwear-options-container").style.opacity = 1.0;
+        }, 50);
+      }
+
+      function hideUnderWearOptions(){
+        document.getElementById("underwear-options-container").style.opacity = 0;
+        setTimeout(function(){
+          document.getElementById("underwear-options-container").style.display = "none";
+        }, 505);
+      }
+
+      function toggleUnderWearOptions(){
+        if(Fashion.sectionOpen){
+          //close the section
+          Fashion.sectionOpen = false;
+        }
+
+        if(Fashion.underwearOptionsVisible){
+          hideUnderWearOptions();
+          Fashion.sectionOpen = false;
+          Fashion.underwearOptionsVisible = false;
+        }
+        else{
+          showUnderWearOptions();
+          Fashion.sectionOpen = true;
+          Fashion.underwearOptionsVisible = true;
+        }
+      }
+
+      function showBottomOptions(){
+        document.getElementById("bottom-options-container").style.display = "block";
+        setTimeout(function(){
+          document.getElementById("bottom-options-container").style.opacity = 1.0;
+        }, 50);
+      }
+
+      function hideBottomOptions(){
+        document.getElementById("bottom-options-container").style.opacity = 0;
+        setTimeout(function(){
+          document.getElementById("bottom-options-container").style.display = "none";
+        }, 505);
+      }
+
+      function toggleBottomOptions(){
+        if(Fashion.sectionOpen){
+          //close the section
+          Fashion.sectionOpen = false;
+        }
+
+        if(Fashion.bottomOptionsVisible){
+          hideBottomOptions();
+          Fashion.sectionOpen = false;
+          Fashion.bottomOptionsVisible = false;
+        }
+        else{
+          showBottomOptions();
+          Fashion.sectionOpen = true;
+          Fashion.bottomOptionsVisible = true;
+        }
+      }
+
+      function showTopOptions(){
+        document.getElementById("top-options-container").style.display = "block";
+        setTimeout(function(){
+          document.getElementById("top-options-container").style.opacity = 1.0;
+        }, 50);
+      }
+
+      function hideTopOptions(){
+        document.getElementById("top-options-container").style.opacity = 0;
+        setTimeout(function(){
+          document.getElementById("top-options-container").style.display = "none";
+        }, 505);
+      }
+
+      function toggleTopOptions(){
+        if(Fashion.sectionOpen){
+          //close the section
+          Fashion.sectionOpen = false;
+        }
+
+        if(Fashion.topOptionsVisible){
+          hideTopOptions();
+          Fashion.sectionOpen = false;
+          Fashion.topOptionsVisible = false;
+        }
+        else{
+          showTopOptions();
+          Fashion.sectionOpen = true;
+          Fashion.topOptionsVisible = true;
+        }
+      }
+
+      var finishedSelectingOutfit = false;
+
+      function finalizeOutfit(){
+        finishedSelectingOutfit = true;
+        document.getElementById("finish-outfit-button-container").style.display = "block";
+        setTimeout(function(){
+          document.getElementById("finish-outfit-button-container").style.opacity = 1.0;
+        }, 50);
+      }
+
+      document.addEventListener("DOMContentLoaded", function(){
+        initScene();
+
+        document.getElementById("name-container").innerHTML = PatriceMorganLyoko.name;
+
+        document.getElementById("main-menu-container").style.opacity = 1.0;
+
+        showTime();
+
+        document.getElementById("last-public-location-button-container").addEventListener("click", function(){
+          toggleFashionCalendar();
+        });
+
+        document.getElementById("fashion-button-container").addEventListener("click", function(){
+          toggleFittingRoom();
+        })
+
+        document.getElementById("baseline-reset-button-container").addEventListener("click", function(){
+          hideDay(Fashion.calendar.dayInView);
+
+          if(Fashion.underwearOptionsVisible){
+            hideUnderWearOptions();
+            Fashion.underwearOptionsVisible = false;
+          }
+
+          if(Fashion.bottomOptionsVisible){
+            hideBottomOptions();
+            Fashion.bottomOptionsVisible = false;
+          }
+
+          if(Fashion.topOptionsVisible){
+            hideTopOptions();
+            Fashion.topOptionsVisible = false;
+          }
+
+          document.getElementById("blue-underwear-button-container").classList.remove("selected-underwear-option");
+          document.getElementById("black-and-white-underwear-button-container").classList.remove("selected-underwear-option");
+
+          document.getElementById("gray-shorts-button-container").classList.remove("selected-bottom-option");
+          document.getElementById("indigo-corduroys-button-container").classList.remove("selected-bottom-option");
+          document.getElementById("khaki-corduroys-button-container").classList.remove("selected-bottom-option");
+
+          document.getElementById("white-tee-button-container").classList.remove("selected-top-option");
+          document.getElementById("red-and-white-striped-polo-tee-button-container").classList.remove("selected-top-option");
+
+          FittingRoom.Clothing.Array[0][0].present = true;
+          FittingRoom.Clothing.Array[0][0].topMost = true;
+
+          FittingRoom.Clothing.Array[1][0].present = false;
+          FittingRoom.Clothing.Array[1][0].topMost = false;
+
+          FittingRoom.Clothing.Array[1][1].present = false;
+          FittingRoom.Clothing.Array[1][1].topMost = false;
+
+          FittingRoom.Clothing.Array[2][0].present = false;
+          FittingRoom.Clothing.Array[2][0].topMost = false;
+
+          FittingRoom.Clothing.Array[2][1].present = false;
+          FittingRoom.Clothing.Array[2][1].topMost = false;
+
+          FittingRoom.Clothing.Array[2][2].present = false;
+          FittingRoom.Clothing.Array[2][2].topMost = false;
+
+          FittingRoom.Clothing.Array[3][0].present = false;
+          FittingRoom.Clothing.Array[3][0].topMost = false;
+
+          FittingRoom.Clothing.Array[3][1].present = false;
+          FittingRoom.Clothing.Array[3][1].topMost = false;
+
+          document.getElementById(FittingRoom.Clothing.Array[0][0].option.id).setAttribute("visible", true);
+          document.getElementById(FittingRoom.Clothing.Array[1][0].option.id).setAttribute("visible", false);
+          document.getElementById(FittingRoom.Clothing.Array[1][1].option.id).setAttribute("visible", false);
+
+          document.getElementById(FittingRoom.Clothing.Array[2][0].option.id).setAttribute("visible", false);
+          document.getElementById(FittingRoom.Clothing.Array[2][1].option.id).setAttribute("visible", false);
+
+          document.getElementById(FittingRoom.Clothing.Array[3][0].option.ids[0]).setAttribute("visible", false);
+          document.getElementById(FittingRoom.Clothing.Array[3][0].option.ids[1]).setAttribute("visible", false);
+          document.getElementById(FittingRoom.Clothing.Array[3][0].option.ids[2]).setAttribute("visible", false);
+          document.getElementById(FittingRoom.Clothing.Array[3][1].option.ids[0]).setAttribute("visible", false);
+
+          document.getElementById(FittingRoom.Clothing.Array[3][1].option.ids[1]).setAttribute("visible", false);
+
+          document.getElementById(FittingRoom.Clothing.Array[3][1].option.ids[2]).setAttribute("visible", false);
+
+          FittingRoom.Clothing.topMostLayers.head = null;
+          FittingRoom.Clothing.topMostLayers.top = null;
+          FittingRoom.Clothing.topMostLayers.bottom = null;
+          FittingRoom.Clothing.topMostLayers.feet = null;
+          FittingRoom.Clothing.topMostLayers.under = null;
+          FittingRoom.Clothing.topMostLayers.baseline = true;
+
+
+        });
+
+        document.getElementById("add-underwear-button-container").addEventListener("click", function(){
+          toggleUnderWearOptions();
+        });
+
+        document.getElementById("add-pants-button-container").addEventListener("click", function(){
+          toggleBottomOptions();
+        });
+
+        document.getElementById("add-tops-button-container").addEventListener("click", function(){
+          toggleTopOptions();
+        });
+
+
+
+        document.getElementById("blue-underwear-button-container").addEventListener("click", function(){
+
+          //select the corresponding Clothing
+          FittingRoom.Clothing.Array[1][0].present = true;
+          FittingRoom.Clothing.Array[1][1].present = false;
+
+          //check the clothing array to see what models are the topmost topMostLayers
+          if(FittingRoom.Clothing.topMostLayers.under!==null){// if an underwear model is in view
+            document.getElementById(FittingRoom.Clothing.topMostLayers.under).setAttribute("visible", false);//hide that model
+
+            //toggle off the selected option button
+            document.getElementById("black-and-white-underwear-button-container").classList.remove("selected-underwear-option");
+          }
+          //make this current selection the topMost model layer
+          FittingRoom.Clothing.Array[1][0].topMost = true;
+          FittingRoom.Clothing.Array[1][1].topMost = false;
+          document.getElementById("blue-underwear-button-container").classList.add("selected-underwear-option");
+
+
+          FittingRoom.Clothing.topMostLayers.under = FittingRoom.Clothing.Array[1][0].option.id;
+
+          //show the topmostlayers
+          if(FittingRoom.Clothing.topMostLayers.bottom===null){//if there are no pants
+            document.getElementById(FittingRoom.Clothing.topMostLayers.under).setAttribute("visible", true);//show the underwear
+          }
+          // what layers are covered? the baseline layer 0
+          if(FittingRoom.Clothing.topMostLayers.baseline){
+            document.getElementById("baseline-body-container").setAttribute("visible", false);
+          }
+
+
+          // debugging
+          console.log("----CLOTHING ARRAY-------------------");
+          console.log(FittingRoom.Clothing.Array);
+        });
+
+        document.getElementById("black-and-white-underwear-button-container").addEventListener("click", function(){
+          //select the corresponding Clothing
+          FittingRoom.Clothing.Array[1][0].present = false;
+          FittingRoom.Clothing.Array[1][1].present = true;
+
+          //check the clothing array to dee what models are the topmost topMostLayers
+          if(FittingRoom.Clothing.topMostLayers.under!==null){
+            document.getElementById(FittingRoom.Clothing.topMostLayers.under).setAttribute("visible", false);
+
+            document.getElementById("blue-underwear-button-container").classList.remove("selected-underwear-option");
+          }
+
+          FittingRoom.Clothing.Array[1][0].topMost = false;
+          FittingRoom.Clothing.Array[1][1].topMost = true;
+          document.getElementById("black-and-white-underwear-button-container").classList.add("selected-underwear-option");
+
+          FittingRoom.Clothing.topMostLayers.under = FittingRoom.Clothing.Array[1][1].option.id;
+
+          //show the topmostlayers
+          if(FittingRoom.Clothing.topMostLayers.bottom===null){
+            document.getElementById(FittingRoom.Clothing.topMostLayers.under).setAttribute("visible", true);
+          }
+          if(FittingRoom.Clothing.topMostLayers.baseline){
+            document.getElementById("baseline-body-container").setAttribute("visible", false);
+          }
+
+          // debugging
+          console.log("----CLOTHING ARRAY-------------------");
+          console.log(FittingRoom.Clothing.Array);
+        });
+
+
+        document.getElementById("gray-shorts-button-container").addEventListener("click", function(){
+
+          //select the corresponding Clothing
+          FittingRoom.Clothing.Array[2][0].present = true;
+          FittingRoom.Clothing.Array[2][1].present = false;
+          FittingRoom.Clothing.Array[2][2].present = false;
+
+          //check the clothing array to see what models are the topmost topMostLayers
+          if(FittingRoom.Clothing.topMostLayers.bottom!==null){// if an pants or shorts model is in view
+            document.getElementById(FittingRoom.Clothing.topMostLayers.bottom).setAttribute("visible", false);//hide that model
+
+            //toggle off the selected option button
+            document.getElementById("indigo-corduroys-button-container").classList.remove("selected-bottom-option");
+            document.getElementById("khaki-corduroys-button-container").classList.remove("selected-bottom-option");
+          }
+
+          if(FittingRoom.Clothing.topMostLayers.under!==null){// if underwear model is in view
+            document.getElementById(FittingRoom.Clothing.topMostLayers.under).setAttribute("visible", false);//hide that model
+          }
+          //make this current selection the topMost model layer
+          FittingRoom.Clothing.Array[2][0].topMost = true;
+          FittingRoom.Clothing.Array[2][1].topMost = false;
+          FittingRoom.Clothing.Array[2][2].topMost = false;
+          document.getElementById("gray-shorts-button-container").classList.add("selected-bottom-option");
+
+
+          FittingRoom.Clothing.topMostLayers.bottom = FittingRoom.Clothing.Array[2][0].option.id;
+          document.getElementById(FittingRoom.Clothing.topMostLayers.bottom).setAttribute("visible", true);
+
+          //show the topmostlayers
+          /*if(FittingRoom.Clothing.topMostLayers.bottom===null){//if there are no pants
+            document.getElementById(FittingRoom.Clothing.topMostLayers.under).setAttribute("visible", true);//show the underwear
+          }
+          // what layers are covered? the baseline layer 0
+          if(FittingRoom.Clothing.topMostLayers.baseline){
+            document.getElementById("baseline-body-container").setAttribute("visible", false);
+          }*/
+
+
+          // debugging
+          console.log("----CLOTHING ARRAY-------------------");
+          console.log(FittingRoom.Clothing.Array);
+        });
+
+        document.getElementById("indigo-corduroys-button-container").addEventListener("click", function(){
+          //select the corresponding Clothing
+          FittingRoom.Clothing.Array[2][0].present = false;
+          FittingRoom.Clothing.Array[2][1].present = true;
+          FittingRoom.Clothing.Array[2][2].present = false;
+
+          //check the clothing array to see what models are the topmost topMostLayers
+          if(FittingRoom.Clothing.topMostLayers.bottom!==null){
+            document.getElementById(FittingRoom.Clothing.topMostLayers.bottom).setAttribute("visible", false);
+
+            document.getElementById("gray-shorts-button-container").classList.remove("selected-bottom-option");
+            document.getElementById("khaki-corduroys-button-container").classList.remove("selected-bottom-option");
+          }
+
+          if(FittingRoom.Clothing.topMostLayers.under!==null){
+            document.getElementById(FittingRoom.Clothing.topMostLayers.under).setAttribute("visible", false);
+          }
+
+          FittingRoom.Clothing.Array[2][0].topMost = false;
+          FittingRoom.Clothing.Array[2][1].topMost = true;
+          FittingRoom.Clothing.Array[2][2].topMost = false;
+          document.getElementById("indigo-corduroys-button-container").classList.add("selected-bottom-option");
+
+          FittingRoom.Clothing.topMostLayers.bottom = FittingRoom.Clothing.Array[2][1].option.id;
+          document.getElementById(FittingRoom.Clothing.topMostLayers.bottom).setAttribute("visible", true);
+
+/*
+          //show the topmostlayers
+          if(FittingRoom.Clothing.topMostLayers.bottom===null){
+            document.getElementById(FittingRoom.Clothing.topMostLayers.under).setAttribute("visible", true);
+          }
+          if(FittingRoom.Clothing.topMostLayers.baseline){
+            document.getElementById("baseline-body-container").setAttribute("visible", false);
+          }
+*/
+          // debugging
+          console.log("----CLOTHING ARRAY-------------------");
+          console.log(FittingRoom.Clothing.Array);
+        });
+
+        document.getElementById("khaki-corduroys-button-container").addEventListener("click", function(){
+          //select the corresponding Clothing
+          FittingRoom.Clothing.Array[2][0].present = false;
+          FittingRoom.Clothing.Array[2][1].present = false;
+          FittingRoom.Clothing.Array[2][2].present = true;
+
+          //check the clothing array to see what models are the topmost topMostLayers
+          if(FittingRoom.Clothing.topMostLayers.bottom!==null){
+            document.getElementById(FittingRoom.Clothing.topMostLayers.bottom).setAttribute("visible", false);
+
+            document.getElementById("gray-shorts-button-container").classList.remove("selected-bottom-option");
+            document.getElementById("indigo-corduroys-button-container").classList.remove("selected-bottom-option");
+          }
+
+          if(FittingRoom.Clothing.topMostLayers.under!==null){
+            document.getElementById(FittingRoom.Clothing.topMostLayers.under).setAttribute("visible", false);
+          }
+
+          FittingRoom.Clothing.Array[2][0].topMost = false;
+          FittingRoom.Clothing.Array[2][1].topMost = false;
+          FittingRoom.Clothing.Array[2][2].topMost = true;
+          document.getElementById("khaki-corduroys-button-container").classList.add("selected-bottom-option");
+
+          FittingRoom.Clothing.topMostLayers.bottom = FittingRoom.Clothing.Array[2][2].option.id;
+          document.getElementById(FittingRoom.Clothing.topMostLayers.bottom).setAttribute("visible", true);
+
+/*
+          //show the topmostlayers
+          if(FittingRoom.Clothing.topMostLayers.bottom===null){
+            document.getElementById(FittingRoom.Clothing.topMostLayers.under).setAttribute("visible", true);
+          }
+          if(FittingRoom.Clothing.topMostLayers.baseline){
+            document.getElementById("baseline-body-container").setAttribute("visible", false);
+          }
+*/
+          // debugging
+          console.log("----CLOTHING ARRAY-------------------");
+          console.log(FittingRoom.Clothing.Array);
+        });
+
+
+        document.getElementById("white-tee-button-container").addEventListener("click", function(){
+          //select the corresponding Clothing
+          finalizeOutfit();
+
+          FittingRoom.Clothing.Array[3][0].present = true;
+          FittingRoom.Clothing.Array[3][1].present = false;
+
+          //check the clothing array to see what models are the topmost topMostLayers
+          if(FittingRoom.Clothing.topMostLayers.top!==null){
+            document.getElementById(FittingRoom.Clothing.topMostLayers.top).setAttribute("visible", false);
+
+            document.getElementById("red-and-white-striped-polo-tee-button-container").classList.remove("selected-top-option");
+          }
+
+          if(FittingRoom.Clothing.topMostLayers.bottom!==null){
+            document.getElementById(FittingRoom.Clothing.topMostLayers.bottom).setAttribute("visible", false);
+          }
+
+          if(FittingRoom.Clothing.topMostLayers.under!==null){
+            document.getElementById(FittingRoom.Clothing.topMostLayers.under).setAttribute("visible", false);
+          }
+
+          FittingRoom.Clothing.Array[3][0].topMost = true;
+          FittingRoom.Clothing.Array[3][1].topMost = false;
+          document.getElementById("white-tee-button-container").classList.add("selected-top-option");
+
+
+          if(FittingRoom.Clothing.Array[2][0].present===true){
+            FittingRoom.Clothing.topMostLayers.top = FittingRoom.Clothing.Array[3][0].option.ids[0];
+          }
+          else if(FittingRoom.Clothing.Array[2][1].present===true){
+            FittingRoom.Clothing.topMostLayers.top = FittingRoom.Clothing.Array[3][0].option.ids[1];
+          }
+          else if(FittingRoom.Clothing.Array[2][2].present===true){
+            FittingRoom.Clothing.topMostLayers.top = FittingRoom.Clothing.Array[3][0].option.ids[2];
+          }
+          document.getElementById(FittingRoom.Clothing.topMostLayers.top).setAttribute("visible", true);
+
+        /*
+          //show the topmostlayers
+          if(FittingRoom.Clothing.topMostLayers.bottom===null){
+            document.getElementById(FittingRoom.Clothing.topMostLayers.under).setAttribute("visible", true);
+          }
+          if(FittingRoom.Clothing.topMostLayers.baseline){
+            document.getElementById("baseline-body-container").setAttribute("visible", false);
+          }
+        */
+          // debugging
+          console.log("----CLOTHING ARRAY-------------------");
+          console.log(FittingRoom.Clothing.Array);
+        });
+
+        document.getElementById("red-and-white-striped-polo-tee-button-container").addEventListener("click", function(){
+          //select the corresponding Clothing
+
+          finalizeOutfit();
+
+          FittingRoom.Clothing.Array[3][0].present = false;
+          FittingRoom.Clothing.Array[3][1].present = true;
+
+          //check the clothing array to see what models are the topmost topMostLayers
+          if(FittingRoom.Clothing.topMostLayers.top!==null){
+            document.getElementById(FittingRoom.Clothing.topMostLayers.top).setAttribute("visible", false);
+
+            document.getElementById("white-tee-button-container").classList.remove("selected-top-option");
+          }
+
+          if(FittingRoom.Clothing.topMostLayers.bottom!==null){
+            document.getElementById(FittingRoom.Clothing.topMostLayers.bottom).setAttribute("visible", false);
+          }
+
+          if(FittingRoom.Clothing.topMostLayers.under!==null){
+            document.getElementById(FittingRoom.Clothing.topMostLayers.under).setAttribute("visible", false);
+          }
+
+          FittingRoom.Clothing.Array[3][0].topMost = false;
+          FittingRoom.Clothing.Array[3][1].topMost = true;
+
+          if(FittingRoom.Clothing.Array[2][0].present===true){
+            FittingRoom.Clothing.topMostLayers.top = FittingRoom.Clothing.Array[3][1].option.ids[0];
+          }
+          else if(FittingRoom.Clothing.Array[2][1].present===true){
+            FittingRoom.Clothing.topMostLayers.top = FittingRoom.Clothing.Array[3][1].option.ids[1];
+          }
+          else if(FittingRoom.Clothing.Array[2][2].present===true){
+            FittingRoom.Clothing.topMostLayers.top = FittingRoom.Clothing.Array[3][1].option.ids[2];
+          }
+          document.getElementById("red-and-white-striped-polo-tee-button-container").classList.add("selected-top-option");
+
+          //FittingRoom.Clothing.topMostLayers.top = FittingRoom.Clothing.Array[3][1].option.id;
+          document.getElementById(FittingRoom.Clothing.topMostLayers.top).setAttribute("visible", true);
+
+        /*
+          //show the topmostlayers
+          if(FittingRoom.Clothing.topMostLayers.bottom===null){
+            document.getElementById(FittingRoom.Clothing.topMostLayers.under).setAttribute("visible", true);
+          }
+          if(FittingRoom.Clothing.topMostLayers.baseline){
+            document.getElementById("baseline-body-container").setAttribute("visible", false);
+          }
+        */
+          // debugging
+          console.log("----CLOTHING ARRAY-------------------");
+          console.log(FittingRoom.Clothing.Array);
+        });
+
+
+        document.getElementById("finish-outfit-button-container").addEventListener("click", function(){
+          if(finishedSelectingOutfit){
+            window.location.href = "./today-ar";
+          }
+        });
+
+
+        /*
+
+          day 1 = nude, Baseline
+
+        */
+
+        let days = document.getElementsByClassName("day-container");
+        for (let i = 0; i < days.length; i++) {
+            let dayPointer = i;
+
+            (function(){
+              days[dayPointer].addEventListener("click", function(){
+                toggleDayInView(dayPointer);
+                days[dayPointer].classList.add("selected-day-container");
+                if(Fashion.calendar.dayInView!==-1){
+                  days[Fashion.calendar.dayInView].classList.remove("selected-day-container");
+                }
+              });
+            })();
+        }
+
+      });
+    </script>
+  </head>
+<body>
+  <div id="site-title-container">
+    <div id="title-name-container">Lemba - Kongo</div>
+    <input id="toggle-mobile-menu-container" type="button" value="" />
+  </div>
+  <div id="main-menu-container">
+    <input id="boutique-button-container" class="menu-option-button-container" value="Boutique" type="button"/>
+    <input id="maison-button-container" class="menu-option-button-container" value="Maison" type="button"/>
+    <input id="contact-button-container" class="menu-option-button-container" value="Contact" type="button"/>
+  </div>
+  <div id="main-app-container">
+    <div id="name-container">Profile Name</div>
+    <div id="MyClockDisplay" class="clock"></div>
+    <input id="last-public-location-button-container" type="button" value="" />
+    <input id="fashion-button-container" type="button" value="" />
+    <input id="hov-button-container" type="button" value="" />
+
+
+    <input id="add-tops-button-container" type="button" value="" />
+    <input id="add-pants-button-container" type="button" value="" />
+    <input id="add-underwear-button-container" type="button" value="" />
+    <input id="baseline-reset-button-container" type="button" value="" />
+
+
+    <div id="underwear-options-container" class="clothing-options-container">
+      <input id="blue-underwear-button-container" class="underwear-option-button-container" type="button" value="" />
+      <input id="black-and-white-underwear-button-container" class="underwear-option-button-container" type="button" value="" />
+    </div>
+
+    <div id="bottom-options-container" class="clothing-options-container">
+      <input id="gray-shorts-button-container" class="bottom-option-button-container" type="button" value="" />
+      <input id="indigo-corduroys-button-container" class="bottom-option-button-container" type="button" value="" />
+      <input id="khaki-corduroys-button-container" class="bottom-option-button-container" type="button" value="" />
+    </div>
+
+    <div id="top-options-container" class="clothing-options-container">
+      <input id="white-tee-button-container" class="top-option-button-container" type="button" value="" />
+      <input id="red-and-white-striped-polo-tee-button-container" class="top-option-button-container" type="button" value="" />
+    </div>
+
+    <input id="finish-outfit-button-container" type="button" value="finish" />
+
+    <a-scene id="scene-container" embedded width="720" height="480">
+      <a-assets timeout="15000">
+        <img id="earth-texture" src="./media/img/earth-texture.png" />
+        <img id="starry-sky-texture" src="./media/img/starry-sky-texture.avif" />
+
+        <img id="baseline-texture" src="./media/mod/SundayMay1/PatriceMorgan-Academy-Baseline.png" />
+        <a-asset-item id="baseline-obj" src="./media/mod/SundayMay1/PatriceMorgan-Academy-Baseline.obj"></a-asset-item>
+        <a-asset-item id="baseline-mtl" src="./media/mod/SundayMay1/PatriceMorgan-Academy-Baseline.mtl"></a-asset-item>
+
+        <img id="saturday-april-23-texture" src="./media/mod/SaturdayApril23/PatriceMorgan-Glasses-EarthGreenCottonTee-2.png" />
+        <a-asset-item id="saturday-april-23-obj" src="./media/mod/SaturdayApril23/PatriceMorgan-Glasses-EarthGreenCottonTee-2.obj"></a-asset-item>
+        <a-asset-item id="saturday-april-23-mtl" src="./media/mod/SaturdayApril23/PatriceMorgan-Glasses-EarthGreenCottonTee-2.mtl"></a-asset-item>
+
+        <img id="blue-striped-boxers-texture" src="./media/mod/FridayMay29/PatriceMorgan-Nude-Top-BlueStripedBoxers-Bottom.png" />
+        <a-asset-item id="blue-striped-boxers-obj" src="./media/mod/FridayMay29/PatriceMorgan-Nude-Top-BlueStripedBoxers-Bottom.obj"></a-asset-item>
+        <a-asset-item id="blue-striped-boxers-mtl" src="./media/mod/FridayMay29/PatriceMorgan-Nude-Top-BlueStripedBoxers-Bottom.mtl"></a-asset-item>
+
+        <img id="black-and-white-striped-boxers-texture" src="./media/mod/FridayMay29/PatriceMorgan-Nude-Top-BlackAndWhiteStripedBoxers-Bottom.png" />
+        <a-asset-item id="black-and-white-striped-boxers-obj" src="./media/mod/FridayMay29/PatriceMorgan-Nude-Top-BlackAndWhiteStripedBoxers-Bottom.obj"></a-asset-item>
+        <a-asset-item id="black-and-white-striped-boxers-mtl" src="./media/mod/FridayMay29/PatriceMorgan-Nude-Top-BlackAndWhiteStripedBoxers-Bottom.mtl"></a-asset-item>
+
+        <img id="gray-champion-sweat-shorts-texture" src="./media/mod/FridayMay29/PatriceMorgan-Nude-Top-GrayChampionSweatShorts-Bottom.png" />
+        <a-asset-item id="gray-champion-sweat-shorts-obj" src="./media/mod/FridayMay29/PatriceMorgan-Nude-Top-GrayChampionSweatShorts-Bottom.obj"></a-asset-item>
+        <a-asset-item id="gray-champion-sweat-shorts-mtl" src="./media/mod/FridayMay29/PatriceMorgan-Nude-Top-GrayChampionSweatShorts-Bottom.mtl"></a-asset-item>
+
+        <img id="indigo-corduroys-texture" src="./media/mod/ThursdayJune2/PatriceMorgan-Nude-Top-Indigo-Corduroy-Pants-Bottom.png" />
+        <a-asset-iem id="indigo-corduroys-obj" src="./media/mod/ThursdayJune2/PatriceMorgan-Nude-Top-Indigo-Corduroy-Pants-Bottom.obj"></a-asset-item>
+        <a-asset-iem id="indigo-corduroys-mtl" src="./media/mod/ThursdayJune2/PatriceMorgan-Nude-Top-Indigo-Corduroy-Pants-Bottom.mtl"></a-asset-item>
+
+        <img id="khaki-corduroys-texture" src="./media/mod/WednesdayJune29/PatriceMorgan-Nude-Top-Khaki-Corduroy-Pants-Bottom.png" />
+        <a-asset-iem id="khaki-corduroys-obj" src="./media/mod/WednesdayJune29/PatriceMorgan-Nude-Top-Khaki-Corduroy-Pants-Bottom.obj"></a-asset-item>
+        <a-asset-iem id="khaki-corduroys-mtl" src="./media/mod/WednesdayJune29/PatriceMorgan-Nude-Top-Khaki-Corduroy-Pants-Bottom.mtl"></a-asset-item>
+
+        <img id="body-texture" src="./media/mod/ThursdayJune30/PatriceMorgan-Green-Checkered-Cotton-Long-Sleeve-Top-Gray-Shorts-Bottom.png" />
+        <a-asset-item id="body-obj" src="./media/mod/ThursdayJune30/PatriceMorgan-Green-Checkered-Cotton-Long-Sleeve-Top-Gray-Shorts-Bottom.obj"></a-asset-item>
+        <a-asset-item id="body-mtl" src="./media/mod/ThursdayJune30/PatriceMorgan-Green-Checkered-Cotton-Long-Sleeve-Top-Gray-Shorts-Bottom.mtl"></a-asset-item>
+
+        <img id="green-checkered-long-sleeve-with-khakis-texture" src="./media/mod/WednesdayJune29/PatriceMorgan-Green-Checkered-Cotton-Long-Sleeve-Top-Khaki-Corduroy-Pants-Bottom.png" />
+        <a-asset-item id="green-checkered-long-sleeve-with-khakis-obj" src="./media/mod/WednesdayJune29/PatriceMorgan-Green-Checkered-Cotton-Long-Sleeve-Top-Khaki-Corduroy-Pants-Bottom.obj"></a-asset-item>
+        <a-asset-item id="green-checkered-long-sleeve-with-khakis-mtl" src="./media/mod/WednesdayJune29/PatriceMorgan-Green-Checkered-Cotton-Long-Sleeve-Top-Khaki-Corduroy-Pants-Bottom.mtl"></a-asset-item>
+
+        <img id="green-checkered-long-sleeve-with-indigo-corduroys-texture" src="./media/mod/FridayJune3/PatriceMorgan-Green-Checkered-Cotton-Long-Sleeve-Top-Indigo-Corduroy-Pants-Bottom.png"/>
+        <a-asset-item id="green-checkered-long-sleeve-with-indigo-corduroys-obj" src="./media/mod/FridayJune3/PatriceMorgan-Green-Checkered-Cotton-Long-Sleeve-Top-Indigo-Corduroy-Pants-Bottom.obj"></a-asset-item>
+        <a-asset-item id="green-checkered-long-sleeve-with-indigo-corduroys-mtl" src="./media/mod/FridayJune3/PatriceMorgan-Green-Checkered-Cotton-Long-Sleeve-Top-Indigo-Corduroy-Pants-Bottom.mtl"></a-asset-item>
+
+        <img id="blue-oxford-with-gray-shorts-texture" src="./media/mod/ThursdayJune30/PatriceMorgan-Blue-Oxford-Cotton-Long-Sleeve-Top-Gray-Shorts-Bottom.png" />
+        <a-asset-item id="blue-oxford-with-gray-shorts-obj" src="./media/mod/ThursdayJune30/PatriceMorgan-Blue-Oxford-Cotton-Long-Sleeve-Top-Gray-Shorts-Bottom.obj"></a-asset-item>
+        <a-asset-item id="blue-oxford-with-gray-shorts-mtl" src="./media/mod/ThursdayJune30/PatriceMorgan-Blue-Oxford-Cotton-Long-Sleeve-Top-Gray-Shorts-Bottom.obj"></a-asset-item>
+
+        <img id="blue-oxford-with-indigo-corduroys-texture" src="./media/mod/TuesdayJune7/PatriceMorgan-Blue-Oxford-Top-Indigo-Corduroy-Pants-Bottom.png" />
+        <a-asset-item id="blue-oxford-with-indigo-corduroys-obj" src="./media/mod/TuesdayJune7/PatriceMorgan-Blue-Oxford-Top-Indigo-Corduroy-Pants-Bottom.obj"></a-asset-item>
+        <a-asset-item id="blue-oxford-with-indigo-corduroys-mtl" src="./media/mod/TuesdayJune7/PatriceMorgan-Blue-Oxford-Top-Indigo-Corduroy-Pants-Bottom.obj"></a-asset-item>
+
+        <img id="blue-oxford-with-khakis-texture" src="./media/mod/WednesdayJune29/PatriceMorgan-Blue-Oxford-Cotton-Long-Sleeve-Top-Khaki-Corduroy-Pants-Bottom.png" />
+        <a-asset-item id="blue-oxford-with-khakis-obj" src="./media/mod/WednesdayJune29/PatriceMorgan-Blue-Oxford-Cotton-Long-Sleeve-Top-Khaki-Corduroy-Pants-Bottom.obj"></a-asset-item>
+        <a-asset-item id="blue-oxford-with-khakis-mtl" src="./media/mod/WednesdayJune29/PatriceMorgan-Blue-Oxford-Cotton-Long-Sleeve-Top-Khaki-Corduroy-Pants-Bottom.obj"></a-asset-item>
+      </a-assets>
+      <a-obj-model id="day-default-container"
+                   position="0 1.25 -4"
+                   rotation="-90 0 0"
+                   scale="3 3 3"
+                   src="#saturday-april-23-obj"
+                   material="src: #saturday-april-23-texture; side: double;"
+                   animation="property: rotation; from: -90 0 0; to: -90 360 0; loop: true; dur: 24000; easing: linear; pauseEvents: pauseInitialEarthRotation;">
+      </a-obj-model>
+
+      <a-obj-model id="baseline-body-container"
+                   position="0 1.25 -4"
+                   rotation="-90 0 0"
+                   scale="3 3 3"
+                   visible="false"
+                   src="#baseline-obj"
+                   material="src: #baseline-texture; side: double;"
+                   animation="property: rotation; from: -90 0 0; to: -90 360 0; loop: true; dur: 24000; easing: linear; pauseEvents: pauseInitialEarthRotation;">
+      </a-obj-model>
+
+      <a-obj-model id="blue-striped-boxers-container"
+                   position="0 1.25 -4"
+                   rotation="-90 0 0"
+                   scale="3 3 3"
+                   visible="false"
+                   src="#blue-striped-boxers-obj"
+                   material="src: #blue-striped-boxers-texture; side: double;"
+                   animation="property: rotation; from: -90 0 0; to: -90 360 0; loop: true; dur: 24000; easing: linear; pauseEvents: pauseInitialEarthRotation;">
+      </a-obj-model>
+
+      <a-obj-model id="black-and-white-striped-boxers-container"
+                   position="0 1.25 -4"
+                   rotation="-90 0 0"
+                   scale="3 3 3"
+                   visible="false"
+                   src="#black-and-white-striped-boxers-obj"
+                   material="src: #black-and-white-striped-boxers-texture; side: double;"
+                   animation="property: rotation; from: -90 0 0; to: -90 360 0; loop: true; dur: 24000; easing: linear; pauseEvents: pauseInitialEarthRotation;">
+      </a-obj-model>
+
+      <a-obj-model id="gray-champion-sweat-shorts-container"
+                   position="0 1.25 -4"
+                   rotation="-90 0 0"
+                   scale="3 3 3"
+                   visible="false"
+                   src="#gray-champion-sweat-shorts-obj"
+                   material="src: #gray-champion-sweat-shorts-texture; side: double;"
+                   animation="property: rotation; from: -90 0 0; to: -90 360 0; loop: true; dur: 24000; easing: linear; pauseEvents: pauseInitialEarthRotation;">
+      </a-obj-model>
+
+      <a-obj-model id="indigo-corduroys-container"
+                   position="0 1.25 -4"
+                   rotation="-90 0 0"
+                   scale="3 3 3"
+                   visible="false"
+                   src="#indigo-corduroys-obj"
+                   material="src: #indigo-corduroys-texture; side: double;"
+                   animation="property: rotation; from: -90 0 0; to: -90 360 0; loop: true; dur: 24000; easing: linear; pauseEvents: pauseInitialEarthRotation;">
+      </a-obj-model>
+
+      <a-obj-model id="khaki-corduroys-container"
+                   position="0 1.25 -4"
+                   rotation="-90 0 0"
+                   scale="3 3 3"
+                   visible="false"
+                   src="#khaki-corduroys-obj"
+                   material="src: #khaki-corduroys-texture; side: double;"
+                   animation="property: rotation; from: -90 0 0; to: -90 360 0; loop: true; dur: 24000; easing: linear; pauseEvents: pauseInitialEarthRotation;">
+      </a-obj-model>
+
+      <a-obj-model id="white-tee-container"
+                   position="0 1.25 -4"
+                   rotation="-90 0 0"
+                   scale="3 3 3"
+                   visible="false"
+                   src="#body-obj"
+                   material="src: #body-texture; side: double;"
+                   animation="property: rotation; from: -90 0 0; to: -90 360 0; loop: true; dur: 24000; easing: linear; pauseEvents: pauseInitialEarthRotation;">
+      </a-obj-model>
+
+      <a-obj-model id="green-checkered-long-sleeve-with-indigo-corduroys-container"
+                   position="0 1.25 -4"
+                   rotation="-90 0 0"
+                   scale="3 3 3"
+                   visible="false"
+                   src="#green-checkered-long-sleeve-with-indigo-corduroys-obj"
+                   material="src: #green-checkered-long-sleeve-with-indigo-corduroys-texture; side: double;"
+                   animation="property: rotation; from: -90 0 0; to: -90 360 0; loop: true; dur: 24000; easing: linear; pauseEvents: pauseInitialEarthRotation;">
+      </a-obj-model>
+
+      <a-obj-model id="green-checkered-long-sleeve-with-khakis-container"
+                   position="0 1.25 -4"
+                   rotation="-90 0 0"
+                   scale="3 3 3"
+                   visible="false"
+                   src="#green-checkered-long-sleeve-with-khakis-obj"
+                   material="src: #green-checkered-long-sleeve-with-khakis-texture; side: double;"
+                   animation="property: rotation; from: -90 0 0; to: -90 360 0; loop: true; dur: 24000; easing: linear; pauseEvents: pauseInitialEarthRotation;">
+      </a-obj-model>
+
+      <a-obj-model id="red-and-white-striped-polo-tee-container"
+                   position="0 1.25 -4"
+                   rotation="-90 0 0"
+                   scale="3 3 3"
+                   visible="false"
+                   src="#blue-oxford-with-gray-shorts-obj"
+                   material="src: #blue-oxford-with-gray-shorts-texture; side: double;"
+                   animation="property: rotation; from: -90 0 0; to: -90 360 0; loop: true; dur: 24000; easing: linear; pauseEvents: pauseInitialEarthRotation;">
+      </a-obj-model>
+
+      <a-obj-model id="blue-oxford-with-indigo-corduroys-container"
+                   position="0 1.25 -4"
+                   rotation="-90 0 0"
+                   scale="3 3 3"
+                   visible="false"
+                   src="#blue-oxford-with-indigo-corduroys-obj"
+                   material="src: #blue-oxford-with-indigo-corduroys-texture; side: double;"
+                   animation="property: rotation; from: -90 0 0; to: -90 360 0; loop: true; dur: 24000; easing: linear; pauseEvents: pauseInitialEarthRotation;">
+      </a-obj-model>
+
+      <a-obj-model id="blue-oxford-with-khakis-container"
+                   position="0 1.25 -4"
+                   rotation="-90 0 0"
+                   scale="3 3 3"
+                   visible="false"
+                   src="#blue-oxford-with-khakis-obj"
+                   material="src: #blue-oxford-with-khakis-texture; side: double;"
+                   animation="property: rotation; from: -90 0 0; to: -90 360 0; loop: true; dur: 24000; easing: linear; pauseEvents: pauseInitialEarthRotation;">
+      </a-obj-model>
+      <a-sky id="sky-container" src="#starry-sky-texture"></a-sky>
+    </a-scene>
+  </div>
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Lemba | Kongo | 08</title>
+    <link rel="stylesheet" href="./css/lemba-kongo.css" type="text/css" />
+    <script src="./js/aframe1.3.0.min.js"></script>
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js.map"></script><!---->
+    <script src="./js/lk-dia-navigation.js"></script><!---->
+    <script>
+      document.addEventListener("DOMContentLoaded", function(){
+        initScene();
+      });
+    </script>
+  </head>
+<body>
+  <div id="site-title-container">
+    <div id="title-name-container">Lemba - Kongo</div>
+    <input id="toggle-mobile-menu-container" type="button" value="" />
+  </div>
+  <div id="main-menu-container">
+    <input id="boutique-button-container" class="menu-option-button-container" value="Boutique" type="button"/>
+    <input id="maison-button-container" class="menu-option-button-container" value="Maison" type="button"/>
+    <input id="contact-button-container" class="menu-option-button-container" value="Contact" type="button"/>
+  </div>
+  <a-scene id="scene-container" embedded width="720" height="480">
+    <a-assets>
+      <img id="yellow-kongo-shirt-texture" src="./media/mod/PatriceMorgan-Yellow-Lemba-Kongo-Holding-Red-Solo-Cup.png"/>
+      <a-asset-item id="yellow-kongo-shirt-obj" src="./media/mod/PatriceMorgan-Yellow-Lemba-Kongo-Holding-Red-Solo-Cup.obj"></a-asset-item>
+      <a-asset-item id="yellow-kongo-shirt-mtl" src="./media/mod/PatriceMorgan-Yellow-Lemba-Kongo-Holding-Red-Solo-Cup.mtl"></a-asset-item>
+    </a-assets>
+    <input id="ar-store-button-container" value="AR" type="button" />
+    <a-obj-model id="current-body-container"
+                 position="0 1 -4"
+                 rotation="-90 0 0"
+                 scale="3 3 3"
+                 src="#yellow-kongo-shirt-obj"
+                 material="src: #yellow-kongo-shirt-texture; side: double;"
+                 animation="property: rotation; from: -90 0 0; to: -90 360 0; loop: true; dur: 24000; easing: linear; pauseEvents: pauseInitialEarthRotation;">
+    </a-obj-model>
+    <a-sky color="white"></a-sky>
+  </a-scene>
+</body>
+</html>

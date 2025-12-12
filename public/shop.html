@@ -1,0 +1,945 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./media/icon/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="./media/icon/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="./media/icon/favicon-16x16.png" />
+    <link rel="stylesheet" type="text/css" href="./css/l-k.css" />
+    <script src="https://cdn.jsdelivr.net/npm/lazyload@2.0.0-rc.2/lazyload.js"></script>
+    <title> L|K SUMMER 25</title>
+  </head>
+  <body>
+    <div id="preview-item-container">
+      <div id="preview-item-title-container">Item Title Goes Here</div>
+      <div id="preview-item-visual-container"></div>
+      <div id="preview-item-author-container">Author Name Goes Here</div>
+      <div id="preview-item-price-container">$ 59.99</div>
+      <div id="preview-item-description-container">Item Description Goes Here</div>
+      <input id="preview-item-in-vr-button-container" type="button" value="" />
+      <input id="preview-item-in-ar-button-container" type="button" value="" />
+      <input id="purchase-item-button-container" type="button" value="buy" />
+      <input id="return-to-store-button-container" type="button" value="go back" />
+    </div>
+    <div id="main-app-container">
+      <input type="button" value="" id="go-home-button-container" />
+      <input type="button" value="more" id="join-lyoko-button-container" />
+      <h5 id="header-prefix-container">Lemba | Kongo</h5>
+      <h3 id="header-main-body-container">SUMMER '25</h3>
+      <h4 id="secondary-header-container">Crafted by Hand, Fashioned in Kongo</h4>
+      <div id="examples-container"></div>
+    </div>
+    <script>
+      var nftPreviewIsVisible = false;
+      var menuIsVisible = false;
+      var nftPreviewContainer = document.getElementById("preview-item-container");
+        var currentLink;
+        
+      var Inventory = [
+        {
+            itemID: 1,
+            title: "The Woman in Blue, Pillow Cover",
+            author: "Isabelle's",
+            price: "$14.99",
+            preview: "./media/img/nft-6-min.png",
+            description: "Light fabric placemat featuring a figure of a tall, slender woman with earrings, neck collar and right arm band carrying basket on her head, colored blue against a blue background",
+            count: 1,
+            dimensions: {
+                widthCM: 37.5,
+                heightCM: 36.5,
+                widthIN: 14.8125,
+                heightIN: 14.375
+            },
+            link: "https://baltimorelibraries.com/products/the-woman-in-blue-pillow-cover"
+        },
+        {
+            itemID: 2,
+            title: "Profile of a Woman against Magenta, Pillow Cover",
+            author: "Isabelle's",
+            price: "$14.99",
+            preview: "./media/img/nft-1-min.png",
+            description: "Soft, 100% Cotton Pillow Case featuring a colored fabric interwoven image of a woman's profile against a magenta background",
+            count: 1,
+            dimensions: {
+                widthCM: 37.5,
+                heightCM: 36.5,
+                widthIN: 14.8125,
+                heightIN: 14.375
+            },
+            link: "https://baltimorelibraries.com/products/profile-of-a-woman-against-magenta-pillow-cover"
+        },
+        {
+            itemID: 3,
+            title: "Quilted/Patchwork Pillow Case (Assorted)",
+            author: "Isabelle's",
+            price: "$11.99",
+            preview: "./media/img/nft-2-min.png",
+            description: "Dual layer pillow case, 100% Cotton on top, Satin on the back, featuring a quilted patch design on the cotton layer",
+            count: 8,
+            dimensions: {
+                widthCM: 33.5,
+                heightCM: 35.0,
+                widthIN: 13.25,
+                heightIN: 13.75
+            },
+            link: "https://baltimorelibraries.com/products/quilted-patchwork-pillow-case-assorted/"
+        },
+        {
+            itemID: 4,
+            title: "Long Sleeve Oxford Shirt",
+            author: "Isabelle's",
+            price: "$29.99",
+            preview: "./media/img/antelope-long-sleeve-icon.png",
+            description: "Men's long sleeve cotton (100%) shirt featuring a stylized antelope mosaic design",
+            count: 1,
+            dimensions: {
+                widthCM: 37.5,
+                heightCM: 36.5,
+                widthIN: 14.8125,
+                heightIN: 14.375
+            },
+            link: "https://baltimorelibraries.com/products/long-sleeve-oxford-shirt-antelope-mosaic-theme"
+        },
+        {
+            itemID: 5,
+            title: "Stylized Bread Basket, featuring 'Quartier Savanne'",
+            author: "Isabelle's",
+            price: "$14.99",
+            preview: "./media/img/antelope-brown-bread-basket.png",
+            description: "Cotton bread basket featuring portions of the 'Quartier Savanne' artwork",
+            link: "https://baltimorelibraries.com/products/stylized-bread-basket-featuring-quartier-savanne"
+        },
+        {
+            itemID: 6,
+            title: "Stylized Trivet, featuring 'Quartier Savanne'",
+            author: "Isabelles",
+            price: "$7.99",
+            preview: "./media/img/antelope-brown-trivet.png",
+            description: "Cotton trivet for wooden, ceramic, and granite countertops, featuring portion of the 'Quartier Savanne' artwork",
+            count: 8,
+            dimensions: {
+                widthCM: 33.5,
+                heightCM: 35.0,
+                widthIN: 13.25,
+                heightIN: 13.75
+            },
+            link: "https://baltimorelibraries.com/products/stylized-trivet-featuring-quartier-savanne"
+        },
+        {
+            itemID: 7,
+            title: "Stylized Placemat",
+            author: "Isabelle's",
+            price: "$9.99",
+            preview: "./media/img/baby-blue-place-mat.png",
+            description: "Light fabric placemat decorated with symbolic, savanna imagery against a baby blue background",
+            count: 1,
+            dimensions: {
+                widthCM: 37.5,
+                heightCM: 36.5,
+                widthIN: 14.8125,
+                heightIN: 14.375
+            },
+            link: "https://baltimorelibraries.com/products/placemat-electric-blue-afrika-theme"
+        },
+        {
+            itemID: 8,
+            title: "Stylized Towel",
+            author: "Isabelle's",
+            price: "$8.99",
+            preview: "./media/img/baby-blue-towel.png",
+            description: "Towel decorated with symbolic, savanna imagery against a baby blue background",
+            count: 1,
+            dimensions: {
+                widthCM: 37.5,
+                heightCM: 36.5,
+                widthIN: 14.8125,
+                heightIN: 14.375
+            },
+            link: "https://baltimorelibraries.com/products/towel-electric-blue-afrika-theme"
+        },
+        /*{ ADD IMAGE TO FOLLOWING ITEM
+            itemID: 09,
+            title: "Summer Dress",
+            author: "Isabelle's",
+            price: "$17.99",
+            preview: "./media/img/blue-green-girls-mini-skirt-1-icon.png",
+            description: "Breezy aquamarine and blue cloth dress decorated in ancient village motifs and African symbols, recommended for girls aged 4 to 7",
+            count: 8,
+            dimensions: {
+                widthCM: 33.5,
+                heightCM: 35.0,
+                widthIN: 13.25,
+                heightIN: 13.75
+            },
+            link: "https://baltimorelibraries.com/products/"
+        },*/
+        {
+            itemID: 10,
+            title: "Girls Top and Mini Skirt",
+            author: "Isabelle's",
+            price: "$34.99",
+            preview: "./media/img/blue-green-girls-mini-skirt-icon.png",
+            description: "Breezy aquamarine and blue cloth top with mini skirt decorated in ancient village motifs and African symbols, recommended for girls aged 7 to 14",
+            count: 8,
+            dimensions: {
+                widthCM: 33.5,
+                heightCM: 35.0,
+                widthIN: 13.25,
+                heightIN: 13.75
+            },
+            link: "https://baltimorelibraries.com/products/girls-top-mini-skirt"
+        },
+        {
+            itemID: 11,
+            title: "Padded Trivet",
+            author: "Isabelle's",
+            price: "$5.99",
+            preview: "./media/img/blue-green-square.png",
+            description: "Padded, soft fabric trivet, featuring 'Blue Elephants' artwork from Isabelle",
+            count: 8,
+            dimensions: {
+                widthCM: 33.5,
+                heightCM: 35.0,
+                widthIN: 13.25,
+                heightIN: 13.75
+            },
+            link: "https://baltimorelibraries.com/products/padded-trivet"
+        },
+        {
+            
+            itemID: 12,
+            title: "Branded Cloth Napkin",
+            author: "Isabelle's",
+            price: "$6.99",
+            preview: "./media/img/blue-village-towel-icon.png",
+            description: "100% Cotton Cloth Napkin, from Isabelle's Outdoor Dining Collection",
+            count: 8,
+            dimensions: {
+                widthCM: 33.5,
+                heightCM: 35.0,
+                widthIN: 13.25,
+                heightIN: 13.75
+            },
+            link: "https://baltimorelibraries.com/products/branded-cloth-napkin"
+        },
+        {
+            itemID: 13,
+            title: "Kongo Cosmos Full Body Outfit",
+            author: "Isabelle's",
+            price: "$39.99",
+            preview: "./media/img/blue-white-star-geometry-outfit-1-icon.png",
+            description: "Two piece outfit: (1) Lightweight 100% Cotton Polo (2) Lightweight 100% Cotton Fabric Pants; featuring repeating geometric patterns from the Kongo Cosmology",
+            count: 8,
+            dimensions: {
+                widthCM: 33.5,
+                heightCM: 35.0,
+                widthIN: 13.25,
+                heightIN: 13.75
+            },
+            link: "https://baltimorelibraries.com/products/kongo-cosmos-full-body-outfit"
+        },
+        {
+            itemID: 14,
+            title: "Kongo Cosmos Pants",
+            author: "Isabelle's",
+            price: "$23.99",
+            preview: "./media/img/blue-white-star-geometry-pants-1-icon.png",
+            description: "Lightweight 100% Cotton Fabric Pants, featuring repeating geometric patterns from the Kongo Cosmology",
+            count: 8,
+            dimensions: {
+                widthCM: 33.5,
+                heightCM: 35.0,
+                widthIN: 13.25,
+                heightIN: 13.75
+            },
+            link: "https://baltimorelibraries.com/products/kongo-cosmos-pants"
+        },
+        {
+            itemID: 15,
+            title: "Kongo Cosmos Shirt",
+            author: "Isabelle's",
+            price: "$15.99",
+            preview: "./media/img/blue-white-star-geometry-shirt-1-icon.png",
+            description: "Lightweight 100% Cotton Polo, featuring repeating geometric patterns from the Kongo Cosmology",
+            count: 8,
+            dimensions: {
+                widthCM: 33.5,
+                heightCM: 35.0,
+                widthIN: 13.25,
+                heightIN: 13.75
+            },
+            link: "https://baltimorelibraries.com/products/kongo-cosmos-shirt"
+        },
+        {
+            itemID: 16,
+            title: "Padded Trivet",
+            author: "Isabelle's",
+            price: "$5.99",
+            preview: "./media/img/blue-yellow-trivet.png",
+            description: "Padded, soft fabric trivet, featuring golden Kongo iconography on a blue background, artwork from Isabelle",
+            count: 8,
+            dimensions: {
+                widthCM: 33.5,
+                heightCM: 35.0,
+                widthIN: 13.25,
+                heightIN: 13.75
+            },
+            link: "https://baltimorelibraries.com/products/padded-trivet-golden-motif"
+        },
+        {
+            itemID: 17,
+            title: "Padded Bread Basket",
+            author: "Isabelle's",
+            price: "$12.99",
+            preview: "./media/img/blue-yellow-traditional-bread-basket.png",
+            description: "Padded, soft fabric bread basket, featuring golden Kongo iconography on a blue background, artwork from Isabelle",
+            count: 8,
+            dimensions: {
+                widthCM: 33.5,
+                heightCM: 35.0,
+                widthIN: 13.25,
+                heightIN: 13.75
+            },
+            link: "https://baltimorelibraries.com/products/"
+        },
+        {
+            itemID: 18,
+            title: "Colored Pillow Cover",
+            author: "Isabelle's",
+            price: "$11.99",
+            preview: "./media/img/colored-pad-1-icon.png",
+            description: "Soft, 100% Cotton Pad featuring collage design of abstract Kongo iconography and African artwork from Isabelle's, both sides",
+            count: 8,
+            dimensions: {
+                widthCM: 33.5,
+                heightCM: 35.0,
+                widthIN: 13.25,
+                heightIN: 13.75
+            },
+            link: "https://baltimorelibraries.com/products/"
+        },
+        {
+            itemID: 19,
+            title: "Colored Pillow Cover",
+            author: "Isabelle's",
+            price: "$11.99",
+            preview: "./media/img/colored-pad-alternate-icon.png",
+            description: "Soft, 100% Cotton Pad featuring collage design of abstract Kongo iconography and African artwork from Isabelle's, both sides",
+            count: 8,
+            dimensions: {
+                widthCM: 33.5,
+                heightCM: 35.0,
+                widthIN: 13.25,
+                heightIN: 13.75
+            },
+            link: "https://baltimorelibraries.com/products/"
+        },
+        {
+            itemID: 20,
+            title: "Summer Dress by Isabelle's",
+            author: "Isabelle's",
+            price: "$32.99",
+            preview: "./media/img/dress-0.png",
+            description: "100% Cotton Fabric white Summer Dress for young girls decorated with village iconography, from Isabelle's",
+            count: 8,
+            dimensions: {
+                widthCM: 33.5,
+                heightCM: 35.0,
+                widthIN: 13.25,
+                heightIN: 13.75
+            },
+            link: "https://baltimorelibraries.com/products/summer-dress-by-isabelles"
+        },
+        {
+            itemID: 21,
+            title: "Outdoor Galore Summer Dress w/Belt by Isabelle's",
+            author: "Isabelle's",
+            price: "$36.99",
+            preview: "./media/img/dress-1.png",
+            description: "A 100% Custom fashioned Summer Dress for young girls featuring an iconic split design and a built in waist specific belt, from Isabelle's",
+            count: 8,
+            dimensions: {
+                widthCM: 33.5,
+                heightCM: 35.0,
+                widthIN: 13.25,
+                heightIN: 13.75
+            },
+            link: "https://baltimorelibraries.com/products/outdoor-galore-summer-dress-w-belt-by-isabelles"
+        },
+        {
+            itemID: 22,
+            title: "Electric Blue 'Villager's Delight' Oven Mitt",
+            author: "Isabelle's",
+            price: "$8.99",
+            preview: "./media/img/electric-blue-villagers-oven-mitt-icon.png",
+            description: "Thick, durable electric blue fabric oven mitt featuring 'Villager's Delight' artwork, from Isabelle's",
+            count: 8,
+            dimensions: {
+                widthCM: 33.5,
+                heightCM: 35.0,
+                widthIN: 13.25,
+                heightIN: 13.75
+            },
+           link: "https://baltimorelibraries.com/products/electric-blue-villagers-delight-oven-mitt"
+        },
+        {
+            itemID: 23,
+            title: "Electric Blue 'Villager's Delight' Napkin",
+            author: "Isabelle's",
+            price: "$8.99",
+            preview: "./media/img/electric-blue-villagers-towel-icon.png",
+            description: "Lightweight, blue fabric towel featuring 'Villager's Delight' artwork, from Isabelle's",
+            count: 8,
+            dimensions: {
+                widthCM: 33.5,
+                heightCM: 35.0,
+                widthIN: 13.25,
+                heightIN: 13.75
+            },
+            link: "https://baltimorelibraries.com/products/electric-blue-villagers-delight-napkin"
+        },
+        {
+            itemID: 24,
+            title: "Elephants Placemat",
+            author: "Isabelle's",
+            price: "$11.99",
+            preview: "./media/img/elephants-alternative-0.png",
+            description: "Padded placemat featuring 'The Elephants' artwork from Isabelle's",
+            count: 8,
+            dimensions: {
+                widthCM: 33.5,
+                heightCM: 35.0,
+                widthIN: 13.25,
+                heightIN: 13.75
+            },
+            link: "https://baltimorelibraries.com/products/elephants-placemat"
+        },
+        {
+            itemID: 25,
+            title: "Elephants Bread Basket",
+            author: "Isabelle's",
+            price: "$14.99",
+            preview: "./media/img/elephants-bread-basket-icon.png",
+            description: "Padded bread basket featuring 'The Elephants' artwork from Isabelle's",
+            count: 8,
+            dimensions: {
+                widthCM: 33.5,
+                heightCM: 35.0,
+                widthIN: 13.25,
+                heightIN: 13.75
+            },
+            link: "https://baltimorelibraries.com/products/elephants-bread-basket"
+        },
+        {
+            itemID: 26,
+            title: "Emerald Green Shirt",
+            author: "Isabelle's",
+            price: "$24.99",
+            preview: "./media/img/emerald-green-shirt-icon.png",
+            description: "Cotton Shirt, short-sleeve button down, emerald color featuring black absstract patterns",
+            count: 8,
+            dimensions: {
+                widthCM: 33.5,
+                heightCM: 35.0,
+                widthIN: 13.25,
+                heightIN: 13.75
+            },
+            link: "https://baltimorelibraries.com/products/emerald-green-shirt"
+        },
+        {
+            itemID: 27,
+            title: "Geometric Blue Pants",
+            author: "Isabelle's",
+            price: "$22.99",
+            preview: "./media/img/geometric-blue-pants-icon.png",
+            description: "Soft fabric, hand-woven blue pants featuring geometric patterns",
+            count: 8,
+            dimensions: {
+                widthCM: 33.5,
+                heightCM: 35.0,
+                widthIN: 13.25,
+                heightIN: 13.75
+            },
+            link: "https://baltimorelibraries.com/products/kongo-cosmos-pants"
+        },
+        {
+            itemID: 28,
+            title: "Padded Placemat",
+            author: "Isabelle's",
+            price: "$11.99",
+            preview: "./media/img/geometric-brown-rectangle.png",
+            description: "Padded Placemat featuring Abstract Kongo Symbols",
+            count: 8,
+            dimensions: {
+                widthCM: 33.5,
+                heightCM: 35.0,
+                widthIN: 13.25,
+                heightIN: 13.75
+            },
+            link: "https://baltimorelibraries.com/products/padded-placemat"
+        },
+        {
+            itemID: 29,
+            title: "Padded Trivet",
+            author: "Isabelle's",
+            price: "$8.99",
+            preview: "./media/img/geometric-brown-square-potholder-icon.png",
+            description: "Padded Trivet featuring Abstract Kongo Symbols",
+            count: 8,
+            dimensions: {
+                widthCM: 33.5,
+                heightCM: 35.0,
+                widthIN: 13.25,
+                heightIN: 13.75
+            },
+            link: "https://baltimorelibraries.com/products/padded-trivet-kongo-motif"
+        },
+        {
+            itemID: 30,
+            title: "London Wax Elegance Napkin",
+            author: "Isabelle's",
+            price: "$9.99",
+            preview: "./media/img/geometric-brown-square-towel-icon.png",
+            description: "Cotton towel featuring 'London Wax Elegance' Abstract Kongo patterns and artwork",
+            count: 8,
+            dimensions: {
+                widthCM: 33.5,
+                heightCM: 35.0,
+                widthIN: 13.25,
+                heightIN: 13.75
+            },
+            link: "https://baltimorelibraries.com/products/london-wax-elegance-napkin"
+        },
+        {
+            itemID: 31,
+            title: "London Wax Elegance Bread Basket",
+            author: "Isabelle's",
+            price: "$11.99",
+            preview: "./media/img/geometric-brown-square.png",
+            description: "Padded Bread basket featuring 'London Wax Elegance' Abstract Kongo patterns and artwork",
+            count: 8,
+            dimensions: {
+                widthCM: 33.5,
+                heightCM: 35.0,
+                widthIN: 13.25,
+                heightIN: 13.75
+            },
+            link: "https://baltimorelibraries.com/products/london-wax-elegance-bread-basket"
+        },
+        {
+            itemID: 32,
+            title: "Green Orange Motif Shirt",
+            author: "Isabelle's",
+            price: "$34.99",
+            preview: "./media/img/green-orange-style-shirt-1-icon.png",
+            description: "One of one, Kongo abstract splash pattern, orange on green, 100% Cotton",
+            count: 8,
+            dimensions: {
+                widthCM: 33.5,
+                heightCM: 35.0,
+                widthIN: 13.25,
+                heightIN: 13.75
+            },
+            link: "https://baltimorelibraries.com/products/green-orange-motif-shirt"
+        },
+        {
+            itemID: 33,
+            title: "Lady In Blue, Pillow Cover",
+            author: "Isabelle's",
+            price: "$14.99",
+            preview: "./media/img/lady-in-blue-alternative-0.png",
+            description: "Light fabric placemat featuring a figure of a tall, slender woman with earrings, neck collar and right arm band carrying basket on her head, colored blue against a blue background",
+            count: 8,
+            dimensions: {
+                widthCM: 33.5,
+                heightCM: 35.0,
+                widthIN: 13.25,
+                heightIN: 13.75
+            },
+            link: "https://baltimorelibraries.com/products/the-woman-in-blue-pillow-cover"
+        },
+        {
+            itemID: 34,
+            title: "Lady In Blue, Pillow Cover",
+            author: "Isabelle's",
+            price: "$14.99",
+            preview: "./media/img/lady-in-blue-icon.png",
+            description: "Light fabric placemat featuring a figure of a tall, slender woman with earrings, neck collar and right arm band carrying basket on her head, colored blue against a blue background",
+            count: 8,
+            dimensions: {
+                widthCM: 33.5,
+                heightCM: 35.0,
+                widthIN: 13.25,
+                heightIN: 13.75
+            },
+            link: "https://baltimorelibraries.com/products/the-woman-in-blue-pillow-cover"
+        },
+        {
+            itemID: 35,
+            title: "Luxury Bath Items",
+            author: "Isabelle's",
+            price: "$59.99",
+            preview: "./media/img/luxury-bath-items-2-icon.png",
+            description: "Luxury Collection of Assorted Bath Products including: (1) Padded Slippers, (2) Padded Tote Bag, (3) Towelsl (5) Bath Robe; Items stylized in custom patterns, from Isabelle's",
+            count: 8,
+            dimensions: {
+                widthCM: 33.5,
+                heightCM: 35.0,
+                widthIN: 13.25,
+                heightIN: 13.75
+            },
+            link: "https://baltimorelibraries.com/products/luxury-bath-item-set"
+        },
+        {
+            itemID: 36,
+            title: "Multicolor Geometric Outfit",
+            author: "Isabelle's",
+            price: "$42.99",
+            preview: "./media/img/multicolor-geometric-ensemble-1-icon.png",
+            description: "Two piece outfit featuring Multi-color, abstract patterns: (1) Shirt, short-sleeve, button down, (2) Shorts with built-in belt",
+            count: 8,
+            dimensions: {
+                widthCM: 33.5,
+                heightCM: 35.0,
+                widthIN: 13.25,
+                heightIN: 13.75
+            },
+            link: "https://baltimorelibraries.com/products/multicolor-geometric-outfit"
+        },
+        {
+            itemID: 37,
+            title: "Multicolor Geometric Shirt",
+            author: "Isabelle's",
+            price: "$29.99",
+            preview: "./media/img/multicolor-geometric-shirt-1-icon.png",
+            description: "Shirt, short-sleeve, button down, 100% Cotton, featuring multi-color, abstract pattern",
+            count: 8,
+            dimensions: {
+                widthCM: 33.5,
+                heightCM: 35.0,
+                widthIN: 13.25,
+                heightIN: 13.75
+            },
+            link: "https://baltimorelibraries.com/products/multicolor-geometric-shirt"
+        },
+        {
+            itemID: 38,
+            title: "Multicolor Geometric Shorts",
+            author: "Isabelle's",
+            price: "$12.99",
+            preview: "./media/img/multicolor-geometric-shorts-1-icon.png",
+            description: "Shorts, built-in belt, 100% Cotton, featuring multi-color, abstract pattern",
+            count: 8,
+            dimensions: {
+                widthCM: 33.5,
+                heightCM: 35.0,
+                widthIN: 13.25,
+                heightIN: 13.75
+            },
+            link: "https://baltimorelibraries.com/products/multicolor-geometric-shorts"
+        },
+        {
+            itemID: 39,
+            title: "'Abstract Savanna' Placemat",
+            author: "Isabelle's",
+            price: "$11.99",
+            preview: "./media/img/nft-3-min.png",
+            description: "Light fabric placemat, featuring 'Abstract Savanna' artwork from Isabelle",
+            count: 8,
+            dimensions: {
+                widthCM: 33.5,
+                heightCM: 35.0,
+                widthIN: 13.25,
+                heightIN: 13.75
+            },
+            link: "https://baltimorelibraries.com/products/abstract-savanna-placemat"
+        },
+        {
+            itemID: 40,
+            title: "'Blue Elephants' Placemat",
+            author: "Isabelle's",
+            price: "$11.99",
+            preview: "./media/img/nft-4-min.png",
+            description: "Light fabric placemat, featuring 'Blue Elephants' artwork from Isabelle",
+            count: 8,
+            dimensions: {
+                widthCM: 33.5,
+                heightCM: 35.0,
+                widthIN: 13.25,
+                heightIN: 13.75
+            },
+            link: "https://baltimorelibraries.com/products/elephants-placemat"
+        },
+        {
+            itemID: 41,
+            title: "'Blue Elephants' Bread Basket",
+            author: "Isabelle's",
+            price: "$14.99",
+            preview: "./media/img/nft-5-min.png",
+            description: "100% Cotton Bread Basket, featuring 'Blue Elephants' artwork from Isabelle",
+            count: 8,
+            dimensions: {
+                widthCM: 33.5,
+                heightCM: 35.0,
+                widthIN: 13.25,
+                heightIN: 13.75
+            },
+            link: "https://baltimorelibraries.com/products/elephants-bread-basket"
+        },
+        {
+            itemID: 42,
+            title: "'Abstract Savanna' Bread Basket",
+            author: "Isabelle's",
+            price: "$14.99",
+            preview: "./media/img/nft-8-min.png",
+            description: "100% Cotton Bread Basket, featuring 'Abstract Savanna' artwork by Isabelle's",
+            count: 8,
+            dimensions: {
+                widthCM: 33.5,
+                heightCM: 35.0,
+                widthIN: 13.25,
+                heightIN: 13.75
+            },
+            link: "https://baltimorelibraries.com/products/abstract-savanna-bread-basket"
+        },
+        {
+            itemID: 43,
+            title: "Afro-Futurist Apron",
+            author: "Isabelle's",
+            price: "$12.99",
+            preview: "./media/img/orange-apron.png",
+            description: "Large one-size-fits-all cotton apron, decorated with Afro-Futurist symbols against an orange background",
+            count: 8,
+            dimensions: {
+                widthCM: 33.5,
+                heightCM: 35.0,
+                widthIN: 13.25,
+                heightIN: 13.75
+            },
+            link: "https://baltimorelibraries.com/products/afro-futurist-apron"
+        },
+        {
+            itemID: 44,
+            title: "Afro-Futurist Placemat",
+            author: "Isabelle's",
+            price: "$11.99",
+            preview: "./media/img/orange-place-mat.png",
+            description: "Light fabric placemat, decorated with Afro-Futurist symbols against an orange background",
+            count: 8,
+            dimensions: {
+                widthCM: 33.5,
+                heightCM: 35.0,
+                widthIN: 13.25,
+                heightIN: 13.75
+            },
+            link: "https://baltimorelibraries.com/products/afro-futurist-placemat"
+        },
+        {
+            itemID: 45,
+            title: "Afro-Futurist Napkin",
+            author: "Isabelle's",
+            price: "$9.99",
+            preview: "./media/img/orange-square.png",
+            description: "Light fabric towel, decorated with Afro-Futurist symbols against an orange background",
+            count: 8,
+            dimensions: {
+                widthCM: 33.5,
+                heightCM: 35.0,
+                widthIN: 13.25,
+                heightIN: 13.75
+            },
+            link: "https://baltimorelibraries.com/products/afro-futurist-napkin"
+        }
+      ];
+
+        /*
+        ,
+        {
+            itemID: 46,
+            title: "Next Item",
+            author: "Isabelle's",
+            price: "$9.99",
+            preview: "./media/img/hov-logo.png",
+            descriptioon: "Light fabric towel, decorated with Afro-Futurist symbols against an orange background",
+            count: 8,
+            dimensions: {
+                widthCM: 33.0,
+                heightCM: 34.0,
+                widthIN: 13,
+                heightIN: 13
+            },
+            link: "https://baltimorelibraries.com/products/
+        }
+        */
+
+        
+        function showFullImage(){
+            window.open(`https://lemba-kongo.com/${currentLink}`, "_blank");
+        }
+        
+      function toggleItemPreviewContainer(item){
+        let currentNFT = item;
+        if(nftPreviewIsVisible){
+          nftPreviewContainer.style.opacity = 0;
+          setTimeout(function(){
+            nftPreviewContainer.style.display = "none";
+          }, 505);
+          nftPreviewIsVisible = false;
+        }
+        else{
+            
+            nftPreviewContainer.style.display = "block";
+            document.getElementById("preview-item-title-container").textContent = Inventory[currentNFT].title;
+            document.getElementById("preview-item-author-container").innerHTML = `<a target="_blank" href="${Inventory[currentNFT].link}" style="text-decoration: none; text-transform: uppercase;">${Inventory[currentNFT].author}</span>`;
+            document.getElementById("preview-item-price-container").textContent = Inventory[currentNFT].price;
+            document.getElementById("preview-item-description-container").textContent = Inventory[currentNFT].description;
+            document.getElementById("preview-item-visual-container").style.backgroundImage = `url(${Inventory[currentNFT].preview})`;
+            currentLink = Inventory[currentNFT].preview;
+
+            //var customListener = ;
+            
+            var old_element = document.getElementById("purchase-item-button-container");
+            var new_element = old_element.cloneNode(true);
+            old_element.parentNode.replaceChild(new_element, old_element);
+            
+            document.getElementById("purchase-item-button-container").addEventListener("click", openPurchaseLink.bind(this, Inventory[currentNFT].link));
+            document.getElementById("preview-item-visual-container").removeEventListener("click", showFullImage);
+            document.getElementById("preview-item-visual-container").addEventListener("click", showFullImage);
+            
+          setTimeout(function(){
+            nftPreviewContainer.style.opacity = 1.0;
+          }, 50);
+          nftPreviewIsVisible = true;
+        }
+      }
+
+        function openPurchaseLink(link){
+            window.open(link, "_blank");
+        }
+        
+      //var itemInView = null;
+      
+        function toggleMenuContainer(){
+        if(menuIsVisible){
+          //document.getElementById("main-menu-container").style.opacity = 0;
+          document.getElementById("main-menu-container").classList.add("collapsed");
+          /*setTimeout(function(){
+            document.getElementById("main-menu-container").style.display = "none";
+          }, 550);*/
+          menuIsVisible = false;
+        }
+        else{
+          //document.getElementById("main-menu-container").style.display = "block";
+          //setTimeout(function(){
+            //document.getElementById("main-menu-container").style.opacity = 1.0;
+            document.getElementById("main-menu-container").classList.remove("collapsed");
+         // }, 50);
+          menuIsVisible = true;
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", function(){
+        console.log("LEMBA - KONGO \n Cultural Outlet & Travel Rep \n DIA v. 0.3.1 \n by Patrice-Morgan");
+
+        document.getElementById("go-home-button-container").addEventListener("click", function(){
+          window.location.href = "https://littlefreedigitallibrary.com";
+        });
+
+        document.getElementById("join-lyoko-button-container").addEventListener("click", function(){
+            window.location.href = "./host";
+        });
+
+        document.getElementById("return-to-store-button-container").addEventListener("click", function(){
+          toggleItemPreviewContainer();
+        });
+
+        /*document.getElementById("purchase-item-button-container").addEventListener("click", function(){
+          window.open(Inventory[currentNFT].link, "_blank");
+        });*/
+
+        //let nftButtons = document.getElementsByClassName("view-nft-button-container");
+
+          
+        for(var i=0; i<Inventory.length; i++){
+          (function(){
+            let currentNFT = i;
+
+            let nftContainer = document.createElement("div");
+            nftContainer.setAttribute("id", `nft-${currentNFT}-container`);
+            nftContainer.classList.add("nft-container");
+
+            let nftVisualContainer = document.createElement("img");
+            nftVisualContainer.setAttribute("id", `nft-${currentNFT}-visual-container`);
+            nftVisualContainer.classList.add("nft-visual-container");
+
+            let nftMetaContainer = document.createElement("div");
+            nftMetaContainer.setAttribute("id", `nft-${currentNFT}-meta-container`);
+            nftMetaContainer.classList.add("nft-meta-container");
+
+            let nftTitleContainer = document.createElement("div");
+            nftTitleContainer.setAttribute("id", `nft-${currentNFT}-title-container`);
+            nftTitleContainer.classList.add("nft-title-container");
+
+            let nftAuthorContainer = document.createElement("div");
+            nftAuthorContainer.setAttribute("id", `nft-${currentNFT}-author-container`);
+            nftAuthorContainer.classList.add("nft-author-container");
+
+            let nftValueContainer = document.createElement("div");
+            nftValueContainer.setAttribute("id", `nft-${currentNFT}-value-container`);
+            nftValueContainer.classList.add("nft-value-container");
+
+            let nftViewContainer = document.createElement("input");
+            nftViewContainer.setAttribute("id", `view-nft-${currentNFT}-button-container`);
+            nftViewContainer.classList.add("view-nft-button-container");
+            nftViewContainer.setAttribute("type", "button");
+            nftViewContainer.setAttribute("value", "view");
+
+            let nftPurchaseContainer = document.createElement("input");
+            nftPurchaseContainer.setAttribute("id", `buy-nft-${currentNFT}-button-container`);
+            nftPurchaseContainer.classList.add("buy-nft-button-container");
+            nftPurchaseContainer.setAttribute("type", "button");
+            nftPurchaseContainer.setAttribute("value", "buy");
+
+
+            nftTitleContainer.textContent = Inventory[currentNFT].title;
+            nftAuthorContainer.textContent = Inventory[currentNFT].author;
+            nftValueContainer.textContent = Inventory[currentNFT].price;
+            
+              nftVisualContainer.src = Inventory[currentNFT].preview;
+              
+              //style.backgroundImage = `url(${Inventory[currentNFT].preview})`;
+
+            if(i>5){
+              nftVisualContainer.setAttribute("loading", "lazy");
+              nftVisualContainer.classList.add("lazyload");
+            }
+
+            nftViewContainer.addEventListener("click", function(){
+              toggleItemPreviewContainer(currentNFT);
+            });
+
+            nftPurchaseContainer.addEventListener("click", function(){
+              window.open(Inventory[currentNFT].link, "_blank");
+            });
+
+            document.getElementById("examples-container").append(nftContainer);
+            nftContainer.append(nftVisualContainer);
+            nftContainer.append(nftTitleContainer);
+            nftContainer.append(nftAuthorContainer);
+            nftContainer.append(nftValueContainer);
+            nftContainer.append(nftViewContainer);
+            nftContainer.append(nftPurchaseContainer);
+
+            if(i>5&&i==Inventory.length-1){
+              lazyload();
+            }
+          })();
+        }
+
+      });
+    </script>
+  </body>
+</html>

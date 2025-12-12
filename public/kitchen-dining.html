@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./media/icon/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="./media/icon/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="./media/icon/favicon-16x16.png" />
+    <link rel="stylesheet" type="text/css" href="./css/l-k.css" />
+    <title> Lemba - Kongo | Virtual Show Room </title>
+  </head>
+  <body>
+    <div id="preview-item-container">
+      <div id="preview-item-title-container">Item Title Goes Here</div>
+      <div id="preview-item-visual-container"></div>
+      <div id="preview-item-author-container">Author Name Goes Here</div>
+      <div id="preview-item-price-container">$ 59.99</div>
+      <div id="preview-item-description-container">Item Description Goes Here</div>
+      <input id="preview-item-in-vr-button-container" type="button" value="" />
+      <input id="preview-item-in-ar-button-container" type="button" value="" />
+      <input id="purchase-item-button-container" type="button" value="add to cart" />
+      <input id="return-to-store-button-container" type="button" value="go back" />
+    </div>
+    <div id="main-app-container">
+      <div id="main-menu-container">
+        <input id="home-option-button-container" class="option-button-container"  value="home" />
+        <input id="mens-fashion-option-button-container" class="option-button-container"  value="men" />
+        <input id="womens-fashion-option-button-container" class="option-button-container"  value="women" />
+        <input id="kitchen-dining-option-button-container" class="option-button-container"  value="kitchen/dining" />
+      </div>
+      <input type="button" value="" id="go-home-button-container" />
+      <input type="button" value="menu" id="join-lyoko-button-container" />
+      <h5 id="header-prefix-container">Lemba - Kongo</h5>
+      <h3 id="header-main-body-container">Kitchen & Dining</h3>
+
+      <h4 id="secondary-header-container">immersive experiences, crafted by hand <br/> fashioned with love</h4>
+      <div id="examples-container">
+
+      </div>
+    </div>
+    <script>
+      var nftPreviewIsVisible = false;
+      var menuIsVisible = false;
+
+      var nftPreviewContainer = document.getElementById("preview-item-container");
+
+      var Inventory = [
+        {
+          title: "The Woman in Blue, Placemat (black on blue)",
+          author: "Isabelle's",
+          price: "$49.99",
+          preview: "./media/img/nft-0-final.png",
+          description: "Tall, slender woman with earrings, neck collar and right arm band carrying basket on her head, colored black against a frosty blue and white background",
+          dimensions: {
+            widthCM: 39,
+            heightCM: 39,
+            widthIN: 15.375,
+            heightIN: 15.375
+          },
+          link: "https://houseofven.us/pARk/isabelles"
+        },
+        {
+          title: "The Woman in Blue, Placemat (blue on white)",
+          author: "Isabelle's",
+          price: "$49.99",
+          preview: "./media/img/nft-6-min.png",
+          description: "Tall, slender woman with earrings, neck collar and right arm band carrying basket on her head, colored blue against a blue background",
+          count: 1,
+          dimensions: {
+            widthCM: 37.5,
+            heightCM: 36.5,
+            widthIN: 14.8125,
+            heightIN: 14.375
+          },
+          link: "https://houseofven.us/pARk/isabelles"
+        },
+        {
+          title: "Profile of a Woman against Magenta, Pillow Cover",
+          author: "Isabelle's",
+          price: "$49.99",
+          preview: "./media/img/nft-1-min.png",
+          description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
+          link: "https://houseofven.us/pARk/isabelles"
+        },
+        {
+          title: "Quilted/Patchwork Pillow Case (Assorted)",
+          author: "Isabelle's",
+          price: "$49.99",
+          preview: "./media/img/nft-2-min.png",
+          description: "Multi section quilted patch on front, white satin on back, assorted styles",
+          count: 8,
+          dimensions: {
+            widthCM: 33.5,
+            heightCM: 35.0,
+            widthIN: 13.25,
+            heightIN: 13.75
+          },
+          link: "https://houseofven.us/pARk/isabelles"
+        },
+        {
+          title: "Heart of the Cradle Bread Place Mat",
+          author: "Isabelle's",
+          price: "$49.99",
+          preview: "./media/img/nft-3-min.png",
+          description: "Yellow place mat featuring dancing figures, coconut trees, traditional style village homes, and the African continent",
+          count: 6,
+          dimensions: {
+            widthCM: 44.5,
+            heightCM: 31.7,
+            widthIN: 17.5,
+            heightIN: 12.175
+          },
+          link: "https://houseofven.us/pARk/isabelles"
+        },
+        {
+          title: "Blue Green Elephant Village Palm Tree Place Mat",
+          author: "Isabelle's",
+          price: "$49.99",
+          preview: "./media/img/nft-4-min.png",
+          description: "Blue green place mat with elephant village palm tree motif; similar motif available on bread baskets",
+          count: 6,
+          dimensions: {
+            widthCM: 44.5,
+            heightCM: 31.7,
+            widthIN: 17.5,
+            heightIN: 12.175
+          },
+          link: "https://houseofven.us/pARk/isabelles"
+        },
+        {
+          title: "Blue Green Elephant Village Palm Tree Bread Basket",
+          author: "Isabelle's",
+          price: "$49.99",
+          preview: "./media/img/nft-5-min.png",
+          description: "Blue green bread basket with elephant village palm tree motif; similar motif available on place mats",
+          count: 6,
+          dimensions: {
+            widthCM: 44.5,
+            heightCM: 31.7,
+            widthIN: 17.5,
+            heightIN: 12.175
+          },
+          link: "https://houseofven.us/pARk/isabelles"
+        },
+        {
+          title: "Quilted/Patchwork Pillow Case (Assorted)",
+          author: "Isabelle's",
+          price: "$29.99",
+          preview: "./media/img/nft-7-min.png",
+          description: "Multi section quilted patch on front, white satin on back, assorted styles",
+          count: 8,
+          dimensions: {
+            widthCM: 33.5,
+            heightCM: 35.0,
+            widthIN: 13.25,
+            heightIN: 13.75
+          },
+          link: "https://houseofven.us/pARk/isabelles"
+        },
+        {
+          title: "Heart of the Cradle Bread Basket",
+          author: "Isabelle's",
+          price: "$49.99",
+          preview: "./media/img/nft-8-min.png",
+          description: "Yellow bread basket featuring dancing figures, coconut trees, traditional style village homes, and the African continent",
+          count: 1,
+          dimensions: {
+            widthCM: 39.0,
+            heightCM: 39.0,
+            widthIN: 15.375,
+            heightIN: 15.375
+          },
+          link: "https://houseofven.us/pARk/isabelles"
+        },
+        {
+          title: "Dancing Figures African Continent, Home, Tree Yellow Cotton Trivet",
+          author: "Isabelle's",
+          price: "$19.99",
+          preview: "./media/img/yellow-square.png",
+          description: "Yellow padded, cotton trivet featuring dancing figures, representations of the African contenent, traditional style homes, and coconut treesbread basket featuring dancing figures, coconut trees, traditional style village homes, and the African continent",
+          count: 2,
+          dimensions: {
+            widthCM: 39.0,
+            heightCM: 39.0,
+            widthIN: 15.375,
+            heightIN: 15.375
+          },
+          link: "https://houseofven.us/pARk/isabelles"
+        },
+        {
+          title: "Traditional Cosmic Seals Orange Place Mat",
+          author: "Isabelle's",
+          price: "$19.99",
+          preview: "./media/img/orange-place-mat.png",
+          description: "Orange padded, cotton place mat featuring traditional style cosmic seals",
+          count: 6,
+          dimensions: {
+            widthCM: 39.0,
+            heightCM: 39.0,
+            widthIN: 15.375,
+            heightIN: 15.375
+          },
+          link: "https://houseofven.us/pARk/isabelles"
+        },
+        {
+          title: "Traditional Cosmic Seals Orange Apron",
+          author: "Isabelle's",
+          price: "$29.99",
+          preview: "./media/img/orange-apron.png",
+          description: "Orange padded, cotton cooking apron featuring traditional style cosmic seals",
+          count: 1,
+          dimensions: {
+            widthCM: 39.0,
+            heightCM: 39.0,
+            widthIN: 15.375,
+            heightIN: 15.375
+          },
+          link: "https://houseofven.us/pARk/isabelles"
+        },
+        {
+          title: "Traditional Cosmic Seals Orange Trivet",
+          author: "Isabelle's",
+          price: "$39.99",
+          preview: "./media/img/orange-trivet.png",
+          description: "Orange padded cotton trivet featuring traditional style cosmic seals",
+          count: 6,
+          dimensions: {
+            widthCM: 39.0,
+            heightCM: 39.0,
+            widthIN: 15.375,
+            heightIN: 15.375
+          },
+          link: "https://houseofven.us/pARk/isabelles"
+        },
+        {
+          title: "Traditional Cosmic Seals Orange Towels",
+          author: "Isabelle's",
+          price: "$29.99",
+          preview: "./media/img/orange-square.png",
+          description: "Orange cotton hand towels featuring traditional style cosmic seals",
+          count: 6,
+          dimensions: {
+            widthCM: 39.0,
+            heightCM: 39.0,
+            widthIN: 15.375,
+            heightIN: 15.375
+          },
+          link: "https://houseofven.us/pARk/isabelles"
+        },
+        {
+          title: "Traditional Baby Blue Hand Towels",
+          author: "Isabelle's",
+          price: "$29.99",
+          preview: "./media/img/baby-blue-towel.png",
+          description: "Baby blue hand towels featuring traditional styles",
+          count: 6,
+          dimensions: {
+            widthCM: 39.0,
+            heightCM: 39.0,
+            widthIN: 15.375,
+            heightIN: 15.375
+          },
+          link: "https://houseofven.us/pARk/isabelles"
+        },
+        {
+          title: "Traditional Baby Blue Place Mats",
+          author: "Isabelle's",
+          price: "$39.99",
+          preview: "./media/img/baby-blue-place-mat.png",
+          description: "Baby blue place mats featuring traditional styles",
+          count: 6,
+          dimensions: {
+            widthCM: 39.0,
+            heightCM: 39.0,
+            widthIN: 15.375,
+            heightIN: 15.375
+          },
+          link: "https://houseofven.us/pARk/isabelles"
+        },
+        {
+          title: "London Wax Elegance Bread Basket",
+          author: "Isabelle's",
+          price: "$39.99",
+          preview: "./media/img/london-wax-elegance-african-geometric-bread-basket.png",
+          description: "London Wax Elegance brand bread basket featuring maroon background and geometric iconography",
+          count: 1,
+          dimensions: {
+            widthCM: 39.0,
+            heightCM: 39.0,
+            widthIN: 15.375,
+            heightIN: 15.375
+          },
+          link: "https://houseofven.us/pARk/isabelles"
+        },
+        {
+          title: "London Wax Elegance Place Mat",
+          author: "Isabelle's",
+          price: "$39.99",
+          preview: "./media/img/london-wax-elegance-african-geometric-place-mat.png",
+          description: "London Wax Elegance brand place mat featuring maroon background and geometric iconography",
+          count: 6,
+          dimensions: {
+            widthCM: 39.0,
+            heightCM: 39.0,
+            widthIN: 15.375,
+            heightIN: 15.375
+          },
+          link: "https://houseofven.us/pARk/isabelles"
+        },
+        {
+          title: "London Wax Elegance Cloth Napkin",
+          author: "Isabelle's",
+          price: "$39.99",
+          preview: "./media/img/london-wax-elegance-african-geometric-cloth-napkin.png",
+          description: "London Wax Elegance brand cloth napkin featuring maroon background and geometric iconography",
+          count: 6,
+          dimensions: {
+            widthCM: 39.0,
+            heightCM: 39.0,
+            widthIN: 15.375,
+            heightIN: 15.375
+          },
+          link: "https://houseofven.us/pARk/isabelles"
+        },
+        {
+          title: "London Wax Elegance Trivet",
+          author: "Isabelle's",
+          price: "$39.99",
+          preview: "./media/img/london-wax-elegance-african-geometric-trivet.png",
+          description: "London Wax Elegance brand trivet featuring maroon background and geometric iconography",
+          count: 2,
+          dimensions: {
+            widthCM: 39.0,
+            heightCM: 39.0,
+            widthIN: 15.375,
+            heightIN: 15.375
+          },
+          link: "https://houseofven.us/pARk/isabelles"
+        },
+        {
+          title: "Antelope Maroon Bread Basket",
+          author: "Isabelle's",
+          price: "$39.99",
+          preview: "./media/img/antelope-brown-bread-basket.png",
+          description: "Maroon bread basket featuring animal iconography",
+          count: 1,
+          dimensions: {
+            widthCM: 39.0,
+            heightCM: 39.0,
+            widthIN: 15.375,
+            heightIN: 15.375
+          },
+          link: "https://houseofven.us/pARk/isabelles"
+        },
+        {
+          title: "Antelope Maroon Trivet",
+          author: "Isabelle's",
+          price: "$39.99",
+          preview: "./media/img/london-wax-elegance-african-geometric-trivet.png",
+          description: "Maroon trivet featuring animal iconography",
+          count: 2,
+          dimensions: {
+            widthCM: 39.0,
+            heightCM: 39.0,
+            widthIN: 15.375,
+            heightIN: 15.375
+          },
+          link: "https://houseofven.us/pARk/isabelles"
+        },
+        {
+          title: "Blue Yellow Cotton Trivet",
+          author: "Isabelle's",
+          price: "$39.99",
+          preview: "./media/img/blue-yellow-trivet.png",
+          description: "Blue Yellow padded cotton trivet featuring traditional pattern",
+          count: 2,
+          dimensions: {
+            widthCM: 39.0,
+            heightCM: 39.0,
+            widthIN: 15.375,
+            heightIN: 15.375
+          },
+          link: "https://houseofven.us/pARk/isabelles"
+        },
+        {
+          title: "Blue Yellow Cotton Bread Basket",
+          author: "Isabelle's",
+          price: "$39.99",
+          preview: "./media/img/blue-yellow-traditional-bread-basket.png",
+          description: "Blue yellow padded cotton bread basket featuring traditional pattern",
+          count: 2,
+          dimensions: {
+            widthCM: 39.0,
+            heightCM: 39.0,
+            widthIN: 15.375,
+            heightIN: 15.375
+          },
+          link: "https://houseofven.us/pARk/isabelles"
+        },
+        {
+          title: "Red Ya Mado Cotton Shorts",
+          author: "Isabelle's",
+          price: "$39.99",
+          preview: "./media/img/shorts.png",
+          description: "Cotton shorts featuring primarily Red Ya Mado pattern",
+          count: 2,
+          dimensions: {
+            widthCM: 39.0,
+            heightCM: 39.0,
+            widthIN: 15.375,
+            heightIN: 15.375
+          },
+          link: "https://houseofven.us/pARk/isabelles"
+        },
+        {
+          title: "Orange Multi-Color Grid Towel",
+          author: "Isabelle's",
+          price: "$39.99",
+          preview: "./media/img/orange-grid.png",
+          description: "An orange towel featuring a dazzling array of colored panels",
+          count: 2,
+          dimensions: {
+            widthCM: 39.0,
+            heightCM: 39.0,
+            widthIN: 15.375,
+            heightIN: 15.375
+          },
+          link: "https://houseofven.us/pARk/isabelles"
+        },
+        {
+          title: "Blue Green Cotton Trivet",
+          author: "Isabelle's",
+          price: "$39.99",
+          preview: "./media/img/blue-green-square.png",
+          description: "Blue Green Cotton Trivet",
+          count: 2,
+          dimensions: {
+            widthCM: 39.0,
+            heightCM: 39.0,
+            widthIN: 15.375,
+            heightIN: 15.375
+          },
+          link: "https://houseofven.us/pARk/isabelles"
+        },
+      ];
+
+      function toggleItemPreviewContainer(item){
+        let currentNFT = item;
+        if(nftPreviewIsVisible){
+          nftPreviewContainer.style.opacity = 0;
+          setTimeout(function(){
+            nftPreviewContainer.style.display = "none";
+          }, 505);
+          nftPreviewIsVisible = false;
+        }
+        else{
+          nftPreviewContainer.style.display = "block";
+          document.getElementById("preview-item-title-container").textContent = Inventory[currentNFT].title;
+          document.getElementById("preview-item-author-container").innerHTML = `<a target="_blank" href="${Inventory[currentNFT].link}" style="text-decoration: none; text-transform: uppercase;">${Inventory[currentNFT].author}</span>`;
+          document.getElementById("preview-item-price-container").textContent = Inventory[currentNFT].price;
+          document.getElementById("preview-item-description-container").textContent = Inventory[currentNFT].description;
+          document.getElementById("preview-item-visual-container").style.backgroundImage = `url(${Inventory[currentNFT].preview})`;
+          setTimeout(function(){
+            nftPreviewContainer.style.opacity = 1.0;
+          }, 50);
+          nftPreviewIsVisible = true;
+        }
+      }
+
+
+      function toggleMenuContainer(){
+        if(menuIsVisible){
+          document.getElementById("main-menu-container").style.opacity = 0;
+          document.getElementById("main-menu-container").style.height = 0;
+          setTimeout(function(){
+              document.getElementById("main-menu-container").style.display = "none";
+          }, 505);
+          menuIsVisible = false;
+        }
+        else{
+          document.getElementById("main-menu-container").style.display = "block";
+          setTimeout(function(){
+            document.getElementById("main-menu-container").style.opacity = 1.0;
+            document.getElementById("main-menu-container").style.height = "100%";
+          }, 50);
+          menuIsVisible = true;
+        }
+      }
+
+      document.addEventListener("DOMContentLoaded", function(){
+        console.log("LEMBA - KONGO \n Cultural Outlet & Travel Rep \n DIA v. 0.1.0 \n by Patrice-Morgan");
+
+        document.getElementById("go-home-button-container").addEventListener("click", function(){
+          window.location.href = "https://houseofven.us";
+        });
+
+        document.getElementById("join-lyoko-button-container").addEventListener("click", function(){
+          toggleMenuContainer();
+        });
+
+        document.getElementById("return-to-store-button-container").addEventListener("click", function(){
+          toggleItemPreviewContainer();
+        });
+
+        //let nftButtons = document.getElementsByClassName("view-nft-button-container");
+
+        for(var i=0; i<Inventory.length; i++){
+          (function(){
+            let currentNFT = i;
+
+            let nftContainer = document.createElement("div");
+            nftContainer.setAttribute("id", `nft-${currentNFT}-container`);
+            nftContainer.classList.add("nft-container");
+
+            let nftVisualContainer = document.createElement("div");
+            nftVisualContainer.setAttribute("id", `nft-${currentNFT}-visual-container`);
+            nftVisualContainer.classList.add("nft-visual-container");
+
+            let nftMetaContainer = document.createElement("div");
+            nftMetaContainer.setAttribute("id", `nft-${currentNFT}-meta-container`);
+            nftMetaContainer.classList.add("nft-meta-container");
+
+            let nftTitleContainer = document.createElement("div");
+            nftTitleContainer.setAttribute("id", `nft-${currentNFT}-title-container`);
+            nftTitleContainer.classList.add("nft-title-container");
+
+            let nftAuthorContainer = document.createElement("div");
+            nftAuthorContainer.setAttribute("id", `nft-${currentNFT}-author-container`);
+            nftAuthorContainer.classList.add("nft-author-container");
+
+            let nftValueContainer = document.createElement("div");
+            nftValueContainer.setAttribute("id", `nft-${currentNFT}-value-container`);
+            nftValueContainer.classList.add("nft-value-container");
+
+            let nftViewContainer = document.createElement("input");
+            nftViewContainer.setAttribute("id", `view-nft-${currentNFT}-button-container`);
+            nftViewContainer.classList.add("view-nft-button-container");
+            nftViewContainer.setAttribute("type", "button");
+            nftViewContainer.setAttribute("value", "view");
+
+            let nftPurchaseContainer = document.createElement("input");
+            nftPurchaseContainer.setAttribute("id", `buy-nft-${currentNFT}-button-container`);
+            nftPurchaseContainer.classList.add("buy-nft-button-container");
+            nftPurchaseContainer.setAttribute("type", "button");
+            nftPurchaseContainer.setAttribute("value", "buy");
+
+
+            nftTitleContainer.textContent = Inventory[currentNFT].title;
+            nftAuthorContainer.textContent = Inventory[currentNFT].author;
+            nftValueContainer.textContent = Inventory[currentNFT].price;
+            nftVisualContainer.style.backgroundImage = `url(${Inventory[currentNFT].preview})`;
+            if(i>5){
+              nftVisualContainer.setAttribute("loading", "lazy");
+            }
+            nftViewContainer.addEventListener("click", function(){
+              toggleItemPreviewContainer(currentNFT);
+            });
+
+            document.getElementById("examples-container").append(nftContainer);
+            nftContainer.append(nftVisualContainer);
+            nftContainer.append(nftTitleContainer);
+            nftContainer.append(nftAuthorContainer);
+            nftContainer.append(nftValueContainer);
+            nftContainer.append(nftViewContainer);
+            nftContainer.append(nftPurchaseContainer);
+
+          })();
+        }
+
+      });
+    </script>
+  </body>
+</html>

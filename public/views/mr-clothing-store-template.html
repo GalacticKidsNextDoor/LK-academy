@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Lemba | Kongo | 17</title>
+    <link rel="stylesheet" href="./css/browse.css" type="text/css" />
+    <script src="./js/aframe1.3.0.min.js"></script>
+    <script src="https://aframe.io/releases/1.3.0/aframe.min.js.map"></script><!---->
+    <script src="./js/lk-dia-navigation.js"></script><!---->
+    <!--<script src="./js/lk-dia-collection.js"></script>-->
+    <script>
+    var Collection = {
+      description: "clothing",
+      nValue: 1,
+      list: [
+        {
+          type: "headwear",
+          articleName: "",
+          yearProduced: "",
+          articlePrice: "",
+          articleIcon: "",
+          bg: {
+            color: "red"
+          }
+        },
+        {
+          type: "torso/shirts",
+          articleName: "",
+          yearProduced: "",
+          articlePrice: "",
+          articleIcon: "",
+          bg: {
+            color: "orange"
+          }
+        },
+        {
+          type: "legwear/pants",
+          articleName: "",
+          yearProduced: "",
+          articlePrice: "",
+          articleIcon: "",
+          bg: {
+            color: "yellow"
+          }
+        },
+        {
+          type: "footwear",
+          articleName: "",
+          yearProduced: "",
+          articlePrice: "",
+          articleIcon: "",
+          bg: {
+            color: "green"
+          }
+        },
+        {
+          type: "wristwear/accessories",
+          articleName: "",
+          yearProduced: "",
+          articlePrice: "",
+          articleIcon: "",
+          bg: {
+            color: "blue"
+          }
+        },
+        {
+          type: "neckwear/accessories",
+          articleName: "",
+          yearProduced: "",
+          articlePrice: "",
+          articleIcon: "",
+          bg: {
+            color: "indigo"
+          }
+        },
+        {
+          type: "eyewear/accessories",
+          articleName: "",
+          yearProduced: "",
+          articlePrice: "",
+          articleIcon: "",
+          bg: {
+            color: "violet"
+          }
+        }
+      ]
+    };
+
+      function loadItems(){
+        let collectionContainer = document.getElementById("collection-container");
+        collectionContainer.innerHTML = "";
+
+        for(let itemCount = 0; itemCount < Collection.list.length; itemCount++){
+          let currentItem = itemCount;
+          (function(){
+            let currentButton = document.createElement("button");
+            currentButton.classList.add("collection-item-container");
+            currentButton.setAttribute("id",`collection-item-${currentItem}-container`);
+            currentButton.setAttribute("type", "button");
+            currentButton.style.backgroundColor = Collection.list[currentItem].bg.color;
+            collectionContainer.append(currentButton);
+          })();
+          /*{
+            type: "headwear",
+            articleName: "",
+            yearProduced: "",
+            articlePrice: "",
+            articleIcon: ""
+          }*/
+        }
+      }
+      document.addEventListener("DOMContentLoaded", function(){
+        initScene();
+        setTimeout(function(){
+          loadItems();
+        }, 3000);
+      });
+    </script>
+  </head>
+<body>
+  <div id="site-title-container">
+    <div id="title-name-container">Lemba - Kongo</div>
+    <input id="toggle-mobile-menu-container" type="button" value="" />
+  </div>
+  <div id="main-menu-container">
+    <input id="boutique-button-container" class="menu-option-button-container" value="Boutique" type="button"/>
+    <input id="maison-button-container" class="menu-option-button-container" value="Maison" type="button"/>
+    <input id="contact-button-container" class="menu-option-button-container" value="Contact" type="button"/>
+  </div>
+  <div id="collection-container">
+    <div id="collection-item-placeholder-container" class="collection-item-container">
+
+    </div>
+  </div>
+</body>
+</html>
