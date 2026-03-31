@@ -3,196 +3,308 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Lemba Academy</title>
+    <title>Club Roster | Lemba Academy</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Inter Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     <style>
         body { font-family: 'Inter', sans-serif; }
         /* Professional Dark Mode Aesthetic */
-        .portal-bg { background-color: #111827; }
-        .card-bg { background-color: #1F2937; }
-        .accent-color { color: #84cc16; } /* Lime green for a vibrant, professional look */
-        .progress-bar-bg { background-color: #374151; }
-        .progress-fill { transition: width 0.5s ease-in-out; }
-        /* Style for the Static Data Message */
-        #status-message {
-            background-color: #042f2e; /* Dark teal/green background */
-            border: 1px solid #14b8a6;
-            color: #5eead4; /* Lighter teal text color */
-        }
+        .portal-bg { background-color: #f3f4f6; } /* Light gray background like DC United mostly has, but we will go dark for header */
+        .header-bg { background-color: #000000; }
+        .table-header { background-color: #f9fafb; color: #111827; border-bottom: 2px solid #e5e7eb; }
+        .row-hover:hover { background-color: #f3f4f6; cursor: pointer; }
+        .accent-text { color: #84cc16; } 
+        
+        /* Modal Styles */
+        .modal-backdrop { background-color: rgba(0, 0, 0, 0.75); backdrop-filter: blur(4px); }
+        .modal-content { background-color: #111827; color: white; }
     </style>
-    <script type="module">
-        
-        let currentRoster = [];
-        const ROSTER_JSON_PATH = 'academy_roster.json'; // Path to the static JSON file
+</head>
+<body class="bg-white min-h-screen">
 
-        // --- CORE APPLICATION STATE & UI ELEMENTS ---
-        const playerListEl = document.getElementById('player-list');
-        const playerDetailEl = document.getElementById('player-detail');
-        const loaderEl = document.getElementById('loader');
-        const statusMessageEl = document.getElementById('status-message');
-        const authMessageEl = document.getElementById('auth-message');
+    <!-- Header -->
+    <header class="header-bg text-white shadow-lg sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-4">
+                <div class="h-10 w-10 bg-lime-500 rounded-full flex items-center justify-center font-bold text-black tracking-tighter">LK</div>
+                <h1 class="text-2xl font-black tracking-tight uppercase">Club Roster</h1>
+            </div>
+            <nav class="hidden md:flex space-x-8 text-sm font-semibold tracking-wide text-gray-300">
+                <a href="#" class="text-white border-b-2 border-lime-500 pb-1">Roster</a>
+                <a href="schedule.html" class="hover:text-white transition">Schedule</a>
+                <a href="academy.html" class="hover:text-white transition">Club</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Sub-Nav / Tabs -->
+    <div class="bg-white border-b border-gray-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex space-x-8 pt-6 pb-0">
+                <button onclick="switchView('roster')" id="tab-roster" class="pb-4 border-b-4 border-black font-bold text-black text-sm uppercase tracking-wider focus:outline-none">Roster</button>
+                <button onclick="switchView('stats')" id="tab-stats" class="pb-4 border-b-4 border-transparent font-bold text-gray-500 hover:text-black text-sm uppercase tracking-wider focus:outline-none">Stats</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         
-        // --- 1. DATA LOADING (From JSON File) ---
-        const loadRosterData = async () => {
+        <!-- Loading Spinner -->
+        <div id="loader" class="flex justify-center items-center py-20">
+            <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-black"></div>
+        </div>
+
+        <!-- Data Table -->
+        <div id="table-container" class="hidden overflow-x-auto rounded-lg border border-gray-200 shadow-sm">
+            <table class="min-w-full divide-y divide-gray-200 bg-white text-sm">
+                <thead class="bg-gray-50">
+                    <tr id="table-head-row">
+                        <!-- Headers injected via JS -->
+                    </tr>
+                </thead>
+                <tbody id="table-body" class="divide-y divide-gray-200">
+                    <!-- Rows injected via JS -->
+                </tbody>
+            </table>
+        </div>
+
+        <div class="mt-4 text-xs text-gray-400 text-center">
+            * Stats updated as of March 29, 2026. Click any player row for detailed bio.
+        </div>
+    </main>
+
+    <!-- Player Overlay / Modal -->
+    <div id="player-modal" class="fixed inset-0 z-50 hidden modal-backdrop flex justify-end">
+        <!-- Slide-over Panel -->
+        <div class="w-full max-w-2xl h-full modal-content shadow-2xl overflow-y-auto transform transition-transform duration-300 translate-x-full" id="modal-panel">
+            
+            <!-- Close Button -->
+            <button onclick="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white z-50">
+                <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+            </button>
+
+            <!-- Modal Content Injector -->
+            <div id="modal-body"></div>
+        </div>
+    </div>
+
+    <script>
+        let rosterData = [];
+        let currentView = 'roster'; // 'roster' or 'stats'
+        const ROSTER_JSON_PATH = 'academy_roster.json';
+
+        async function init() {
             try {
                 const response = await fetch(ROSTER_JSON_PATH);
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
                 const data = await response.json();
-                currentRoster = data.roster || [];
-                
-                authMessageEl.textContent = 'Data Source: Static JSON File';
-                statusMessageEl.textContent = 'Roster data loaded successfully.';
-
-                // Render the UI after loading
-                renderRosterList(currentRoster);
-                const momo = currentRoster.find(p => p.name.includes('Momo'));
-                selectPlayer(momo || currentRoster[0]);
-
+                rosterData = data.roster || [];
+                document.getElementById('loader').classList.add('hidden');
+                document.getElementById('table-container').classList.remove('hidden');
+                renderTable();
             } catch (error) {
-                console.error("Error loading roster data:", error);
-                authMessageEl.textContent = 'Data Source: Error (Offline)';
-                statusMessageEl.textContent = `FATAL ERROR: Could not load data from ${ROSTER_JSON_PATH}. Check file existence and path.`;
-            } finally {
-                loaderEl.classList.add('hidden');
+                console.error("Error loading roster:", error);
+                document.getElementById('loader').innerHTML = '<p class="text-red-600">Error loading data.</p>';
             }
-        };
+        }
 
-        // --- 2. UI RENDERING ---
-
-        const calculateProgress = (last, target) => {
-            if (target === 0 || last === 0) return '0%';
-            const percent = Math.min(100, (last / target) * 100);
-            return `${(last / target) * 100 > 100 ? '100+' : ((last / target) * 100).toFixed(0)}%`;
-        };
-        
-        const renderMetricGroup = (metrics, type) => {
-            return metrics
-                .filter(metric => metric.type === type)
-                .map(metric => {
-                    const progress = calculateProgress(metric.last, metric.target);
-                    const isComplete = parseFloat(progress) >= 100;
-
-                    return `
-                        <div class="mb-4 p-4 border border-gray-600 rounded-xl card-bg">
-                            <div class="flex justify-between items-center mb-1">
-                                <span class="text-gray-200 font-semibold">${metric.name}</span>
-                                <span class="text-sm ${isComplete ? 'text-lime-400 font-bold' : 'text-gray-400'}">${metric.last} / ${metric.target} ${metric.unit}</span>
-                            </div>
-                            <div class="progress-bar-bg h-2 rounded-full mb-2">
-                                <div class="progress-fill h-full rounded-full ${isComplete ? 'bg-lime-500' : 'bg-orange-500'}" style="width: ${progress};"></div>
-                            </div>
-                            <span class="text-xs text-gray-400">${progress} completed</span>
-                        </div>
-                    `;
-                }).join('');
-        };
-
-
-        const renderRosterList = (roster) => {
-            playerListEl.innerHTML = '';
-            roster.forEach(player => {
-                const li = document.createElement('li');
-                li.className = 'p-3 my-1 rounded-lg cursor-pointer bg-gray-700 hover:bg-gray-600 transition duration-150 ease-in-out border border-transparent';
-                li.id = `player-item-${player.id}`;
-                li.innerHTML = `
-                    <div class="font-bold text-white">${player.name}</div>
-                    <div class="text-sm text-gray-400">${player.position} (${player.status})</div>
-                `;
-                li.onclick = () => selectPlayer(player);
-                playerListEl.appendChild(li);
-            });
-        };
-        
-        const selectPlayer = (player) => {
-            if (!player) {
-                playerDetailEl.innerHTML = '<p class="text-gray-400 p-8 text-center">Select a player from the roster.</p>';
-                return;
-            }
-
-            // Highlight selected player in the list
-            document.querySelectorAll('#player-list li').forEach(el => {
-                el.classList.remove('bg-lime-600', 'hover:bg-lime-500');
-                el.classList.add('bg-gray-700', 'hover:bg-gray-600');
-            });
-            const selectedEl = document.getElementById(`player-item-${player.id}`);
-            if (selectedEl) {
-                selectedEl.classList.remove('bg-gray-700', 'hover:bg-gray-600');
-                selectedEl.classList.add('bg-lime-600', 'hover:bg-lime-500');
-            }
+        function switchView(view) {
+            currentView = view;
             
-            // Render metrics in their respective sections
-            const combineMetricsHtml = renderMetricGroup(player.metrics, 'combine');
-            const matchMetricsHtml = renderMetricGroup(player.metrics, 'match');
+            // UI Toggle
+            document.getElementById('tab-roster').className = view === 'roster' 
+                ? 'pb-4 border-b-4 border-black font-bold text-black text-sm uppercase tracking-wider focus:outline-none'
+                : 'pb-4 border-b-4 border-transparent font-bold text-gray-500 hover:text-black text-sm uppercase tracking-wider focus:outline-none';
+            
+            document.getElementById('tab-stats').className = view === 'stats' 
+                ? 'pb-4 border-b-4 border-black font-bold text-black text-sm uppercase tracking-wider focus:outline-none'
+                : 'pb-4 border-b-4 border-transparent font-bold text-gray-500 hover:text-black text-sm uppercase tracking-wider focus:outline-none';
 
+            renderTable();
+        }
 
-            playerDetailEl.innerHTML = `
-                <div class="p-6">
-                    <h2 class="text-3xl font-extrabold accent-color mb-1">${player.name}</h2>
-                    <p class="text-lg text-gray-300 mb-4">${player.position} | Age: ${player.age} | ${player.height}, ${player.weight}</p>
+        function renderTable() {
+            const thead = document.getElementById('table-head-row');
+            const tbody = document.getElementById('table-body');
+            tbody.innerHTML = '';
+            thead.innerHTML = '';
+
+            if (currentView === 'roster') {
+                // Roster Columns
+                thead.innerHTML = `
+                    <th class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Player</th>
+                    <th class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Jersey #</th>
+                    <th class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Position</th>
+                    <th class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Status</th>
+                    <th class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Height / Weight</th>
+                `;
+
+                rosterData.forEach(p => {
+                    const tr = document.createElement('tr');
+                    tr.className = 'row-hover transition-colors duration-150';
+                    tr.onclick = () => openModal(p);
+                    tr.innerHTML = `
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <div class="flex items-center">
+                                <div class="flex-shrink-0 h-10 w-10">
+                                    <img class="h-10 w-10 rounded-full object-cover border border-gray-300" src="${p.photoUrl}" onerror="this.src='https://placehold.co/100x100?text=NA'">
+                                </div>
+                                <div class="ml-4">
+                                    <div class="text-sm font-bold text-gray-900">${p.name}</div>
+                                </div>
+                            </div>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900 font-mono">${p.jerseyNumber || '-'}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">${p.position}</td>
+                        <td class="px-6 py-4 whitespace-nowrap">
+                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${p.status.includes('Loan') || p.status.includes('Trialing') ? 'bg-lime-100 text-lime-800' : 'bg-gray-100 text-gray-800'}">
+                                ${p.status}
+                            </span>
+                        </td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">${p.height} / ${p.weight}</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+
+            } else {
+                // Stats Columns
+                thead.innerHTML = `
+                    <th class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Player</th>
+                    <th class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">GP</th>
+                    <th class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Mins</th>
+                    <th class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">G</th>
+                    <th class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">A</th>
+                    <th class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">xG</th>
+                    <th class="px-6 py-3 text-left text-xs font-bold text-gray-500 uppercase tracking-wider">Pass%</th>
+                `;
+
+                rosterData.forEach(p => {
+                    const getMetric = (name) => {
+                        const m = p.metrics.find(x => x.name.includes(name));
+                        return m ? m.last : '-';
+                    };
+
+                    const tr = document.createElement('tr');
+                    tr.className = 'row-hover transition-colors duration-150';
+                    tr.onclick = () => openModal(p);
+                    tr.innerHTML = `
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-900">${p.name}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">${getMetric('Matches Played')}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">${getMetric('Minutes Played')}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm font-bold text-gray-900">${getMetric('Goals')}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">${getMetric('Assists')}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">${getMetric('Expected Goals')}</td>
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-700">${getMetric('Passes Completed')}%</td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+            }
+        }
+
+        function openModal(player) {
+            const modal = document.getElementById('player-modal');
+            const panel = document.getElementById('modal-panel');
+            const body = document.getElementById('modal-body');
+
+            // Find all match metrics
+            const matchMetrics = player.metrics.filter(m => m.type === 'match');
+
+            // Check for Action Plan
+            const actionButton = player.actionPlanUrl 
+                ? `<a href="${player.actionPlanUrl}" class="mt-4 block w-full bg-lime-500 hover:bg-lime-400 text-black font-bold py-3 px-4 rounded text-center transition shadow-lg uppercase tracking-wide">
+                     View Player Action Plan
+                   </a>`
+                : '';
+
+            body.innerHTML = `
+                <!-- Modal Header -->
+                <div class="relative h-48 bg-gray-900">
+                    <img class="w-full h-full object-cover opacity-50" src="${player.photoUrl}" onerror="this.src='https://placehold.co/600x400/111827/374151?text=NO+IMAGE'">
+                    <div class="absolute bottom-0 left-0 p-6 bg-gradient-to-t from-gray-900 to-transparent w-full">
+                        <h2 class="text-4xl font-black text-white uppercase">${player.name}</h2>
+                        <div class="flex items-center space-x-4 mt-2">
+                            <span class="text-lime-400 font-mono text-xl">#${player.jerseyNumber || '00'}</span>
+                            <span class="text-gray-300 font-semibold">${player.position}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-6 space-y-8">
                     
-                    <div class="mb-6 card-bg p-4 rounded-xl shadow-lg">
-                        <p class="text-sm font-semibold text-gray-400 mb-2">Current Status & Notes</p>
-                        <p class="text-gray-200">${player.status}</p>
-                        <p class="text-gray-300 italic text-sm mt-2">${player.notes}</p>
+                    <!-- Bio Section -->
+                    <div class="grid grid-cols-2 gap-4 text-sm border-b border-gray-700 pb-6">
+                        <div>
+                            <p class="text-gray-500 uppercase text-xs">Status</p>
+                            <p class="font-bold text-white">${player.status}</p>
+                        </div>
+                         <div>
+                            <p class="text-gray-500 uppercase text-xs">Age</p>
+                            <p class="font-bold text-white">${player.age}</p>
+                        </div>
+                        <div>
+                            <p class="text-gray-500 uppercase text-xs">Height</p>
+                            <p class="font-bold text-white">${player.height}</p>
+                        </div>
+                        <div>
+                            <p class="text-gray-500 uppercase text-xs">Weight</p>
+                            <p class="font-bold text-white">${player.weight}</p>
+                        </div>
+                        <div class="col-span-2 mt-2">
+                             <p class="text-gray-500 uppercase text-xs mb-1">Scouting Notes</p>
+                             <p class="text-gray-300 italic">"${player.notes}"</p>
+                        </div>
                     </div>
 
-                    <h3 class="text-xl font-bold text-white mb-4 border-b border-gray-700 pb-2">Combine & Development Metrics</h3>
-                    ${combineMetricsHtml}
+                    <!-- Action Button (Conditional) -->
+                    ${actionButton}
 
-                    <h3 class="text-xl font-bold text-white mt-8 mb-4 border-b border-gray-700 pb-2">Match Metrics (Season Targets)</h3>
-                    ${matchMetricsHtml}
+                    <!-- Stats Table (In Modal) -->
+                    <div>
+                        <h3 class="text-lg font-bold text-white mb-4 uppercase">Season Statistics</h3>
+                        <div class="bg-gray-800 rounded-lg overflow-hidden">
+                            <table class="w-full text-sm text-left">
+                                <thead class="bg-gray-700 text-gray-400 uppercase text-xs">
+                                    <tr>
+                                        <th class="px-4 py-2">Metric</th>
+                                        <th class="px-4 py-2 text-right">Value</th>
+                                        <th class="px-4 py-2 text-right text-lime-500">Target</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-gray-700">
+                                    ${matchMetrics.map(m => `
+                                        <tr>
+                                            <td class="px-4 py-3 text-gray-300">${m.name}</td>
+                                            <td class="px-4 py-3 text-right font-bold text-white">${m.last} <span class="text-xs text-gray-500 font-normal">${m.unit}</span></td>
+                                            <td class="px-4 py-3 text-right text-gray-500">${m.target}</td>
+                                        </tr>
+                                    `).join('')}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
                 </div>
             `;
-        };
-        
-        // Start the application
-        window.onload = loadRosterData;
+
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                panel.classList.remove('translate-x-full');
+            }, 10);
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('player-modal');
+            const panel = document.getElementById('modal-panel');
+            
+            panel.classList.add('translate-x-full');
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 300);
+        }
+
+        window.onload = init;
     </script>
-</head>
-<body class="portal-bg min-h-screen text-gray-100">
-
-    <div id="loader" class="fixed inset-0 portal-bg flex flex-col justify-center items-center z-50">
-        <div class="animate-spin rounded-full h-16 w-16 border-t-2 border-b-2 border-lime-500"></div>
-        <p class="mt-4 text-lime-400">Loading Roster Data...</p>
-    </div>
-
-    <div class="max-w-7xl mx-auto p-4 sm:p-8">
-        <header class="flex justify-between items-center pb-4 border-b border-gray-700 mb-6">
-            <h1 class="text-4xl font-extrabold text-white tracking-tight">The Lemba Academy</h1>
-            <div class="text-right">
-                <p id="auth-message" class="text-sm text-gray-400">Data Source: Static JSON File</p>
-            </div>
-        </header>
-
-        <main class="grid grid-cols-1 lg:grid-cols-4 gap-6">
-            <!-- Roster List (Left Column) -->
-            <div class="lg:col-span-1 card-bg rounded-2xl shadow-xl overflow-hidden">
-                <div class="p-4 border-b border-gray-700">
-                    <h2 class="text-xl font-bold text-white">Active Roster</h2>
-                </div>
-                <ul id="player-list" class="divide-y divide-gray-700 p-2">
-                    <!-- Player list items will be injected here -->
-                </ul>
-            </div>
-
-            <!-- Player Detail (Right Column) -->
-            <div class="lg:col-span-3 card-bg rounded-2xl shadow-xl min-h-[60vh]">
-                <div id="player-detail">
-                    <p class="text-gray-400 p-8 text-center">Select a player from the roster to view their profile and metrics.</p>
-                </div>
-            </div>
-        </main>
-        
-        <!-- Global Status/Warning Message -->
-        <footer class="mt-8 text-center text-sm p-3 rounded-lg" id="footer-status">
-            <p id="status-message" class="font-semibold">Roster loaded successfully.</p>
-            <p class="text-gray-400 mt-2">Note: This portal is read-only and uses static data from the `academy_roster.json` file.</p>
-        </footer>
-    </div>
 </body>
 </html>

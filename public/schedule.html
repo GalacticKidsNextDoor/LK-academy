@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Club Schedule | Lemba Academy</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Inter Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .header-bg { background-color: #000000; }
+        .accent-text { color: #84cc16; } /* Lime Green */
+        .match-row:hover { background-color: #f9fafb; cursor: pointer; }
+        .expanded-row { background-color: #f3f4f6; }
+        
+        /* Status Badges */
+        .badge-win { background-color: #dcfce7; color: #166534; }
+        .badge-loss { background-color: #fee2e2; color: #991b1b; }
+        .badge-upcoming { background-color: #f3f4f6; color: #374151; }
+        .badge-trial { background-color: #fce7f3; color: #9d174d; }
+        .badge-cancelled { background-color: #e5e7eb; color: #6b7280; text-decoration: line-through; }
+    </style>
+</head>
+<body class="bg-white min-h-screen text-gray-900">
+
+    <!-- Header (Consistent with Roster) -->
+    <header class="header-bg text-white shadow-lg sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center space-x-4">
+                <div class="h-10 w-10 bg-lime-500 rounded-full flex items-center justify-center font-bold text-black tracking-tighter">LK</div>
+                <h1 class="text-2xl font-black tracking-tight uppercase">Club Schedule</h1>
+            </div>
+            <nav class="hidden md:flex space-x-8 text-sm font-semibold tracking-wide text-gray-300">
+                <a href="roster.html" class="hover:text-white transition">Roster</a>
+                <a href="#" class="text-white border-b-2 border-lime-500 pb-1">Schedule</a>
+                <a href="academy.html" class="hover:text-white transition">Club</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Filter Tabs -->
+    <div class="bg-white border-b border-gray-200 sticky top-20 z-30">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex space-x-8 pt-6 pb-0">
+                <button onclick="filterMatches('ALL')" id="tab-all" class="pb-4 border-b-4 border-black font-bold text-black text-sm uppercase tracking-wider focus:outline-none">All Fixtures</button>
+                <button onclick="filterMatches('UPCOMING')" id="tab-upcoming" class="pb-4 border-b-4 border-transparent font-bold text-gray-500 hover:text-black text-sm uppercase tracking-wider focus:outline-none">Upcoming</button>
+                <button onclick="filterMatches('RESULT')" id="tab-results" class="pb-4 border-b-4 border-transparent font-bold text-gray-500 hover:text-black text-sm uppercase tracking-wider focus:outline-none">Results</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        
+        <!-- Loading Spinner -->
+        <div id="loader" class="flex justify-center items-center py-20">
+            <div class="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-black"></div>
+        </div>
+
+        <!-- Schedule List -->
+        <div id="schedule-container" class="space-y-4">
+            <!-- Matches injected here -->
+        </div>
+
+    </main>
+
+    <script type="module">
+        const MATCH_JSON_PATH = 'match_data.json';
+        const container = document.getElementById('schedule-container');
+        const loader = document.getElementById('loader');
+        
+        let allMatches = [];
+        let currentFilter = 'ALL';
+
+        async function init() {
+            try {
+                const response = await fetch(MATCH_JSON_PATH);
+                const data = await response.json();
+                allMatches = data.schedule || [];
+                renderMatches();
+            } catch (error) {
+                console.error("Error loading schedule:", error);
+                container.innerHTML = '<p class="text-center text-red-600 font-bold mt-10">Error loading match data.</p>';
+            } finally {
+                loader.classList.add('hidden');
+            }
+        }
+
+        window.filterMatches = (filter) => {
+            currentFilter = filter;
+            
+            // Update Tabs UI
+            ['all', 'upcoming', 'results'].forEach(tab => {
+                const el = document.getElementById(`tab-${tab}`);
+                if (tab.toUpperCase() === filter || (filter === 'RESULT' && tab === 'results')) {
+                    el.className = 'pb-4 border-b-4 border-black font-bold text-black text-sm uppercase tracking-wider focus:outline-none transition-colors';
+                } else {
+                    el.className = 'pb-4 border-b-4 border-transparent font-bold text-gray-500 hover:text-black text-sm uppercase tracking-wider focus:outline-none transition-colors';
+                }
+            });
+
+            renderMatches();
+        };
+
+        function renderMatches() {
+            container.innerHTML = '';
+            
+            const filtered = allMatches.filter(m => {
+                if (currentFilter === 'ALL') return true;
+                // Results now include actual results, completed trials, and cancelled games (history)
+                if (currentFilter === 'RESULT') return m.type === 'RESULT' || m.type === 'TRIAL' || m.type === 'CANCELLED';
+                // Upcoming is strictly future scheduled games
+                if (currentFilter === 'UPCOMING') return m.type === 'UPCOMING';
+                return true;
+            });
+
+            if (filtered.length === 0) {
+                container.innerHTML = '<div class="text-center py-12 text-gray-500">No matches found for this category.</div>';
+                return;
+            }
+
+            filtered.forEach((match, index) => {
+                const isResult = match.type === 'RESULT';
+                const isTrial = match.type === 'TRIAL';
+                const isCancelled = match.type === 'CANCELLED';
+                
+                // Determine Badge Style
+                let badgeClass = 'badge-upcoming';
+                let badgeText = match.time;
+                
+                if (isResult) {
+                    badgeClass = match.result.winner === 'LA' ? 'badge-win' : 'badge-loss';
+                    badgeText = `${match.result.score_la} - ${match.result.score_opp} ${match.result.winner === 'LA' ? '(W)' : '(L)'}`;
+                } else if (isTrial) {
+                    badgeClass = 'badge-trial';
+                    badgeText = 'TRIAL COMPLETE';
+                } else if (isCancelled) {
+                    badgeClass = 'badge-cancelled';
+                    badgeText = 'CANCELLED';
+                }
+
+                // Render Row
+                const rowId = `match-${index}`;
+                const detailsId = `details-${index}`;
+                
+                const card = document.createElement('div');
+                card.className = 'border border-gray-200 rounded-lg overflow-hidden transition-all duration-200';
+                
+                // Dim cancelled cards slightly
+                const rowOpacity = isCancelled ? 'opacity-75' : '';
+
+                card.innerHTML = `
+                    <div class="match-row p-6 flex flex-col md:flex-row items-center justify-between ${rowOpacity}" onclick="toggleDetails('${detailsId}', '${rowId}')" id="${rowId}">
+                        
+                        <!-- Date & Location -->
+                        <div class="flex items-center w-full md:w-1/3 mb-4 md:mb-0">
+                            <div class="flex-shrink-0 w-16 text-center">
+                                <span class="block text-xs font-bold text-gray-500 uppercase tracking-widest">${match.date.split(' ')[0]}</span>
+                                <span class="block text-2xl font-black text-gray-900">${match.date.split(' ')[1]}</span>
+                            </div>
+                            <div class="ml-6 border-l-2 border-gray-100 pl-6">
+                                <div class="text-xs text-gray-400 uppercase font-semibold">Location</div>
+                                <div class="text-sm font-medium text-gray-700 truncate max-w-[200px]">${match.location}</div>
+                            </div>
+                        </div>
+
+                        <!-- Opponent -->
+                        <div class="w-full md:w-1/3 text-center mb-4 md:mb-0">
+                            <span class="text-xl font-bold text-gray-900">${match.opponent}</span>
+                            ${isTrial ? '<span class="block text-xs text-lime-600 font-bold uppercase mt-1">Player Evaluation</span>' : ''}
+                        </div>
+
+                        <!-- Result/Time Badge -->
+                        <div class="w-full md:w-1/3 text-center md:text-right">
+                            <span class="inline-flex items-center px-4 py-2 rounded-full text-sm font-bold ${badgeClass}">
+                                ${badgeText}
+                            </span>
+                             <div class="text-xs text-gray-400 mt-2 md:hidden lg:block">${!isResult && !isTrial && !isCancelled ? match.time : 'Final Time'}</div>
+                        </div>
+                    </div>
+
+                    <!-- Details Accordion -->
+                    <div id="${detailsId}" class="hidden bg-gray-50 border-t border-gray-100 p-6 animate-fade-in">
+                        ${getDetailsHTML(match)}
+                    </div>
+                `;
+                
+                container.appendChild(card);
+            });
+        }
+
+        function getDetailsHTML(match) {
+            if (match.type === 'CANCELLED') {
+                return `
+                    <div class="flex justify-center items-center text-sm text-gray-500 italic">
+                        <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+                        This fixture was cancelled.
+                    </div>
+                `;
+            }
+
+            if (match.type === 'UPCOMING') {
+                return `
+                    <div class="flex justify-between items-center text-sm text-gray-600">
+                        <p>Match preview and lineup will be available 1 hour before kickoff.</p>
+                    </div>
+                `;
+            }
+
+            if (match.type === 'TRIAL') {
+                // Handle new trial notes format (string)
+                return `
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <h4 class="text-xs font-bold text-gray-500 uppercase mb-2">Evaluation Notes</h4>
+                            <p class="text-sm text-gray-900 leading-relaxed">"${match.result.details}"</p>
+                            <div class="mt-4">
+                                <span class="text-xs font-bold text-gray-500 uppercase block mb-1">Positions Played</span>
+                                <span class="inline-flex items-center px-2 py-1 rounded bg-gray-200 text-xs font-bold text-gray-700">
+                                    ${match.result.position_la ? match.result.position_la.join(' / ') : 'N/A'}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="flex items-end justify-end">
+                            <a href="action-plan.html" class="inline-flex items-center text-lime-600 font-bold hover:text-lime-700 text-sm border border-lime-600 rounded px-4 py-2 hover:bg-lime-50 transition">
+                                View Player Action Plan 
+                                <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                            </a>
+                        </div>
+                    </div>
+                `;
+            }
+
+            // Standard Result
+            if (match.type === 'RESULT') {
+                return `
+                    <h4 class="text-xs font-bold text-gray-500 uppercase mb-3">Match Events</h4>
+                    <div class="space-y-2">
+                        ${match.result.details.map(d => `
+                            <div class="flex items-start text-sm">
+                                <span class="font-mono font-bold w-12 text-gray-400">${d.time}</span>
+                                <span class="font-bold text-gray-900 w-32">${d.scorer}</span>
+                                <span class="text-gray-500 italic">${d.notes || ''}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            }
+            
+            return '';
+        }
+
+        // Global function for toggle
+        window.toggleDetails = (detailsId, rowId) => {
+            const details = document.getElementById(detailsId);
+            const row = document.getElementById(rowId);
+            
+            if (details.classList.contains('hidden')) {
+                details.classList.remove('hidden');
+                row.classList.add('bg-gray-50');
+            } else {
+                details.classList.add('hidden');
+                row.classList.remove('bg-gray-50');
+            }
+        };
+
+        window.onload = init;
+    </script>
+</body>
+</html>

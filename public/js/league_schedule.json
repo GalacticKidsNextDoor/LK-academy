@@ -1,0 +1,239 @@
+{
+  "season": "2026",
+  "league": "Local Professional Soccer League",
+  "format": "Double Round-Robin (20 Weeks)",
+  "teams": 11,
+  "total_matches": 110,
+  "weeks": [
+    {
+      "week": 1,
+      "dates": "APR 1 - APR 5",
+      "matches": [
+        { "date": "APR 1", "home": "Ellsworth AA SC", "away": "Lemba-Kongo Academy", "location": "Raptor Stadium, Rockville, MD", "time": "12:30 PM" },
+        { "date": "APR 4", "home": "DC Eagles SC", "away": "Page Soccer Club", "location": "Washington, DC", "time": "10:00 AM" },
+        { "date": "APR 4", "home": "Tamarack Timbers", "away": "Hidden Valley SC", "location": "Silver Spring, MD", "time": "1:00 PM" },
+        { "date": "APR 5", "home": "Lions United Academy", "away": "Blessed FC", "location": "Silver Spring, MD", "time": "11:00 AM" },
+        { "date": "APR 5", "home": "DMV Starz FC", "away": "Silver Spring United", "location": "Rosedale Stadium, Washington, DC", "time": "3:00 PM" }
+      ]
+    },
+    {
+      "week": 2,
+      "dates": "APR 5 - APR 11",
+      "matches": [
+        { "date": "APR 5", "home": "DC Eagles SC", "away": "Lemba-Kongo Academy", "location": "Washington, DC", "time": "10:30 AM" },
+        { "date": "APR 10", "home": "Page Soccer Club", "away": "Tamarack Timbers", "location": "Washington, DC", "time": "6:00 PM" },
+        { "date": "APR 11", "home": "Hidden Valley SC", "away": "Lions United Academy", "location": "Bethesda, MD", "time": "12:00 PM" },
+        { "date": "APR 11", "home": "Blessed FC", "away": "DMV Starz FC", "location": "Elkridge, MD", "time": "2:30 PM" },
+        { "date": "APR 11", "home": "Silver Spring United", "away": "District Reign FC", "location": "Silver Spring, MD", "time": "5:00 PM" }
+      ]
+    },
+    {
+      "week": 3,
+      "dates": "APR 9 - APR 18",
+      "matches": [
+        { "date": "APR 9", "home": "Page Soccer Club", "away": "Lemba-Kongo Academy", "location": "Washington, DC", "time": "5:30 PM" },
+        { "date": "APR 17", "home": "Tamarack Timbers", "away": "DC Eagles SC", "location": "Silver Spring, MD", "time": "7:00 PM" },
+        { "date": "APR 18", "home": "Lions United Academy", "away": "Ellsworth AA SC", "location": "Silver Spring, MD", "time": "1:00 PM" },
+        { "date": "APR 18", "home": "DMV Starz FC", "away": "Hidden Valley SC", "location": "Rosedale Stadium, Washington, DC", "time": "4:00 PM" },
+        { "date": "APR 18", "home": "District Reign FC", "away": "Blessed FC", "location": "Washington, DC", "time": "6:30 PM" },
+        { "date": "APR 18", "home": "Silver Spring United", "away": "Page Soccer Club", "location": "Silver Spring, MD", "time": "8:00 PM" }
+      ]
+    },
+    {
+      "week": 4,
+      "dates": "APR 12 - APR 25",
+      "matches": [
+        { "date": "APR 12", "home": "Lemba-Kongo Academy", "away": "Hidden Valley SC", "location": "Academy Grounds, Colesville, MD", "time": "12:30 PM" },
+        { "date": "APR 24", "home": "Page Soccer Club", "away": "Lions United Academy", "location": "Washington, DC", "time": "5:00 PM" },
+        { "date": "APR 25", "home": "DC Eagles SC", "away": "DMV Starz FC", "location": "Washington, DC", "time": "11:00 AM" },
+        { "date": "APR 25", "home": "Ellsworth AA SC", "away": "District Reign FC", "location": "Raptor Stadium, Rockville, MD", "time": "2:00 PM" },
+        { "date": "APR 25", "home": "Tamarack Timbers", "away": "Silver Spring United", "location": "Silver Spring, MD", "time": "4:30 PM" }
+      ]
+    },
+    {
+      "week": 5,
+      "dates": "APR 15 - MAY 2",
+      "matches": [
+        { "date": "APR 15", "home": "Lemba-Kongo Academy", "away": "Tamarack Timbers", "location": "Academy Grounds, Colesville, MD", "time": "10:30 AM" },
+        { "date": "MAY 1", "home": "Lions United Academy", "away": "DC Eagles SC", "location": "Silver Spring, MD", "time": "6:00 PM" },
+        { "date": "MAY 2", "home": "DMV Starz FC", "away": "Page Soccer Club", "location": "Rosedale Stadium, Washington, DC", "time": "12:00 PM" },
+        { "date": "MAY 2", "home": "District Reign FC", "away": "Hidden Valley SC", "location": "Washington, DC", "time": "3:00 PM" },
+        { "date": "MAY 2", "home": "Silver Spring United", "away": "Ellsworth AA SC", "location": "Silver Spring, MD", "time": "5:30 PM" },
+        { "date": "MAY 2", "home": "Blessed FC", "away": "Tamarack Timbers", "location": "Elkridge, MD", "time": "7:30 PM" }
+      ]
+    },
+    {
+      "week": 6,
+      "dates": "APR 21 - MAY 9",
+      "matches": [
+        { "date": "APR 21", "home": "Lemba-Kongo Academy", "away": "Ellsworth AA SC", "location": "Academy Grounds, Colesville, MD", "time": "12:30 PM" },
+        { "date": "MAY 8", "home": "Hidden Valley SC", "away": "Silver Spring United", "location": "Bethesda, MD", "time": "5:30 PM" },
+        { "date": "MAY 9", "home": "Page Soccer Club", "away": "Blessed FC", "location": "Washington, DC", "time": "10:00 AM" },
+        { "date": "MAY 9", "home": "DC Eagles SC", "away": "District Reign FC", "location": "Washington, DC", "time": "1:00 PM" },
+        { "date": "MAY 9", "home": "Tamarack Timbers", "away": "Lions United Academy", "location": "Silver Spring, MD", "time": "4:00 PM" }
+      ]
+    },
+    {
+      "week": 7,
+      "dates": "APR 29 - MAY 16",
+      "matches": [
+        { "date": "APR 29", "home": "Lemba-Kongo Academy", "away": "Page Soccer Club", "location": "Academy Grounds, Colesville, MD", "time": "5:30 PM" },
+        { "date": "MAY 15", "home": "District Reign FC", "away": "Tamarack Timbers", "location": "Washington, DC", "time": "7:00 PM" },
+        { "date": "MAY 16", "home": "Silver Spring United", "away": "DC Eagles SC", "location": "Silver Spring, MD", "time": "11:00 AM" },
+        { "date": "MAY 16", "home": "Blessed FC", "away": "Ellsworth AA SC", "location": "Elkridge, MD", "time": "2:00 PM" },
+        { "date": "MAY 16", "home": "Lions United Academy", "away": "DMV Starz FC", "location": "Silver Spring, MD", "time": "5:00 PM" },
+        { "date": "MAY 16", "home": "Hidden Valley SC", "away": "Page Soccer Club", "location": "Bethesda, MD", "time": "7:30 PM" }
+      ]
+    },
+    {
+      "week": 8,
+      "dates": "MAY 3 - MAY 23",
+      "matches": [
+        { "date": "MAY 3", "home": "Lemba-Kongo Academy", "away": "DC Eagles SC", "location": "Academy Grounds, Colesville, MD", "time": "10:30 AM" },
+        { "date": "MAY 22", "home": "DMV Starz FC", "away": "Tamarack Timbers", "location": "Rosedale Stadium, Washington, DC", "time": "6:30 PM" },
+        { "date": "MAY 23", "home": "Ellsworth AA SC", "away": "Hidden Valley SC", "location": "Raptor Stadium, Rockville, MD", "time": "10:00 AM" },
+        { "date": "MAY 23", "home": "Page Soccer Club", "away": "District Reign FC", "location": "Washington, DC", "time": "1:00 PM" },
+        { "date": "MAY 23", "home": "Blessed FC", "away": "Silver Spring United", "location": "Elkridge, MD", "time": "4:00 PM" }
+      ]
+    },
+    {
+      "week": 9,
+      "dates": "MAY 10 - MAY 30",
+      "matches": [
+        { "date": "MAY 10", "home": "Lemba-Kongo Academy", "away": "Lions United Academy", "location": "Academy Grounds, Colesville, MD", "time": "12:30 PM" },
+        { "date": "MAY 29", "home": "Tamarack Timbers", "away": "Ellsworth AA SC", "location": "Silver Spring, MD", "time": "6:00 PM" },
+        { "date": "MAY 30", "home": "District Reign FC", "away": "DMV Starz FC", "location": "Washington, DC", "time": "11:30 AM" },
+        { "date": "MAY 30", "home": "DC Eagles SC", "away": "Blessed FC", "location": "Washington, DC", "time": "2:30 PM" },
+        { "date": "MAY 30", "home": "Silver Spring United", "away": "Lions United Academy", "location": "Silver Spring, MD", "time": "5:30 PM" },
+        { "date": "MAY 30", "home": "Hidden Valley SC", "away": "DC Eagles SC", "location": "Bethesda, MD", "time": "8:00 PM" }
+      ]
+    },
+    {
+      "week": 10,
+      "dates": "MAY 17 - JUN 6",
+      "matches": [
+        { "date": "MAY 17", "home": "Lemba-Kongo Academy", "away": "Blessed FC", "location": "Academy Grounds, Colesville, MD", "time": "5:30 PM" },
+        { "date": "JUN 5", "home": "Lions United Academy", "away": "District Reign FC", "location": "Silver Spring, MD", "time": "7:00 PM" },
+        { "date": "JUN 6", "home": "DMV Starz FC", "away": "Ellsworth AA SC", "location": "Rosedale Stadium, Washington, DC", "time": "10:00 AM" },
+        { "date": "JUN 6", "home": "Page Soccer Club", "away": "Silver Spring United", "location": "Washington, DC", "time": "1:00 PM" },
+        { "date": "JUN 6", "home": "Blessed FC", "away": "Hidden Valley SC", "location": "Elkridge, MD", "time": "4:00 PM" }
+      ]
+    },
+    {
+      "week": 11,
+      "dates": "MAY 24 - JUN 13",
+      "matches": [
+        { "date": "MAY 24", "home": "Lemba-Kongo Academy", "away": "DMV Starz FC", "location": "Academy Grounds, Colesville, MD", "time": "10:30 AM" },
+        { "date": "JUN 12", "home": "Silver Spring United", "away": "Tamarack Timbers", "location": "Silver Spring, MD", "time": "6:30 PM" },
+        { "date": "JUN 13", "home": "District Reign FC", "away": "Ellsworth AA SC", "location": "Washington, DC", "time": "11:00 AM" },
+        { "date": "JUN 13", "home": "DC Eagles SC", "away": "Lions United Academy", "location": "Washington, DC", "time": "2:00 PM" },
+        { "date": "JUN 13", "home": "Hidden Valley SC", "away": "DMV Starz FC", "location": "Bethesda, MD", "time": "5:00 PM" },
+        { "date": "JUN 13", "home": "Blessed FC", "away": "Page Soccer Club", "location": "Elkridge, MD", "time": "7:30 PM" }
+      ]
+    },
+    {
+      "week": 12,
+      "dates": "MAY 31 - JUN 20",
+      "matches": [
+        { "date": "MAY 31", "home": "Lemba-Kongo Academy", "away": "Silver Spring United", "location": "Academy Grounds, Colesville, MD", "time": "12:30 PM" },
+        { "date": "JUN 19", "home": "Tamarack Timbers", "away": "District Reign FC", "location": "Silver Spring, MD", "time": "6:00 PM" },
+        { "date": "JUN 20", "home": "Ellsworth AA SC", "away": "Blessed FC", "location": "Raptor Stadium, Rockville, MD", "time": "10:00 AM" },
+        { "date": "JUN 20", "home": "DMV Starz FC", "away": "Lions United Academy", "location": "Rosedale Stadium, Washington, DC", "time": "1:00 PM" },
+        { "date": "JUN 20", "home": "Page Soccer Club", "away": "DC Eagles SC", "location": "Washington, DC", "time": "4:00 PM" }
+      ]
+    },
+    {
+      "week": 13,
+      "dates": "JUN 7 - JUN 27",
+      "matches": [
+        { "date": "JUN 7", "home": "Lemba-Kongo Academy", "away": "District Reign FC", "location": "Academy Grounds, Colesville, MD", "time": "5:30 PM" },
+        { "date": "JUN 26", "home": "Lions United Academy", "away": "Tamarack Timbers", "location": "Silver Spring, MD", "time": "7:00 PM" },
+        { "date": "JUN 27", "home": "Silver Spring United", "away": "DMV Starz FC", "location": "Silver Spring, MD", "time": "10:30 AM" },
+        { "date": "JUN 27", "home": "Hidden Valley SC", "away": "Ellsworth AA SC", "location": "Bethesda, MD", "time": "1:30 PM" },
+        { "date": "JUN 27", "home": "District Reign FC", "away": "Page Soccer Club", "location": "Washington, DC", "time": "4:30 PM" },
+        { "date": "JUN 27", "home": "Blessed FC", "away": "DC Eagles SC", "location": "Elkridge, MD", "time": "7:00 PM" }
+      ]
+    },
+    {
+      "week": 14,
+      "dates": "JUN 14 - JUL 4",
+      "matches": [
+        { "date": "JUN 14", "home": "Tamarack Timbers", "away": "Lemba-Kongo Academy", "location": "Silver Spring, MD", "time": "10:00 AM" },
+        { "date": "JUL 3", "home": "DC Eagles SC", "away": "Hidden Valley SC", "location": "Washington, DC", "time": "6:00 PM" },
+        { "date": "JUL 4", "home": "Ellsworth AA SC", "away": "Tamarack Timbers", "location": "Raptor Stadium, Rockville, MD", "time": "11:00 AM" },
+        { "date": "JUL 4", "home": "DMV Starz FC", "away": "Blessed FC", "location": "Rosedale Stadium, Washington, DC", "time": "2:00 PM" },
+        { "date": "JUL 4", "home": "Lions United Academy", "away": "Silver Spring United", "location": "Silver Spring, MD", "time": "5:00 PM" }
+      ]
+    },
+    {
+      "week": 15,
+      "dates": "JUN 21 - JUL 11",
+      "matches": [
+        { "date": "JUN 21", "home": "Hidden Valley SC", "away": "Lemba-Kongo Academy", "location": "Bethesda, MD", "time": "2:00 PM" },
+        { "date": "JUL 10", "home": "District Reign FC", "away": "Lions United Academy", "location": "Washington, DC", "time": "7:00 PM" },
+        { "date": "JUL 11", "home": "Ellsworth AA SC", "away": "DMV Starz FC", "location": "Raptor Stadium, Rockville, MD", "time": "10:00 AM" },
+        { "date": "JUL 11", "home": "Silver Spring United", "away": "Blessed FC", "location": "Silver Spring, MD", "time": "1:00 PM" },
+        { "date": "JUL 11", "home": "Page Soccer Club", "away": "Hidden Valley SC", "location": "Washington, DC", "time": "4:00 PM" },
+        { "date": "JUL 11", "home": "DC Eagles SC", "away": "Tamarack Timbers", "location": "Washington, DC", "time": "7:30 PM" }
+      ]
+    },
+    {
+      "week": 16,
+      "dates": "JUN 28 - JUL 18",
+      "matches": [
+        { "date": "JUN 28", "home": "Lions United Academy", "away": "Lemba-Kongo Academy", "location": "Silver Spring, MD", "time": "11:00 AM" },
+        { "date": "JUL 17", "home": "Tamarack Timbers", "away": "Page Soccer Club", "location": "Silver Spring, MD", "time": "6:00 PM" },
+        { "date": "JUL 18", "home": "Hidden Valley SC", "away": "District Reign FC", "location": "Bethesda, MD", "time": "10:30 AM" },
+        { "date": "JUL 18", "home": "DMV Starz FC", "away": "DC Eagles SC", "location": "Rosedale Stadium, Washington, DC", "time": "1:30 PM" },
+        { "date": "JUL 18", "home": "Blessed FC", "away": "Lions United Academy", "location": "Elkridge, MD", "time": "4:30 PM" }
+      ]
+    },
+    {
+      "week": 17,
+      "dates": "JUL 5 - JUL 25",
+      "matches": [
+        { "date": "JUL 5", "home": "Blessed FC", "away": "Lemba-Kongo Academy", "location": "Elkridge, MD", "time": "3:00 PM" },
+        { "date": "JUL 24", "home": "Ellsworth AA SC", "away": "Silver Spring United", "location": "Raptor Stadium, Rockville, MD", "time": "7:00 PM" },
+        { "date": "JUL 25", "home": "District Reign FC", "away": "DC Eagles SC", "location": "Washington, DC", "time": "11:00 AM" },
+        { "date": "JUL 25", "home": "Page Soccer Club", "away": "DMV Starz FC", "location": "Washington, DC", "time": "2:00 PM" },
+        { "date": "JUL 25", "home": "Lions United Academy", "away": "Hidden Valley SC", "location": "Silver Spring, MD", "time": "5:00 PM" },
+        { "date": "JUL 25", "home": "Tamarack Timbers", "away": "Blessed FC", "location": "Silver Spring, MD", "time": "8:00 PM" }
+      ]
+    },
+    {
+      "week": 18,
+      "dates": "JUL 12 - AUG 1",
+      "matches": [
+        { "date": "JUL 12", "home": "DMV Starz FC", "away": "Lemba-Kongo Academy", "location": "Rosedale Stadium, Washington, DC", "time": "12:00 PM" },
+        { "date": "JUL 31", "home": "Silver Spring United", "away": "Hidden Valley SC", "location": "Silver Spring, MD", "time": "6:30 PM" },
+        { "date": "AUG 1", "home": "Ellsworth AA SC", "away": "Page Soccer Club", "location": "Raptor Stadium, Rockville, MD", "time": "10:00 AM" },
+        { "date": "AUG 1", "home": "Blessed FC", "away": "District Reign FC", "location": "Elkridge, MD", "time": "1:00 PM" },
+        { "date": "AUG 1", "home": "DC Eagles SC", "away": "Silver Spring United", "location": "Washington, DC", "time": "4:00 PM" }
+      ]
+    },
+    {
+      "week": 19,
+      "dates": "JUL 19 - AUG 8",
+      "matches": [
+        { "date": "JUL 19", "home": "Silver Spring United", "away": "Lemba-Kongo Academy", "location": "Silver Spring, MD", "time": "4:00 PM" },
+        { "date": "AUG 7", "home": "District Reign FC", "away": "Silver Spring United", "location": "Washington, DC", "time": "7:00 PM" },
+        { "date": "AUG 8", "home": "Hidden Valley SC", "away": "Blessed FC", "location": "Bethesda, MD", "time": "11:00 AM" },
+        { "date": "AUG 8", "home": "DMV Starz FC", "away": "District Reign FC", "location": "Rosedale Stadium, Washington, DC", "time": "2:00 PM" },
+        { "date": "AUG 8", "home": "Page Soccer Club", "away": "Ellsworth AA SC", "location": "Washington, DC", "time": "5:00 PM" },
+        { "date": "AUG 8", "home": "Tamarack Timbers", "away": "DMV Starz FC", "location": "Silver Spring, MD", "time": "7:30 PM" }
+      ]
+    },
+    {
+      "week": 20,
+      "dates": "JUL 26 - AUG 15",
+      "matches": [
+        { "date": "JUL 26", "home": "District Reign FC", "away": "Lemba-Kongo Academy", "location": "Washington, DC", "time": "1:00 PM" },
+        { "date": "AUG 14", "home": "Ellsworth AA SC", "away": "Lions United Academy", "location": "Raptor Stadium, Rockville, MD", "time": "6:00 PM" },
+        { "date": "AUG 15", "home": "Silver Spring United", "away": "Page Soccer Club", "location": "Silver Spring, MD", "time": "10:00 AM" },
+        { "date": "AUG 15", "home": "DC Eagles SC", "away": "Ellsworth AA SC", "location": "Washington, DC", "time": "1:00 PM" },
+        { "date": "AUG 15", "home": "Hidden Valley SC", "away": "Tamarack Timbers", "location": "Bethesda, MD", "time": "4:00 PM" },
+        { "date": "AUG 15", "home": "Lions United Academy", "away": "Page Soccer Club", "location": "Silver Spring, MD", "time": "7:00 PM" }
+      ]
+    }
+  ]
+}

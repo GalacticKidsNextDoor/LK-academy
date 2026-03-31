@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Action Plan: Momo Goma</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Inter Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .bg-dark { background-color: #0d121c; }
+        .bg-card { background-color: #1F2937; }
+        .text-lime { color: #84cc16; }
+        .border-lime { border-color: #84cc16; }
+        .bg-lime { background-color: #84cc16; }
+        
+        .timeline-line {
+            position: absolute;
+            left: 20px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background-color: #374151;
+        }
+    </style>
+</head>
+<body class="bg-dark text-gray-100 min-h-screen">
+
+    <!-- Header -->
+    <header class="fixed w-full z-50 bg-gray-900/90 backdrop-blur border-b border-lime-600/30">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+            <h1 class="text-2xl font-black tracking-widest text-lime">LEMBA-KONGO <span class="text-white text-lg font-light">| PLAYER DEVELOPMENT</span></h1>
+            <a href="roster.html" class="text-sm text-gray-400 hover:text-white transition">Return to Roster</a>
+        </div>
+    </header>
+
+    <main class="pt-24 pb-16 max-w-5xl mx-auto px-4">
+        
+        <!-- Player Header -->
+        <div class="flex flex-col md:flex-row items-center gap-6 mb-12 animate-fade-in">
+            <div class="relative">
+                <img src="https://placehold.co/150x150/1F2937/84cc16?text=MG" alt="Momo" class="rounded-full border-4 border-lime shadow-2xl">
+                <div class="absolute bottom-0 right-0 bg-lime text-black font-bold px-3 py-1 rounded-full text-xs">USL2 / USMNT ID</div>
+            </div>
+            <div class="text-center md:text-left">
+                <h2 class="text-5xl font-black text-white mb-2">MORGAN "MOMO" GOMA</h2>
+                <p class="text-xl text-gray-400">Strategic Phase 2: <span class="text-lime-400 font-bold">The Florida Scouting Corridor</span></p>
+            </div>
+        </div>
+
+        <!-- Dashboard Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            
+            <!-- Strategic Roadmap -->
+            <div class="col-span-2 bg-card rounded-xl p-8 shadow-lg border border-gray-700">
+                <h3 class="text-2xl font-bold text-white mb-6 flex items-center">
+                    <span class="w-3 h-8 bg-lime mr-3 rounded-sm"></span>
+                    Immediate Timeline (February)
+                </h3>
+                <div class="relative pl-12 space-y-8">
+                    <div class="timeline-line"></div>
+                    
+                    <!-- Item 1 -->
+                    <div class="relative">
+                        <div class="absolute -left-12 w-6 h-6 bg-gray-700 rounded-full border-2 border-lime"></div>
+                        <h4 class="text-lg font-bold text-white">Feb 6 - 7: Final Sharpness</h4>
+                        <p class="text-gray-400 text-sm">Transition from "Maryland Snow" legs to high-intensity technical flow. Focus on proprioception and ankle recalibration for Florida turf.</p>
+                    </div>
+
+                    <!-- Item 2 -->
+                    <div class="relative">
+                        <div class="absolute -left-12 w-6 h-6 bg-lime rounded-full shadow-[0_0_15px_rgba(132,204,22,0.6)]"></div>
+                        <h4 class="text-lg font-bold text-lime-400">Feb 8: College Trial (Match Sim)</h4>
+                        <p class="text-gray-300">Montgomery College Raptors (Top non-D1). <br><span class="italic text-xs text-gray-500">Objective: Dominance. Show level separation.</span></p>
+                    </div>
+
+                    <!-- Item 3 -->
+                    <div class="relative">
+                        <div class="absolute -left-12 w-6 h-6 bg-gray-700 rounded-full border-2 border-gray-500"></div>
+                        <h4 class="text-lg font-bold text-white">Late Feb: FC Miami City Showcase</h4>
+                        <p class="text-gray-400 text-sm">The "Product Launch." FIFA Coral Gables and Inter Miami scouts present. European pipeline activation (Thonon Evian).</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tactical Analysis: Inverted Winger -->
+            <div class="bg-card rounded-xl p-8 shadow-lg border border-gray-700">
+                <h3 class="text-xl font-bold text-white mb-4 flex items-center">
+                    <span class="text-lime mr-2">///</span> Tactical Focus: Inverted Winger
+                </h3>
+                <p class="text-sm text-gray-400 mb-6">Profile: Left-footed / Right-Wing. Height: 6'3".</p>
+                
+                <ul class="space-y-4">
+                    <li class="bg-gray-800 p-4 rounded-lg border-l-4 border-lime">
+                        <span class="block font-bold text-white text-sm uppercase">The "Robben" Cut</span>
+                        <span class="text-gray-400 text-xs">Feint the touchline run to freeze defender hips, explode inside.</span>
+                    </li>
+                    <li class="bg-gray-800 p-4 rounded-lg border-l-4 border-lime">
+                        <span class="block font-bold text-white text-sm uppercase">The "Salah" Channel Run</span>
+                        <span class="text-gray-400 text-xs">Blind-side run between LB and CB. Use 6'3" frame for back-post headers.</span>
+                    </li>
+                    <li class="bg-gray-800 p-4 rounded-lg border-l-4 border-lime">
+                        <span class="block font-bold text-white text-sm uppercase">The "Yamal" Vision</span>
+                        <span class="text-gray-400 text-xs">Early diagonal crosses from the right half-space to the back post.</span>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- Nutrition Protocol -->
+            <div class="bg-card rounded-xl p-8 shadow-lg border border-gray-700">
+                <h3 class="text-xl font-bold text-white mb-4 flex items-center">
+                    <span class="text-lime mr-2">///</span> Recovery & Nutrition
+                </h3>
+                
+                <div class="space-y-6">
+                    <div>
+                        <h4 class="text-sm font-bold text-gray-300 uppercase mb-2">The "Negril x Cava" Protocol</h4>
+                        <div class="grid grid-cols-2 gap-2 text-xs">
+                            <div class="bg-gray-800 p-3 rounded">
+                                <span class="text-lime font-bold block">Negril</span>
+                                <span class="text-gray-400">1/2 lb Grilled Chicken (Eat 2/3 pre-match) + Coco Bread (Carb bomb).</span>
+                            </div>
+                            <div class="bg-gray-800 p-3 rounded">
+                                <span class="text-lime font-bold block">Cava</span>
+                                <span class="text-gray-400">Saffron Basmati Rice base. NO Greens/Beans (Fiber risk).</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h4 class="text-sm font-bold text-gray-300 uppercase mb-2">Heat Acclimatization</h4>
+                        <p class="text-xs text-gray-400">Transitioning from Maryland Winter to Florida Heat requires specialized hydration. Focus on early sleep cycles starting Feb 7.</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        
+        <!-- Footer Quote -->
+        <div class="mt-12 text-center border-t border-gray-800 pt-8">
+            <p class="text-2xl font-serif italic text-gray-500">"The history is static, but your progress is dynamic."</p>
+        </div>
+
+    </main>
+
+</body>
+</html>

@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lemba Kongo Academy - Club History</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom scrollbar for the timeline */
+        .timeline-scroll::-webkit-scrollbar {
+            height: 6px;
+        }
+        .timeline-scroll::-webkit-scrollbar-track {
+            background: #f1f1f1; 
+            border-radius: 4px;
+        }
+        .timeline-scroll::-webkit-scrollbar-thumb {
+            background: #d1d5db; 
+            border-radius: 4px;
+        }
+        .timeline-scroll::-webkit-scrollbar-thumb:hover {
+            background: #9ca3af; 
+        }
+        .lk-green {
+            background-color: #bdeb1b;
+            color: #000;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans text-gray-900 selection:bg-black selection:text-[#bdeb1b]">
+
+    <!-- Top Navigation (Matches Screenshot) -->
+    <nav class="bg-black text-white px-6 py-4 flex items-center justify-between sticky top-0 z-50">
+        <div class="flex items-center gap-4">
+            <div class="w-10 h-10 rounded-full lk-green flex items-center justify-center font-black text-sm tracking-tighter">
+                LK
+            </div>
+            <h1 class="text-xl md:text-2xl font-black uppercase tracking-wide">Club History</h1>
+        </div>
+        <div class="hidden md:flex gap-8 text-sm font-bold text-gray-400">
+            <a href="#" class="hover:text-white transition-colors">Roster</a>
+            <a href="#" class="hover:text-white transition-colors">Schedule</a>
+            <a href="#" class="text-white">Club</a>
+        </div>
+        <!-- Mobile Menu Icon -->
+        <div class="md:hidden text-white">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+        </div>
+    </nav>
+
+    <!-- Main Content Container -->
+    <div class="bg-white min-h-screen pb-20">
+        
+        <!-- Header / Lore Section -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 pt-10 pb-6">
+            <div class="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-gray-200 pb-8">
+                <div>
+                    <h2 class="text-3xl font-black uppercase tracking-tight text-gray-900 mb-2">Archival Registry</h2>
+                    <p class="text-gray-500 max-w-2xl font-medium">
+                        Preserving the legacy of the Brotherhood. Records of physical, academic, and spiritual excellence from the past 26 years.
+                    </p>
+                </div>
+                
+                <!-- Year Selector Dropdown (for quick selection) -->
+                <div class="relative min-w-[200px]">
+                    <label class="block text-xs font-bold text-gray-400 uppercase tracking-widest mb-1">Select Cohort Year</label>
+                    <select id="year-select" class="w-full bg-gray-50 border border-gray-300 text-gray-900 text-sm font-bold rounded-lg focus:ring-black focus:border-black block p-3 outline-none cursor-pointer appearance-none">
+                        <!-- Populated by JS -->
+                    </select>
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 pt-5 text-gray-700">
+                        <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"/></svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Year Lore Header (Dynamic) -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-6">
+            <div class="bg-zinc-900 rounded-xl p-6 text-white shadow-lg relative overflow-hidden">
+                <div class="absolute -right-10 -top-10 opacity-5">
+                    <!-- Subtle mystic/religious geometric motif -->
+                    <svg width="200" height="200" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="2" x2="12" y2="22"></line><line x1="2" y1="12" x2="22" y2="12"></line><polygon points="12 2 22 12 12 22 2 12 12 2"></polygon></svg>
+                </div>
+                <div class="relative z-10">
+                    <div class="flex items-center gap-3 mb-2">
+                        <span class="lk-green px-2 py-1 text-[10px] font-black uppercase tracking-widest rounded-sm">Archive File</span>
+                        <span class="text-gray-400 text-sm font-mono" id="lore-year-tag">1998-1999 Season</span>
+                    </div>
+                    <h3 class="text-2xl font-bold font-serif italic" id="lore-title">"The First Initiates"</h3>
+                    <p class="text-gray-400 text-sm mt-2 max-w-3xl" id="lore-desc">
+                        Under the dual auspices of St. Martin de Porres and the ancestral guides of the Lemba, this cohort established the foundational rites of the academy's athletic and spiritual doctrine.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab Navigation (Roster, Stats, Gallery) -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            <div class="border-b border-gray-200">
+                <div class="flex gap-8 text-sm font-black text-gray-400 uppercase tracking-widest" id="tab-container">
+                    <button class="py-4 border-b-2 border-black text-black transition-colors" data-tab="roster">Roster</button>
+                    <button class="py-4 border-b-2 border-transparent hover:text-black transition-colors" data-tab="stats">Stats</button>
+                    <button class="py-4 border-b-2 border-transparent hover:text-black transition-colors" data-tab="gallery">Gallery</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Content Area -->
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-8">
+            
+            <!-- ROSTER TAB -->
+            <div id="content-roster" class="block">
+                <div class="overflow-x-auto border border-gray-200 rounded-xl">
+                    <table class="w-full text-sm text-left">
+                        <thead class="text-xs text-gray-500 uppercase bg-gray-50/50 font-bold border-b border-gray-200">
+                            <tr>
+                                <th scope="col" class="px-6 py-4">Player</th>
+                                <th scope="col" class="px-6 py-4">Jersey #</th>
+                                <th scope="col" class="px-6 py-4">Position</th>
+                                <th scope="col" class="px-6 py-4">Status</th>
+                                <th scope="col" class="px-6 py-4 text-right">Height / Weight</th>
+                            </tr>
+                        </thead>
+                        <tbody id="roster-tbody" class="divide-y divide-gray-100">
+                            <!-- Populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- STATS TAB -->
+            <div id="content-stats" class="hidden">
+                <div class="overflow-x-auto border border-gray-200 rounded-xl">
+                    <table class="w-full text-sm text-left">
+                        <thead class="text-xs text-gray-500 uppercase bg-gray-50/50 font-bold border-b border-gray-200">
+                            <tr>
+                                <th scope="col" class="px-6 py-4">Player</th>
+                                <th scope="col" class="px-6 py-4">GP</th>
+                                <th scope="col" class="px-6 py-4">Mins</th>
+                                <th scope="col" class="px-6 py-4 font-black text-black">G</th>
+                                <th scope="col" class="px-6 py-4">A</th>
+                                <th scope="col" class="px-6 py-4">XG</th>
+                                <th scope="col" class="px-6 py-4">Pass%</th>
+                            </tr>
+                        </thead>
+                        <tbody id="stats-tbody" class="divide-y divide-gray-100">
+                            <!-- Populated by JS -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- GALLERY TAB -->
+            <div id="content-gallery" class="hidden">
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4" id="gallery-grid">
+                    <!-- Populated by JS -->
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // --- 1. Generation of 26 Years of Mock Data ---
+        const currentYear = new Date().getFullYear(); // 2026 based on system prompt
+        const startYear = currentYear - 26; // 2000
+        
+        const historyData = {};
+
+        // Helper to generate random stats
+        const rand = (min, max) => Math.floor(Math.random() * (max - min + 1) + min);
+
+        // Core Player Base to mix and match
+        const playerNames = ["Morgan Goma", "Meijia Arnaudo", "Noel Givens", "Nathan Givens", "Mohamed Ali", "Adry Nazareno", "Ricky Jones", "Jalli Tacko", "Victor Guzman", "Jason Bovi", "Ezekiel Baptiste", "Jeremiah Kongo", "Augustine Silva", "Clement Okafor"];
+        const positions = ["Striker", "Winger", "Midfield", "Defender", "Goalkeeper", "Striker / Winger"];
+        const statuses = [
+            { label: "First Team", class: "bg-gray-100 text-gray-800" },
+            { label: "Academy Prospect", class: "bg-gray-100 text-gray-800" },
+            { label: "Injured Reserve", class: "bg-gray-100 text-gray-500" },
+            { label: "Loan (FC Miami City)", class: "bg-[#e5fcc2] text-green-900 font-semibold" },
+            { label: "Graduated", class: "bg-black text-white" }
+        ];
+
+        // Lore Generation
+        const loreTitles = [
+            "The Genesis Cohort", "Blood & Soil", "The Iron Will", "Saints & Sinners", 
+            "The Unbroken Chain", "Ex Tenebris Lux", "The Lemba Ascendant", "Vanguard of the Mysteries"
+        ];
+        
+        const galleryPlaceholders = [
+            "https://images.unsplash.com/photo-1518605368461-1ee7e53f20f7?auto=format&fit=crop&q=80&w=800",
+            "https://images.unsplash.com/photo-1431324155629-1a6fc1ac5e74?auto=format&fit=crop&q=80&w=800",
+            "https://images.unsplash.com/photo-1526232761682-d26e03ac148e?auto=format&fit=crop&q=80&w=800",
+            "https://images.unsplash.com/photo-1517466787929-bc90951d0974?auto=format&fit=crop&q=80&w=800",
+            "https://images.unsplash.com/photo-1574629810360-7efbb1925536?auto=format&fit=crop&q=80&w=800",
+            "https://images.unsplash.com/photo-1508344928928-7472b624c078?auto=format&fit=crop&q=80&w=800"
+        ];
+
+        // Build the dataset
+        for (let year = currentYear; year >= startYear; year--) {
+            const cohortSize = rand(8, 12);
+            const roster = [];
+            const shuffledPlayers = [...playerNames].sort(() => 0.5 - Math.random());
+
+            for (let i = 0; i < cohortSize; i++) {
+                const name = shuffledPlayers[i];
+                const initials = name.split(' ').map(n => n[0]).join('');
+                roster.push({
+                    name: name,
+                    initials: initials,
+                    jersey: rand(1, 99),
+                    position: positions[rand(0, positions.length - 1)],
+                    status: statuses[rand(0, statuses.length - 1)],
+                    heightWeight: `5'${rand(7,11)}" / ${rand(150, 190)}lbs`,
+                    stats: {
+                        gp: rand(1, 20),
+                        mins: rand(50, 1800),
+                        g: rand(0, 15),
+                        a: rand(0, 10),
+                        xg: (Math.random() * 10).toFixed(2),
+                        pass: rand(65, 95) + '%'
+                    }
+                });
+            }
+
+            historyData[year] = {
+                title: `${loreTitles[year % loreTitles.length]} - Cohort ${year - startYear + 1}`,
+                roster: roster,
+                images: [...galleryPlaceholders].sort(() => 0.5 - Math.random()).slice(0, rand(3, 6)) // 3 to 6 random images
+            };
+        }
+
+
+        // --- 2. DOM Elements & State ---
+        const yearSelect = document.getElementById('year-select');
+        const tabs = document.querySelectorAll('#tab-container button');
+        const contents = {
+            roster: document.getElementById('content-roster'),
+            stats: document.getElementById('content-stats'),
+            gallery: document.getElementById('content-gallery')
+        };
+        
+        let activeTab = 'roster';
+        let activeYear = currentYear.toString();
+
+
+        // --- 3. Initialization ---
+        function init() {
+            // Populate Dropdown
+            Object.keys(historyData).sort((a,b) => b - a).forEach(year => {
+                const option = document.createElement('option');
+                option.value = year;
+                option.textContent = `${year - 1} - ${year} Season`;
+                yearSelect.appendChild(option);
+            });
+
+            // Event Listeners
+            yearSelect.addEventListener('change', (e) => {
+                activeYear = e.target.value;
+                renderData();
+            });
+
+            tabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    activeTab = tab.dataset.tab;
+                    updateTabs();
+                });
+            });
+
+            // Initial Render
+            renderData();
+        }
+
+        // --- 4. Render Logic ---
+        function updateTabs() {
+            // Update UI
+            tabs.forEach(tab => {
+                if(tab.dataset.tab === activeTab) {
+                    tab.className = "py-4 border-b-2 border-black text-black transition-colors";
+                } else {
+                    tab.className = "py-4 border-b-2 border-transparent hover:text-black transition-colors";
+                }
+            });
+
+            // Toggle Content
+            Object.keys(contents).forEach(key => {
+                if(key === activeTab) {
+                    contents[key].classList.remove('hidden');
+                    contents[key].classList.add('block');
+                } else {
+                    contents[key].classList.remove('block');
+                    contents[key].classList.add('hidden');
+                }
+            });
+        }
+
+        function renderData() {
+            const data = historyData[activeYear];
+            
+            // Update Lore Header
+            document.getElementById('lore-year-tag').textContent = `${activeYear - 1}-${activeYear} Season`;
+            document.getElementById('lore-title').textContent = data.title;
+
+            // Render Roster
+            const rosterTbody = document.getElementById('roster-tbody');
+            rosterTbody.innerHTML = '';
+            data.roster.forEach(player => {
+                rosterTbody.innerHTML += `
+                    <tr class="hover:bg-gray-50 transition-colors">
+                        <td class="px-6 py-4 flex items-center gap-3">
+                            <div class="w-8 h-8 rounded-full bg-black text-white flex items-center justify-center text-[10px] font-bold tracking-tighter shadow-sm">
+                                ${player.initials}
+                            </div>
+                            <span class="font-bold text-gray-900">${player.name}</span>
+                        </td>
+                        <td class="px-6 py-4 text-gray-600">${player.jersey}</td>
+                        <td class="px-6 py-4 text-gray-600">${player.position}</td>
+                        <td class="px-6 py-4">
+                            <span class="px-3 py-1 text-xs rounded-full ${player.status.class}">
+                                ${player.status.label}
+                            </span>
+                        </td>
+                        <td class="px-6 py-4 text-right text-gray-600">${player.heightWeight}</td>
+                    </tr>
+                `;
+            });
+
+            // Render Stats
+            const statsTbody = document.getElementById('stats-tbody');
+            statsTbody.innerHTML = '';
+            data.roster.forEach(player => {
+                statsTbody.innerHTML += `
+                    <tr class="hover:bg-gray-50 transition-colors">
+                        <td class="px-6 py-4 font-bold text-gray-900">${player.name}</td>
+                        <td class="px-6 py-4 text-gray-600">${player.stats.gp}</td>
+                        <td class="px-6 py-4 text-gray-600">${player.stats.mins}</td>
+                        <td class="px-6 py-4 font-black text-black text-base">${player.stats.g}</td>
+                        <td class="px-6 py-4 text-gray-600">${player.stats.a}</td>
+                        <td class="px-6 py-4 text-gray-600">${player.stats.xg}</td>
+                        <td class="px-6 py-4 text-gray-600">${player.stats.pass}</td>
+                    </tr>
+                `;
+            });
+
+            // Render Gallery
+            const galleryGrid = document.getElementById('gallery-grid');
+            galleryGrid.innerHTML = '';
+            data.images.forEach(imgSrc => {
+                galleryGrid.innerHTML += `
+                    <div class="group relative aspect-video rounded-xl overflow-hidden bg-gray-200 cursor-pointer">
+                        <img src="${imgSrc}" alt="Team Photo" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300"></div>
+                    </div>
+                `;
+            });
+        }
+
+        // Run
+        init();
+
+    </script>
+</body>
+</html>

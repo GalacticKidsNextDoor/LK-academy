@@ -1,0 +1,229 @@
+{
+  "schedule": [
+    {
+      "date": "JUN 7",
+      "opponent": "District Reign FC",
+      "time": "5:30 PM",
+      "location": "Academy Grounds, Colesville, MD",
+      "type": "UPCOMING"
+    },
+    {
+      "date": "MAY 31",
+      "opponent": "Silver Spring United",
+      "time": "12:30 PM",
+      "location": "Academy Grounds, Colesville, MD",
+      "type": "UPCOMING"
+    },
+    {
+      "date": "MAY 24",
+      "opponent": "DMV Starz FC",
+      "time": "10:30 AM",
+      "location": "Academy Grounds, Colesville, MD",
+      "type": "UPCOMING"
+    },
+    {
+      "date": "MAY 17",
+      "opponent": "Blessed FC",
+      "time": "5:30 PM",
+      "location": "Academy Grounds, Colesville, MD",
+      "type": "UPCOMING"
+    },
+    {
+      "date": "MAY 10",
+      "opponent": "Lions United Academy",
+      "time": "12:30 PM",
+      "location": "Academy Grounds, Colesville, MD",
+      "type": "UPCOMING"
+    },
+    {
+      "date": "MAY 3",
+      "opponent": "DC Eagles SC",
+      "time": "10:30 AM",
+      "location": "Academy Grounds, Colesville, MD",
+      "type": "UPCOMING"
+    },
+    {
+      "date": "APR 29",
+      "opponent": "Page Soccer Club",
+      "time": "5:30 PM",
+      "location": "Academy Grounds, Colesville, MD",
+      "type": "UPCOMING"
+    },
+    {
+      "date": "APR 25",
+      "opponent": "DC Eagles SC",
+      "time": "10:30 AM",
+      "location": "Washington, DC",
+      "type": "UPCOMING"
+    },
+    {
+      "date": "APR 21",
+      "opponent": "Ellsworth AA SC",
+      "time": "12:30 PM",
+      "location": "Academy Grounds, Colesville, MD",
+      "type": "UPCOMING"
+    },
+    {
+      "date": "APR 19",
+      "opponent": "Page Soccer Club",
+      "time": "5:30 PM",
+      "location": "Washington, DC",
+      "type": "UPCOMING"
+    },
+    {
+      "date": "APR 15",
+      "opponent": "Tamarack Timbers",
+      "time": "10:30 AM",
+      "location": "Academy Grounds, Colesville, MD",
+      "type": "UPCOMING"
+    },
+    {
+      "date": "APR 12",
+      "opponent": "Hidden Valley SC",
+      "time": "12:30 PM",
+      "location": "Academy Grounds, Colesville, MD",
+      "type": "UPCOMING"
+    },
+    {
+      "date": "APR 9",
+      "opponent": "Page Soccer Club",
+      "time": "5:30 PM",
+      "location": "Washington, DC",
+      "type": "UPCOMING"
+    },
+    {
+      "date": "APR 5",
+      "opponent": "DC Eagles SC",
+      "time": "10:30 AM",
+      "location": "Washington, DC",
+      "type": "UPCOMING"
+    },
+    {
+      "date": "APR 1",
+      "opponent": "Ellsworth AA SC",
+      "time": "12:30 PM",
+      "location": "Raptor Stadium, Rockville, MD",
+      "type": "UPCOMING"
+    },
+    {
+      "date": "MAR 31",
+      "opponent": "Lions United Academy",
+      "time": "4:30 PM",
+      "location": "Silver Spring, MD",
+      "type": "UPCOMING"
+    },
+    {
+      "date": "JAN 18",
+      "opponent": "Silver Spring United",
+      "time": "10:30 AM",
+      "location": "Silver Spring, MD",
+      "type": "CANCELLED"
+    },
+    {
+      "date": "JAN 11",
+      "opponent": "Blessed FC",
+      "time": "10:30 AM",
+      "location": "Elkridge, MD",
+      "type": "RESULT",
+      "result": {
+        "score_la": 0,
+        "score_opp": 5,
+        "winner": "Blessed FC",
+        "details": [
+          {"time": "18'", "scorer": "Blessed FC", "assist": null, "notes": "Opponent goal"},
+          {"time": "32'", "scorer": "Blessed FC", "assist": null, "notes": "Opponent goal"},
+          {"time": "53'", "scorer": "Blessed FC", "assist": null, "notes": "Opponent goal"},
+          {"time": "58'", "scorer": "Blessed FC", "assist": null, "notes": "Opponent goal"},
+          {"time": "88'", "scorer": "Blessed FC", "assist": null, "notes": "Opponent goal"}
+        ]
+      }
+    },
+    {
+      "date": "DEC 28",
+      "opponent": "District Reign FC",
+      "time": "10:30 AM",
+      "location": "Washington, DC",
+      "type": "CANCELLED"
+    },
+    {
+      "date": "DEC 22",
+      "opponent": "Christos FC Trial",
+      "time": "5:00 PM",
+      "location": "Elkridge, MD",
+      "type": "TRIAL",
+      "result": {
+        "score_la": 1,
+        "position_la": ["RW", "CM"],
+        "details": "Did not make USL2 roster after trial period; invited to Academy instead"
+      }
+    },
+    {
+      "date": "DEC 20",
+      "opponent": "Patuxent Football Athletics",
+      "time": "9:00 AM",
+      "location": "St. Mary's, MD",
+      "type": "CANCELLED"
+    },
+    {
+      "date": "DEC 17",
+      "opponent": "Lions United Academy",
+      "time": "1:30 PM",
+      "location": "Washington, DC",
+      "type": "RESULT",
+      "result": {
+        "score_la": 4,
+        "score_opp": 2,
+        "winner": "LA",
+        "details": [
+          {"time": "8'", "scorer": "Goma", "assist": "Arnaudo", "notes": "Arnaudo cross to Goma header"},
+          {"time": "15'", "scorer": "Goma", "assist": null, "notes": "Beat keeper one on one"},
+          {"time": "22'", "scorer": "Lions United Academy", "assist": null, "notes": "Opponent goal"},
+          {"time": "48'", "scorer": "Lions United Academy", "assist": null, "notes": "Opponent goal"},
+          {"time": "63'", "scorer": "Ali", "assist": "Goma", "notes": "Goma pass to Ali for strike"},
+          {"time": "78'", "scorer": "Goma", "assist": null, "notes": "Left-footed strike after control"}
+        ]
+      }
+    },
+    {
+      "date": "DEC 14",
+      "opponent": "Lions United Academy",
+      "time": "10:30 AM",
+      "location": "Silver Spring, MD",
+      "type": "RESULT",
+      "result": {
+        "score_la": 2,
+        "score_opp": 2,
+        "winner": "Tie",
+        "details": [
+          {"time": "19'", "scorer": "Goma", "assist": "Ali", "notes": "Ali beat opp RB, passed to Goma"},
+          {"time": "35'", "scorer": "Goma", "assist": null, "notes": "Beat keeper one on one"},
+          {"time": "42'", "scorer": "Lions United Academy", "assist": null, "notes": "Opponent goal"},
+          {"time": "68'", "scorer": "Lions United Academy", "assist": null, "notes": "Opponent goal"}
+        ]
+      }
+    },
+    {
+      "date": "DEC 7",
+      "opponent": "DMV Starz FC",
+      "time": "Final Score",
+      "location": "Rosedale Stadium, Washington, DC",
+      "type": "RESULT",
+      "result": {
+        "score_la": 5,
+        "score_opp": 4,
+        "winner": "LA",
+        "details": [
+          {"time": "10'", "scorer": "Ali", "assist": null, "notes": "Beat keeper one on one"},
+          {"time": "15'", "scorer": "Arnaudo", "assist": null, "notes": "Penalty"},
+          {"time": "25'", "scorer": "Goma", "assist": null, "notes": "Header from right corner after coming on as sub"},
+          {"time": "35'", "scorer": "DMV Starz FC", "assist": null, "notes": "Opponent goal"},
+          {"time": "50'", "scorer": "Goma", "assist": "Corner Kick", "notes": "Left-footed strike after control"},
+          {"time": "63'", "scorer": "DMV Starz FC", "assist": null, "notes": "Opponent goal"},
+          {"time": "69'", "scorer": "DMV Starz FC", "assist": null, "notes": "Opponent goal"},
+          {"time": "75'", "scorer": "Arnaudo", "assist": null, "notes": "Right-footed strike upper 90"},
+          {"time": "84'", "scorer": "DMV Starz FC", "assist": null, "notes": "Opponent goal"}
+        ]
+      }
+    }
+  ]
+}
