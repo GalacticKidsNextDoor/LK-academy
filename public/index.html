@@ -185,14 +185,14 @@
     // --- Data ---
     const padsData = [
       { id: 0, label: "Academy", type: "nav", action: () => open("./academy.html", "_blank") },
-      { id: 1, label: "History", type: "nav", action: () => open("./history.html", "_blank") },
-      { id: 2, label: "First Team", type: "nav", action: () => open("./roster.html", "_blank") },
-      { id: 3, label: "Shop", type: "nav", action: () => open("./shop.html", "_blank") },
-      { id: 4, label: "Pad 5", type: "empty", action: () => console.log("Pad 5 triggered - Ready for artistic input") },
-      { id: 5, label: "Pad 6", type: "empty", action: () => console.log("Pad 6 triggered - Ready for artistic input") },
-      { id: 6, label: "Pad 7", type: "empty", action: () => console.log("Pad 7 triggered - Ready for artistic input") },
-      { id: 7, label: "Pad 8", type: "empty", action: () => console.log("Pad 8 triggered - Ready for artistic input") },
-      { id: 8, label: "Pad 9", type: "empty", action: () => console.log("Pad 9 triggered - Ready for artistic input") },
+      { id: 1, label: "First Team", type: "nav", action: () => open("./roster.html", "_blank") },
+      { id: 2, label: "History", type: "nav", action: () => open("./history.html", "_blank")},
+      { id: 3, label: "Joust", type: "empty", action: () => console.log("Pad 5 triggered - Ready for artistic input") },
+      { id: 4, label: "NACL", type: "nav", action: () => open("./league.html", "_blank") },
+      { id: 5, label: "Shop", type: "nav", action: () => open("./shop.html", "_blank") },
+      { id: 6, label: "Pad 1", type: "empty", action: () => console.log("Pad 7 triggered - Ready for artistic input") },
+      { id: 7, label: "Pad 2", type: "empty", action: () => console.log("Pad 8 triggered - Ready for artistic input") },
+      { id: 8, label: "Pad 3", type: "empty", action: () => console.log("Pad 9 triggered - Ready for artistic input") },
     ];
 
     // --- Initialization & Render Logic ---
@@ -201,7 +201,7 @@
     function renderPads() {
       padsData.forEach((pad) => {
         const btn = document.createElement('button');
-        const textColor = pad.id < 4 ? 'text-zinc-900' : 'text-zinc-500';
+        const textColor = pad.id < 6 ? 'text-zinc-900' : 'text-zinc-500';
         
         btn.className = `
           relative w-20 h-20 md:w-28 md:h-28 rounded-md flex flex-col items-center justify-center text-xs md:text-sm font-bold uppercase tracking-wider select-none outline-none transition-all duration-75

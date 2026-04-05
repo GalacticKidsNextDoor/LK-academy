@@ -44,11 +44,12 @@
             </div>
             <h2 class="text-white text-2xl font-bold tracking-tight uppercase">National Capital Academy League</h2>
         </div>
-        <div class="text-white text-sm font-medium space-x-6 hidden sm:block">
-            <a href="#" class="hover:text-lemba-green transition">Roster</a>
-            <a href="#" class="hover:text-lemba-green transition">Schedule</a>
-            <a href="#" class="text-lemba-green font-bold border-b-2 border-lemba-green pb-1">League</a>
-        </div>
+        <nav class="hidden md:flex space-x-8 text-sm font-semibold tracking-wide text-gray-300">
+            <a href="#" class="text-white border-b-2 border-lime-500 pb-1">League</a>
+            <a href="roster.html" class="hover:text-white transition">Roster</a>
+            <a href="schedule.html" class="hover:text-white transition">Schedule</a>
+            <a href="academy.html" class="hover:text-white transition">Academy</a>
+        </nav>
     </div>
 
     <!-- Tabs Container -->
@@ -144,10 +145,10 @@
     <script>
         // Data derived directly from match_data.json
         const standingsData = [
-            { team: "Lemba-Kongo Academy", mp: 4, w: 2, d: 1, l: 1, gf: 11, ga: 13, isLA: true },
-            { team: "Blessed FC", mp: 1, w: 1, d: 0, l: 0, gf: 5, ga: 0, isLA: false },
-            { team: "Lions United Academy", mp: 2, w: 0, d: 1, l: 1, gf: 4, ga: 6, isLA: false },
-            { team: "DMV Starz FC", mp: 1, w: 0, d: 0, l: 1, gf: 4, ga: 5, isLA: false },
+            { team: "Lemba-Kongo Academy", mp: 0, w: 0, d: 0, l: 0, gf: 0, ga: 0, isLA: true },
+            { team: "Blessed FC", mp: 0, w: 0, d: 0, l: 0, gf: 0, ga: 0, isLA: false },
+            { team: "Lions United Academy", mp: 0, w: 0, d: 0, l: 0, gf: 0, ga: 0, isLA: false },
+            { team: "DMV Starz FC", mp: 0, w: 0, d: 0, l: 0, gf: 0, ga: 0, isLA: false },
             { team: "DC Eagles SC", mp: 0, w: 0, d: 0, l: 0, gf: 0, ga: 0, isLA: false },
             { team: "District Reign FC", mp: 0, w: 0, d: 0, l: 0, gf: 0, ga: 0, isLA: false },
             { team: "Ellsworth AA SC", mp: 0, w: 0, d: 0, l: 0, gf: 0, ga: 0, isLA: false },
